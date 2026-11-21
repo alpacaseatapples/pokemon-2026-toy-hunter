@@ -61,13 +61,6 @@
   }
   .brand h1 { font-size: 15px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
   .brand p { font-size: 11px; margin: 1px 0 0; color: var(--muted); font-weight: 600; }
-  .top-actions { display: flex; align-items: center; gap: 6px; }
-  .icon-btn {
-    width: 34px; height: 34px; border-radius: 11px;
-    background: var(--card); border: 1px solid var(--border);
-    display: grid; place-items: center; font-size: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  }
 
   /* Top External Store Map Link */
   .hunter-link-bar {
@@ -138,10 +131,35 @@
   .pill-toggle {
     padding: 6px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
     background: var(--card); border: 1.5px solid var(--border); color: var(--ink);
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex; align-items: center; gap: 4px;
   }
   .pill-toggle.active {
     background: var(--gold-soft); border-color: #f59e0b; color: #92400e;
+  }
+
+  /* Tappable Wish Star Button */
+  .wish-btn {
+    position: absolute; z-index: 6;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 14px; line-height: 1;
+    background: rgba(255, 255, 255, 0.92); color: #b7aec9;
+    border: 1.5px solid #e6dcf2;
+    box-shadow: 0 2px 5px rgba(45, 38, 64, 0.1);
+    transition: transform 0.15s, background 0.15s, color 0.15s;
+  }
+  .wish-btn:active { transform: scale(0.88); }
+  .wish-btn.active {
+    background: linear-gradient(135deg, #f59e0b, #fb923c);
+    color: #fff; border-color: #f59e0b;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  }
+  .wish-btn-inline {
+    width: 30px; height: 30px; border-radius: 10px; flex-shrink: 0;
+    display: grid; place-items: center; font-size: 15px;
+    background: #f5f1fa; color: #b7aec9; border: 1.5px solid transparent;
+  }
+  .wish-btn-inline.active {
+    background: var(--gold-soft); color: #d97706; border-color: #fbbf24;
   }
 
   /* Missing All-In-One Visual Card */
@@ -151,7 +169,7 @@
   }
   .missing-board-head {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 8px;
+    gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
   }
   .missing-board-title { font-size: 13px; font-weight: 900; }
   .missing-board-sub { font-size: 10.5px; color: var(--muted); font-weight: 700; }
@@ -174,23 +192,22 @@
     transition: transform 0.14s;
   }
   .scan-tile:active { transform: scale(0.96); }
+  .scan-tile.wish {
+    box-shadow: 0 0 0 2px #f59e0b, 0 4px 12px rgba(245, 158, 11, 0.24);
+  }
   .scan-color-band {
     background: var(--tile-hex); color: var(--tile-ink, #2d2640);
     font-size: 10px; font-weight: 900; padding: 4px 4px;
     letter-spacing: 0.2px; text-transform: uppercase;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .scan-body { padding: 4px 4px 7px; }
+  .scan-body { position: relative; padding: 6px 4px 7px; }
+  .scan-tile .wish-btn { top: 4px; right: 4px; width: 24px; height: 24px; font-size: 13px; }
   .scan-name { font-size: 12px; font-weight: 900; line-height: 1.15; margin-top: 1px; }
   .scan-code {
     display: inline-block; margin-top: 2px;
     font-size: 10px; font-weight: 800; color: var(--ink);
     background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
-  }
-  .wish-star {
-    position: absolute; top: 24px; right: 4px; z-index: 3;
-    background: linear-gradient(135deg, #f59e0b, #fb923c); color: #fff;
-    font-size: 8.5px; font-weight: 900; padding: 1px 5px; border-radius: 6px;
   }
 
   /* Master Case Cards */
@@ -225,14 +242,9 @@
   }
   .toy-tile.caught { background: #f6fdf9; border-color: #a7f3d0; }
   .spotlight-on .toy-tile.caught { opacity: 0.34; filter: grayscale(0.35); }
-  .wish-ribbon {
-    position: absolute; top: 5px; left: 5px; z-index: 4;
-    background: linear-gradient(135deg, #f59e0b, #fb923c); color: #fff;
-    font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(245,158,11,0.3);
-  }
+  .toy-tile .wish-btn { top: 5px; right: 5px; width: 24px; height: 24px; font-size: 13px; }
   .dupe-chip {
-    position: absolute; top: 5px; right: 5px; z-index: 4;
+    position: absolute; top: 5px; left: 5px; z-index: 4;
     background: var(--purple); color: #fff;
     font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
   }
@@ -344,26 +356,26 @@
 
   /* Checklist */
   .list-item {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px;
     background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 16px; padding: 10px 12px; margin-bottom: 8px;
+    border-radius: 16px; padding: 10px 10px; margin-bottom: 8px;
     box-shadow: 0 3px 10px rgba(107, 79, 155, 0.05);
   }
   .list-item.caught { border-color: #a7f3d0; background: #f8fffb; }
   .list-item.wish:not(.caught) { border-color: #fbbf24; background: #fffdf5; }
   .list-main { flex: 1; min-width: 0; }
-  .list-title { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .list-title { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
   .list-meta { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
   .mini-tag {
     font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 7px;
     background: #f5f1fa; color: var(--muted);
   }
-  .qty-ctrl { display: flex; align-items: center; gap: 6px; }
+  .qty-ctrl { display: flex; align-items: center; gap: 5px; }
   .qty-btn {
-    width: 28px; height: 28px; border-radius: 9px; background: #f2ebf8;
+    width: 26px; height: 26px; border-radius: 8px; background: #f2ebf8;
     font-weight: 900; font-size: 15px; color: var(--ink);
   }
-  .qty-val { font-size: 13px; font-weight: 800; min-width: 18px; text-align: center; }
+  .qty-val { font-size: 13px; font-weight: 800; min-width: 16px; text-align: center; }
 
   /* Bottom Sticky Bar */
   .bottom-bar {
@@ -452,9 +464,6 @@
           <p>Happy Meal Tracker · Codes 30275-XX</p>
         </div>
       </div>
-      <div class="top-actions">
-        <button class="icon-btn" id="soundToggle" title="Toggle celebration chime">🔔</button>
-      </div>
     </div>
 
     <a class="hunter-link-bar" href="https://www.happymealshunter.xyz/location/cmw5guzss00kisicyr6gi4sew" target="_blank" rel="noopener">
@@ -489,6 +498,7 @@
         <button class="seg-btn" id="modeCasesBtn" onclick="setMapMode('cases')">All 15 Cases</button>
         <button class="seg-btn" id="modePhotoBtn" onclick="setMapMode('photo')">📷 Photo</button>
       </div>
+      <button class="pill-toggle" id="wishOnlyBtn" onclick="toggleWishOnly()">★ Wish Only</button>
       <button class="pill-toggle" id="spotlightBtn" style="display:none;" onclick="toggleSpotlight()">✨ Dim Caught</button>
     </div>
 
@@ -566,6 +576,7 @@
       <div class="seg-group" id="listFilters">
         <button class="seg-btn active" onclick="setListFilter('all', this)">All</button>
         <button class="seg-btn" onclick="setListFilter('need', this)">Need</button>
+        <button class="seg-btn" onclick="setListFilter('wish', this)">★ Wish</button>
         <button class="seg-btn" onclick="setListFilter('caught', this)">Caught</button>
         <button class="seg-btn" onclick="setListFilter('dupes', this)">Trades</button>
       </div>
@@ -611,7 +622,7 @@
     <div class="color-swatch-bar" id="posterSwatches"></div>
     <div class="poster-grid" id="posterGrid"></div>
   </div>
-  <div class="poster-hint">Tap any Pokémon to mark it caught · Show this screen at the counter to scan missing box colors</div>
+  <div class="poster-hint">Tap ★ to add/remove from Wish List · Tap a toy to mark it caught</div>
 </div>
 
 <script>
@@ -624,10 +635,10 @@ const TOYS = [
   { id:'06', name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', accent:'#4b5563', defaultQty:1 },
   { id:'07', name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', accent:'#a855f7', defaultQty:0 },
   { id:'08', name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', accent:'#34d399', defaultQty:1 },
-  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', accent:'#d97706', defaultQty:0, wish:true },
+  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', accent:'#d97706', defaultQty:0, defaultWish:true },
   { id:'10', name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', accent:'#9ca3af', defaultQty:0 },
   { id:'11', name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', accent:'#ea580c', defaultQty:0 },
-  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', accent:'#65a30d', defaultQty:0, wish:true },
+  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', accent:'#65a30d', defaultQty:0, defaultWish:true },
   { id:'13', name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', accent:'#38bdf8', defaultQty:0 },
   { id:'14', name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', accent:'#0284c7', defaultQty:1 },
   { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', accent:'#d97706', defaultQty:0 }
@@ -638,20 +649,24 @@ const LIGHT_HEXES = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5'
 
 let state = {
   qty: {},
-  sound: true,
+  wish: {},
   overlay: { top: 4, bottom: 2, left: 2, right: 2 }
 };
 
 let ui = {
   tab: 'map',
   mapMode: 'missing',
+  wishOnly: false,
   spotlight: false,
   listFilter: 'all',
   selectedCode: '12'
 };
 
 function initDefaultState() {
-  TOYS.forEach(t => { state.qty[t.id] = t.defaultQty; });
+  TOYS.forEach(t => {
+    state.qty[t.id] = t.defaultQty;
+    state.wish[t.id] = !!t.defaultWish;
+  });
 }
 
 function loadState() {
@@ -660,7 +675,12 @@ function loadState() {
     const saved = localStorage.getItem('poke2026_v4');
     if (saved) {
       const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed, qty: { ...state.qty, ...(parsed.qty || {}) } };
+      state = {
+        ...state,
+        ...parsed,
+        qty: { ...state.qty, ...(parsed.qty || {}) },
+        wish: { ...state.wish, ...(parsed.wish || {}) }
+      };
     }
   } catch (e) {}
 }
@@ -669,15 +689,19 @@ function saveState() {
   try { localStorage.setItem('poke2026_v4', JSON.stringify(state)); } catch (e) {}
 }
 
+function isWish(id) {
+  return !!state.wish[id];
+}
+
 function getNeededList() {
-  return TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0) || a.id.localeCompare(b.id));
+  return TOYS.filter(t => !(state.qty[t.id] > 0))
+    .sort((a,b) => (isWish(b.id) ? 1 : 0) - (isWish(a.id) ? 1 : 0) || a.id.localeCompare(b.id));
 }
 
 function getContrastInk(hex) {
   return LIGHT_HEXES.includes(hex) ? '#2d2640' : '#ffffff';
 }
 
-// Cute inline SVG generator for box + chibi character
 function renderBoxAndChibi(toy, size = 72) {
   const chibi = getChibiFace(toy.id);
   const strokeCol = getContrastInk(toy.hex);
@@ -737,27 +761,30 @@ function renderAll() {
   if (document.getElementById('flashOverlay').classList.contains('open')) {
     renderMissingPoster();
   }
-  document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
 }
 
 function renderProgress() {
   const caught = TOYS.filter(t => (state.qty[t.id] || 0) > 0).length;
   const pct = Math.round((caught / TOYS.length) * 100);
   const left = TOYS.length - caught;
+  const wishCount = getNeededList().filter(t => isWish(t.id)).length;
   document.getElementById('progressText').textContent = `${caught} / ${TOYS.length} Caught (${pct}%)`;
   document.getElementById('leftBadge').textContent = left === 0 ? '🎉 Set Complete!' : `${left} Left to Hunt`;
   document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('wishOnlyBtn').textContent = `★ Wish Only (${wishCount})`;
+  document.getElementById('wishOnlyBtn').classList.toggle('active', ui.wishOnly);
   document.getElementById('spotlightBtn').classList.toggle('active', ui.spotlight);
 }
 
 function buildScanTilesHtml(list, iconSize = 62) {
   return list.map(t => {
     const ink = getContrastInk(t.hex);
+    const wished = isWish(t.id);
     return `
-      <div class="scan-tile" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="toggleToy('${t.id}')">
+      <div class="scan-tile ${wished ? 'wish' : ''}" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="toggleToy('${t.id}')">
         <div class="scan-color-band">${t.color}</div>
-        ${t.wish ? '<span class="wish-star">★ WISH</span>' : ''}
         <div class="scan-body">
+          <button class="wish-btn ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
           <div>${renderBoxAndChibi(t, iconSize)}</div>
           <div class="scan-name">${t.name}</div>
           <div class="scan-code">-${t.id}</div>
@@ -769,14 +796,17 @@ function buildScanTilesHtml(list, iconSize = 62) {
 function buildSwatchesHtml(list) {
   return list.map(t => {
     const ink = getContrastInk(t.hex);
-    return `<span class="swatch-chip" style="background:${t.hex};color:${ink};">${t.wish ? '★ ' : ''}${t.color} (-${t.id})</span>`;
+    const wished = isWish(t.id);
+    return `<span class="swatch-chip" style="background:${t.hex};color:${ink};">${wished ? '★ ' : ''}${t.color} (-${t.id})</span>`;
   }).join('');
 }
 
 function renderMissingVisual() {
   const wrap = document.getElementById('missingView');
-  const needed = getNeededList();
-  if (!needed.length) {
+  const allNeeded = getNeededList();
+  const list = ui.wishOnly ? allNeeded.filter(t => isWish(t.id)) : allNeeded;
+
+  if (!allNeeded.length) {
     wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:26px 14px;">
       <div style="font-size:34px;margin-bottom:6px;">🎉</div>
       <div style="font-size:16px;font-weight:900;">All 15 Pokémon Caught!</div>
@@ -784,16 +814,24 @@ function renderMissingVisual() {
     </div>`;
     return;
   }
+  if (!list.length) {
+    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:22px 14px;">
+      <div style="font-size:26px;margin-bottom:6px;">☆</div>
+      <div style="font-size:14px;font-weight:900;">No missing Pokémon on your Wish List</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Tap ☆ on any Pokémon to add it to your Wish List.</div>
+    </div>`;
+    return;
+  }
   wrap.innerHTML = `
     <div class="missing-board">
       <div class="missing-board-head">
         <div>
-          <div class="missing-board-title">🌈 Still Missing (${needed.length}) — Quick Color Scan</div>
-          <div class="missing-board-sub">Tap any toy to mark it caught</div>
+          <div class="missing-board-title">${ui.wishOnly ? `★ Wish List (${list.length})` : `🌈 Still Missing (${list.length}) — Quick Color Scan`}</div>
+          <div class="missing-board-sub">Tap ☆/★ for Wish List · Tap tile to mark caught</div>
         </div>
       </div>
-      <div class="color-swatch-bar">${buildSwatchesHtml(needed)}</div>
-      <div class="missing-grid">${buildScanTilesHtml(needed, 62)}</div>
+      <div class="color-swatch-bar">${buildSwatchesHtml(list)}</div>
+      <div class="missing-grid">${buildScanTilesHtml(list, 62)}</div>
     </div>`;
 }
 
@@ -804,18 +842,19 @@ function renderCases() {
   for (let c = 1; c <= 5; c++) {
     const group = TOYS.filter(t => t.caseNum === c);
     const done = group.every(t => (state.qty[t.id] || 0) > 0);
-    const hasWish = group.some(t => t.wish && !(state.qty[t.id] > 0));
+    const hasWish = group.some(t => isWish(t.id) && !(state.qty[t.id] > 0));
     const tag = done ? `<span class="case-tag done">CASE COMPLETE ✨</span>`
-              : hasWish ? `<span class="case-tag hot">★ TOP WISH INSIDE</span>`
+              : hasWish ? `<span class="case-tag hot">★ WISH INSIDE</span>`
               : `<span class="case-tag">${group.filter(t=>state.qty[t.id]>0).length}/3 Caught</span>`;
     html += `<div class="case-card"><div class="case-head"><div class="case-title">📦 Master Case ${c}</div>${tag}</div><div class="box-grid">`;
     group.forEach(t => {
       const q = state.qty[t.id] || 0;
       const caught = q > 0;
+      const wished = isWish(t.id);
       html += `
-        <div class="toy-tile ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}" onclick="toggleToy('${t.id}')">
-          ${t.wish && !caught ? '<span class="wish-ribbon">★ WISH</span>' : ''}
+        <div class="toy-tile ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}" onclick="toggleToy('${t.id}')">
           ${q > 1 ? `<span class="dupe-chip">x${q}</span>` : ''}
+          <button class="wish-btn ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
           <div class="box-visual">
             ${renderBoxAndChibi(t, 72)}
             ${caught ? `<div class="pokeball-seal">${pokeballSvg(42)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
@@ -839,6 +878,7 @@ function setMapMode(mode) {
   document.getElementById('missingView').style.display = mode === 'missing' ? 'block' : 'none';
   document.getElementById('casesView').style.display = mode === 'cases' ? 'block' : 'none';
   document.getElementById('photoView').style.display = mode === 'photo' ? 'block' : 'none';
+  document.getElementById('wishOnlyBtn').style.display = mode === 'missing' ? 'inline-flex' : 'none';
   document.getElementById('spotlightBtn').style.display = mode === 'cases' ? 'inline-flex' : 'none';
   if (mode === 'photo') renderPhotoOverlay();
 }
@@ -921,7 +961,8 @@ function renderDecoder() {
   const pad = document.getElementById('numPad');
   pad.innerHTML = TOYS.map(t => {
     const caught = (state.qty[t.id] || 0) > 0;
-    const cls = `${caught ? 'caught' : ''} ${t.wish && !caught ? 'wish' : ''} ${ui.selectedCode === t.id ? 'selected' : ''}`;
+    const wished = isWish(t.id);
+    const cls = `${caught ? 'caught' : ''} ${wished && !caught ? 'wish' : ''} ${ui.selectedCode === t.id ? 'selected' : ''}`;
     return `<button class="num-btn ${cls}" onclick="selectCode('${t.id}')">-${t.id}</button>`;
   }).join('');
 
@@ -958,20 +999,22 @@ function selectCode(id) {
 function renderDecoderVerdict(id) {
   const t = TOYS.find(x => x.id === id) || TOYS[11];
   const caught = (state.qty[t.id] || 0) > 0;
+  const wished = isWish(t.id);
   const mates = TOYS.filter(x => x.caseNum === t.caseNum && x.id !== t.id);
   const matesNeeded = mates.filter(x => !(state.qty[x.id] > 0));
   const res = document.getElementById('decoderResult');
   res.innerHTML = `
     <div class="verdict-box ${caught ? 'skip' : 'grab'}">
       <div>${renderBoxAndChibi(t, 82)}</div>
-      <div class="verdict-title">${caught ? '✋ ALREADY CAUGHT' : (t.wish ? '🌟 TOP WISH — GRAB IT!' : '✅ GRAB IT!')}</div>
+      <div class="verdict-title">${caught ? '✋ ALREADY CAUGHT' : (wished ? '🌟 WISH LIST — GRAB IT!' : '✅ GRAB IT!')}</div>
       <div style="font-size:15px;font-weight:800;margin-bottom:4px;">${t.name} · 30275-${t.id} (${t.color} Box)</div>
       <div class="verdict-sub">
         Ships in <strong>Master Case ${t.caseNum}</strong> with ${mates.map(m => `${m.name} (-${m.id})`).join(' & ')}.<br/>
         ${matesNeeded.length ? `💡 <strong>Carton Clue:</strong> Ask if they also have ${matesNeeded.map(m => `<strong>${m.color} (-${m.id} ${m.name})</strong>`).join(' or ')}!` : '✨ All other toys in this carton are already caught.'}
       </div>
-      <div style="margin-top:10px;">
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
         <button class="btn-primary" onclick="toggleToy('${t.id}')">${caught ? 'Mark as Uncaught' : '✅ Mark Caught Now'}</button>
+        <button class="btn-secondary" onclick="toggleWish('${t.id}', event)">${wished ? '★ On Wish List' : '☆ Add to Wish List'}</button>
       </div>
     </div>`;
 }
@@ -981,13 +1024,15 @@ function filterByColor(family) {
   const res = document.getElementById('decoderResult');
   res.innerHTML = matches.map(t => {
     const caught = (state.qty[t.id] || 0) > 0;
+    const wished = isWish(t.id);
     return `
-      <div class="list-item ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}" onclick="selectCode('${t.id}')" style="cursor:pointer;">
+      <div class="list-item ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}" onclick="selectCode('${t.id}')" style="cursor:pointer;">
         <div>${renderBoxAndChibi(t, 52)}</div>
         <div class="list-main">
           <div class="list-title">${t.name} <span class="toy-code">30275-${t.id}</span></div>
           <div class="list-meta">${t.color} Box · Case ${t.caseNum} · <strong>${caught ? 'Already have' : 'NEED!'}</strong></div>
         </div>
+        <button class="wish-btn-inline ${wished ? 'active' : ''}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
       </div>`;
   }).join('');
 }
@@ -1003,9 +1048,10 @@ function setListFilter(f, btn) {
 function renderChecklist() {
   let list = [...TOYS];
   if (ui.listFilter === 'need') list = list.filter(t => !(state.qty[t.id] > 0));
+  if (ui.listFilter === 'wish') list = list.filter(t => isWish(t.id));
   if (ui.listFilter === 'caught') list = list.filter(t => (state.qty[t.id] || 0) > 0);
   if (ui.listFilter === 'dupes') list = list.filter(t => (state.qty[t.id] || 0) > 1);
-  list.sort((a, b) => (b.wish ? 1 : 0) - (a.wish ? 1 : 0) || a.id.localeCompare(b.id));
+  list.sort((a, b) => (isWish(b.id) ? 1 : 0) - (isWish(a.id) ? 1 : 0) || a.id.localeCompare(b.id));
 
   const wrap = document.getElementById('checklistWrap');
   if (!list.length) {
@@ -1015,17 +1061,18 @@ function renderChecklist() {
   wrap.innerHTML = list.map(t => {
     const q = state.qty[t.id] || 0;
     const caught = q > 0;
+    const wished = isWish(t.id);
     return `
-      <div class="list-item ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}">
-        <div onclick="toggleToy('${t.id}')" style="cursor:pointer;">${renderBoxAndChibi(t, 54)}</div>
+      <div class="list-item ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}">
+        <button class="wish-btn-inline ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
+        <div onclick="toggleToy('${t.id}')" style="cursor:pointer;">${renderBoxAndChibi(t, 50)}</div>
         <div class="list-main" onclick="toggleToy('${t.id}')" style="cursor:pointer;">
           <div class="list-title">
             ${t.name}
-            <span class="toy-code">30275-${t.id}</span>
-            ${t.wish && !caught ? '<span class="mini-tag" style="background:#fef3c7;color:#92400e;">★ Top Wish</span>' : ''}
-            ${q > 1 ? `<span class="mini-tag" style="background:#ede9fe;color:#5b21b6;">⇄ Trade x${q-1}</span>` : ''}
+            <span class="toy-code">-${t.id}</span>
+            ${q > 1 ? `<span class="mini-tag" style="background:#ede9fe;color:#5b21b6;">⇄ x${q-1}</span>` : ''}
           </div>
-          <div class="list-meta">${t.color} Box · Master Case ${t.caseNum}</div>
+          <div class="list-meta">${t.color} Box · Case ${t.caseNum}</div>
         </div>
         <div class="qty-ctrl">
           <button class="qty-btn" onclick="changeQty('${t.id}', -1)">−</button>
@@ -1036,7 +1083,23 @@ function renderChecklist() {
   }).join('');
 }
 
-// Actions & Celebration
+// Actions
+function toggleWish(id, ev) {
+  if (ev) ev.stopPropagation();
+  const next = !state.wish[id];
+  state.wish[id] = next;
+  saveState();
+  renderAll();
+  const toy = TOYS.find(t => t.id === id);
+  showToast(next ? `★ Added ${toy.name} to Wish List!` : `☆ Removed ${toy.name} from Wish List`);
+}
+
+function toggleWishOnly() {
+  ui.wishOnly = !ui.wishOnly;
+  renderProgress();
+  renderMissingVisual();
+}
+
 function toggleToy(id) {
   const cur = state.qty[id] || 0;
   if (cur === 0) {
@@ -1071,33 +1134,6 @@ function switchTab(tab) {
   document.getElementById('tab-' + tab).classList.add('active');
 }
 
-document.getElementById('soundToggle').onclick = () => {
-  state.sound = !state.sound;
-  saveState();
-  document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
-  showToast(state.sound ? '🔔 Celebration chime ON' : '🔕 Sound muted');
-};
-
-function playChime() {
-  if (!state.sound) return;
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [523.25, 659.25, 783.99, 1046.5];
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.14, ctx.currentTime + i * 0.08 + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.08 + 0.22);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(ctx.currentTime + i * 0.08);
-      osc.stop(ctx.currentTime + i * 0.08 + 0.24);
-    });
-  } catch (e) {}
-}
-
 function launchConfetti() {
   const c = document.getElementById('confettiCanvas');
   const ctx = c.getContext('2d');
@@ -1128,7 +1164,6 @@ function launchConfetti() {
 }
 
 function celebrate(toy) {
-  playChime();
   launchConfetti();
   showToast(`🎉 Caught ${toy.name} (-${toy.id})!`);
 }
@@ -1198,7 +1233,7 @@ function drawTradeCard() {
   needed.slice(0, 8).forEach((t, i) => {
     ctx.fillStyle = t.hex; ctx.beginPath(); ctx.arc(406, 184 + i*36, 9, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = '#2d2640';
-    ctx.fillText(`${t.wish ? '★ ' : ''}${t.name} (-${t.id})`, 426, 190 + i*36);
+    ctx.fillText(`${isWish(t.id) ? '★ ' : ''}${t.name} (-${t.id})`, 426, 190 + i*36);
   });
 }
 
@@ -1218,7 +1253,7 @@ function downloadTradePng() {
 function copyTradeText() {
   const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
   const needed = getNeededList();
-  const txt = `[Toronto / North York] 2026 McDonald's Pokémon Happy Meal Toy Trade!\n\nFT (Extras): ${dupes.length ? dupes.map(t => `${t.name} (-${t.id})`).join(', ') : 'None yet'}\nISO (Looking for): ${needed.map(t => `${t.wish ? '⭐' : ''}${t.name} (-${t.id})`).join(', ')}\n\nCan meet along the Yonge subway line / North York. DM to swap!`;
+  const txt = `[Toronto / North York] 2026 McDonald's Pokémon Happy Meal Toy Trade!\n\nFT (Extras): ${dupes.length ? dupes.map(t => `${t.name} (-${t.id})`).join(', ') : 'None yet'}\nISO (Looking for): ${needed.map(t => `${isWish(t.id) ? '⭐' : ''}${t.name} (-${t.id})`).join(', ')}\n\nCan meet along the Yonge subway line / North York. DM to swap!`;
   navigator.clipboard?.writeText(txt).then(() => showToast('📋 Trade post copied!'));
 }
 
