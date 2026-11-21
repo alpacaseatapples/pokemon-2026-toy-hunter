@@ -198,6 +198,17 @@
     background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
   }
 
+
+  .toy-art-box {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+  }
+  .toy-art-img {
+    position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+    width: 86%; height: 86%; object-fit: contain; pointer-events: none;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.92)) drop-shadow(0 3px 4px rgba(45,38,64,0.28));
+  }
+
   /* 2026 TCG Realistic Cards Grid */
   .cards-summary {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
@@ -685,21 +696,21 @@
 
 <script>
 const TOYS = [
-  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', colorOrder:1,  defaultQty:0, defaultWish:true },
-  { id:'08', name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', colorOrder:2,  defaultQty:1 },
-  { id:'01', name:'Pikachu',    caseNum:1, color:'Yellow',       family:'yellow', hex:'#ffd83d', colorOrder:3,  defaultQty:2 },
-  { id:'04', name:'Torchic',    caseNum:2, color:'Golden Yellow',family:'yellow', hex:'#ffca28', colorOrder:4,  defaultQty:1 },
-  { id:'11', name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', colorOrder:5,  defaultQty:0 },
-  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', colorOrder:6,  defaultQty:0, defaultWish:true },
-  { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', colorOrder:7,  defaultQty:0 },
-  { id:'02', name:'Weedle',     caseNum:1, color:'Hot Pink',     family:'pink',   hex:'#f4438c', colorOrder:8,  defaultQty:1 },
-  { id:'07', name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', colorOrder:9,  defaultQty:0 },
-  { id:'13', name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', colorOrder:10, defaultQty:0 },
-  { id:'14', name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', colorOrder:11, defaultQty:1 },
-  { id:'03', name:'Munchlax',   caseNum:1, color:'Teal Blue',    family:'blue',   hex:'#24a8db', colorOrder:12, defaultQty:1 },
-  { id:'05', name:'Sobble',     caseNum:2, color:'Royal Blue',   family:'blue',   hex:'#1b6be6', colorOrder:13, defaultQty:1 },
-  { id:'10', name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', colorOrder:14, defaultQty:0 },
-  { id:'06', name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', colorOrder:15, defaultQty:1 }
+  { id:'12', dex:906, name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', colorOrder:1,  defaultQty:0, defaultWish:true },
+  { id:'08', dex:1, name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', colorOrder:2,  defaultQty:1 },
+  { id:'01', dex:25, name:'Pikachu',    caseNum:1, color:'Yellow',       family:'yellow', hex:'#ffd83d', colorOrder:3,  defaultQty:2 },
+  { id:'04', dex:255, name:'Torchic',    caseNum:2, color:'Golden Yellow',family:'yellow', hex:'#ffca28', colorOrder:4,  defaultQty:1 },
+  { id:'11', dex:4, name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', colorOrder:5,  defaultQty:0 },
+  { id:'09', dex:133, name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', colorOrder:6,  defaultQty:0, defaultWish:true },
+  { id:'15', dex:722, name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', colorOrder:7,  defaultQty:0 },
+  { id:'02', dex:13, name:'Weedle',     caseNum:1, color:'Hot Pink',     family:'pink',   hex:'#f4438c', colorOrder:8,  defaultQty:1 },
+  { id:'07', dex:677, name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', colorOrder:9,  defaultQty:0 },
+  { id:'13', dex:7, name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', colorOrder:10, defaultQty:0 },
+  { id:'14', dex:393, name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', colorOrder:11, defaultQty:1 },
+  { id:'03', dex:446, name:'Munchlax',   caseNum:1, color:'Teal Blue',    family:'blue',   hex:'#24a8db', colorOrder:12, defaultQty:1 },
+  { id:'05', dex:816, name:'Sobble',     caseNum:2, color:'Royal Blue',   family:'blue',   hex:'#1b6be6', colorOrder:13, defaultQty:1 },
+  { id:'10', dex:572, name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', colorOrder:14, defaultQty:0 },
+  { id:'06', dex:197, name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', colorOrder:15, defaultQty:1 }
 ];
 
 // Official McDonald's Collection 2026 (M26EN) 15-card set with official Pokémon artwork + TCG type styling
@@ -794,15 +805,22 @@ function getContrastInk(hex) {
 function renderBoxAndChibi(toy, size = 64) {
   const chibi = getChibiFace(toy.id);
   const strokeCol = getContrastInk(toy.hex);
+  const artUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${toy.dex}.png`;
   return `
-  <svg width="${size}" height="${size}" viewBox="0 0 88 88" aria-label="${toy.name}">
-    <rect x="14" y="6" width="60" height="54" rx="10" fill="${toy.hex}" stroke="rgba(45,38,64,0.16)" stroke-width="2"/>
-    <rect x="14" y="29" width="60" height="6" fill="#2d2640"/>
-    <circle cx="44" cy="32" r="10" fill="#2d2640"/>
-    <circle cx="44" cy="32" r="6" fill="${toy.hex}"/>
-    <text x="44" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="${strokeCol}" opacity="0.88">POKÉMON</text>
-    <g transform="translate(22, 42)">${chibi}</g>
-  </svg>`;
+  <div class="toy-art-box" style="width:${size}px;height:${size}px;">
+    <svg width="${size}" height="${size}" viewBox="0 0 88 88" aria-label="${toy.name}">
+      <g opacity="0.38">
+        <rect x="12" y="4" width="64" height="58" rx="11" fill="${toy.hex}" stroke="rgba(45,38,64,0.22)" stroke-width="2"/>
+        <rect x="12" y="29" width="64" height="6" fill="#2d2640"/>
+        <circle cx="44" cy="32" r="10" fill="#2d2640"/>
+        <circle cx="44" cy="32" r="6" fill="${toy.hex}"/>
+        <text x="44" y="19" text-anchor="middle" font-size="8" font-weight="900" fill="${strokeCol}">POKÉMON</text>
+      </g>
+      <g class="chibi-fb" style="display:none;" transform="translate(22, 42)">${chibi}</g>
+    </svg>
+    <img class="toy-art-img" src="${artUrl}" alt="${toy.name}" loading="lazy"
+         onerror="this.style.display='none';this.previousElementSibling.querySelector('.chibi-fb').style.display='block';" />
+  </div>`;
 }
 
 function getChibiFace(id) {
@@ -875,6 +893,34 @@ function renderProgress() {
   pLock.classList.toggle('locked', ui.locked);
 
   document.getElementById('spotlightBtn').classList.toggle('active', ui.spotlight);
+}
+
+function renderPureBoxOnly(toy, size = 60) {
+  const strokeCol = getContrastInk(toy.hex);
+  return `
+  <svg width="${size}" height="${size}" viewBox="0 0 88 88" aria-label="${toy.color} box 30275-${toy.id}">
+    <rect x="10" y="10" width="68" height="68" rx="13" fill="${toy.hex}" stroke="rgba(45,38,64,0.2)" stroke-width="2.2"/>
+    <rect x="10" y="40" width="68" height="8" fill="#2d2640"/>
+    <circle cx="44" cy="44" r="12" fill="#2d2640"/>
+    <circle cx="44" cy="44" r="7" fill="${toy.hex}"/>
+    <text x="44" y="29" text-anchor="middle" font-size="9" font-weight="900" fill="${strokeCol}" opacity="0.9">30275-${toy.id}</text>
+  </svg>`;
+}
+
+function buildPosterBoxesHtml(list, iconSize = 62) {
+  return list.map(t => {
+    const ink = getContrastInk(t.hex);
+    const wished = isWish(t.id);
+    return `
+      <div class="scan-tile ${wished ? 'wish' : ''}" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="handleTileTap('${t.id}')">
+        <div class="scan-color-band">${t.color}</div>
+        <div class="scan-body">
+          <button class="wish-btn ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
+          <div>${renderPureBoxOnly(t, iconSize)}</div>
+          <div class="scan-code" style="font-size:11px;padding:2px 7px;">30275-${t.id}</div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function buildScanTilesHtml(list, iconSize = 58) {
@@ -1382,7 +1428,7 @@ function renderMissingPoster() {
   if (!list.length) return closeMissingPoster();
   document.getElementById('posterCount').textContent = `${list.length} toy${list.length === 1 ? '' : 's'} still needed`;
   document.getElementById('posterSwatches').innerHTML = buildSwatchesHtml(list);
-  document.getElementById('posterGrid').innerHTML = buildScanTilesHtml(list, 58);
+  document.getElementById('posterGrid').innerHTML = buildPosterBoxesHtml(list, 62);
   document.getElementById('posterHint').textContent = ui.locked
     ? '🔒 Screen locked — safe to show crew'
     : 'Sorted by box color · Tap 🔒 Lock before handing phone to crew';
