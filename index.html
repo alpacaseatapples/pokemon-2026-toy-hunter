@@ -33,7 +33,7 @@
     background: var(--bg-grad);
     background-attachment: fixed;
     color: var(--ink);
-    padding-bottom: 24px;
+    padding-bottom: 76px;
     min-height: 100vh;
   }
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
@@ -472,6 +472,23 @@
   }
   .qty-val { font-size: 13px; font-weight: 800; min-width: 16px; text-align: center; }
 
+
+  /* Floating Quick Button to Show McDonald's Staff */
+  .quick-staff-wrap {
+    position: fixed; bottom: calc(12px + env(safe-area-inset-bottom)); left: 0; right: 0;
+    z-index: 35; display: flex; justify-content: center; pointer-events: none; padding: 0 14px;
+  }
+  .quick-staff-btn {
+    pointer-events: auto;
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    background: linear-gradient(135deg, #ff6b9d, #8b5cf6); color: #fff;
+    font-weight: 900; font-size: 13px; padding: 11px 20px; border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(139, 92, 246, 0.38);
+    border: 2px solid rgba(255,255,255,0.65);
+    transition: transform 0.14s;
+  }
+  .quick-staff-btn:active { transform: scale(0.96); }
+
   /* Modals */
   .modal-bg {
     position: fixed; inset: 0; z-index: 60; background: rgba(29, 21, 46, 0.55);
@@ -512,7 +529,7 @@
 
   /* Toast with Undo */
   .toast {
-    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(16px);
+    position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%) translateY(16px);
     background: #2d2640; color: #fff; font-size: 12px; font-weight: 800;
     padding: 9px 14px; border-radius: 999px; opacity: 0; pointer-events: none;
     transition: all 0.22s; z-index: 95; white-space: nowrap;
@@ -659,6 +676,11 @@
     </div>
   </section>
 </main>
+
+<div class="quick-staff-wrap">
+  <button class="quick-staff-btn" onclick="openMissingPoster()">📦 Show Staff — Missing Boxes</button>
+</div>
+
 
 <!-- Trade Card Modal -->
 <div class="modal-bg" id="tradeModal" onclick="if(event.target===this)closeModal('tradeModal')">
