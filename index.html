@@ -34,7 +34,7 @@
     background: var(--bg-grad);
     background-attachment: fixed;
     color: var(--ink);
-    padding-bottom: 92px;
+    padding-bottom: 84px;
     min-height: 100vh;
   }
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
@@ -43,51 +43,59 @@
   /* Header */
   .topbar {
     position: sticky; top: 0; z-index: 30;
-    background: rgba(255, 250, 253, 0.88);
+    background: rgba(255, 250, 253, 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
-    padding: 12px 16px 10px;
+    padding: 10px 14px 10px;
   }
   .topbar-inner { max-width: 720px; margin: 0 auto; }
   .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .brand { display: flex; align-items: center; gap: 10px; }
   .brand-icon {
-    width: 38px; height: 38px; border-radius: 13px;
+    width: 36px; height: 36px; border-radius: 12px;
     background: linear-gradient(135deg, #ff7aa8, #a78bfa);
     display: grid; place-items: center;
     box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
     flex-shrink: 0;
   }
-  .brand h1 { font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
+  .brand h1 { font-size: 15px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
   .brand p { font-size: 11px; margin: 1px 0 0; color: var(--muted); font-weight: 600; }
   .top-actions { display: flex; align-items: center; gap: 6px; }
   .icon-btn {
-    width: 36px; height: 36px; border-radius: 12px;
+    width: 34px; height: 34px; border-radius: 11px;
     background: var(--card); border: 1px solid var(--border);
-    display: grid; place-items: center; font-size: 16px;
+    display: grid; place-items: center; font-size: 15px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   }
-  .share-pill {
-    padding: 8px 12px; border-radius: 12px;
-    background: linear-gradient(135deg, #ff6b9d, #ff8bb3);
-    color: #fff; font-weight: 700; font-size: 12px;
-    display: inline-flex; align-items: center; gap: 5px;
-    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.28);
+
+  /* Top External Store Map Link */
+  .hunter-link-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    margin-top: 8px; padding: 8px 12px; border-radius: 12px;
+    background: linear-gradient(135deg, #ede9fe, #ffe4ee);
+    border: 1px solid #e2d4f8;
+    color: var(--ink); text-decoration: none;
+    font-size: 12px; font-weight: 800;
+  }
+  .hunter-link-bar .open-pill {
+    background: #fff; color: #7c3aed; padding: 3px 8px;
+    border-radius: 999px; font-size: 11px; font-weight: 800;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06); white-space: nowrap;
   }
 
   /* Progress Bar */
-  .progress-wrap { margin-top: 10px; }
+  .progress-wrap { margin-top: 8px; }
   .progress-meta {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 12px; font-weight: 700; margin-bottom: 5px;
+    font-size: 11.5px; font-weight: 700; margin-bottom: 4px;
   }
   .progress-meta .badge {
     background: var(--pink-soft); color: #c81e5d;
-    padding: 2px 8px; border-radius: 999px; font-size: 11px;
+    padding: 2px 8px; border-radius: 999px; font-size: 10.5px;
   }
   .progress-track {
-    height: 10px; border-radius: 999px; background: #ede7f3; overflow: hidden;
+    height: 8px; border-radius: 999px; background: #ede7f3; overflow: hidden;
   }
   .progress-fill {
     height: 100%; border-radius: 999px;
@@ -97,11 +105,11 @@
 
   /* Tabs */
   .tabs {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
-    margin-top: 10px; background: #f2ebf8; padding: 4px; border-radius: 14px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    margin-top: 8px; background: #f2ebf8; padding: 4px; border-radius: 13px;
   }
   .tab-btn {
-    padding: 8px 4px; border-radius: 10px; font-size: 12px; font-weight: 700;
+    padding: 7px 4px; border-radius: 9px; font-size: 12px; font-weight: 700;
     color: var(--muted); transition: all 0.2s; text-align: center;
   }
   .tab-btn.active {
@@ -110,7 +118,7 @@
   }
 
   /* Main Container */
-  .container { max-width: 720px; margin: 0 auto; padding: 14px 14px 24px; }
+  .container { max-width: 720px; margin: 0 auto; padding: 12px 12px 20px; }
   .section { display: none; }
   .section.active { display: block; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -118,22 +126,71 @@
   /* Controls & Pills */
   .toolbar {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 12px;
+    gap: 8px; margin-bottom: 10px;
   }
   .seg-group {
     display: inline-flex; background: #f2ebf8; padding: 3px; border-radius: 12px; gap: 3px;
   }
   .seg-btn {
-    padding: 6px 10px; border-radius: 9px; font-size: 12px; font-weight: 700; color: var(--muted);
+    padding: 6px 9px; border-radius: 9px; font-size: 11.5px; font-weight: 700; color: var(--muted);
   }
   .seg-btn.active { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
   .pill-toggle {
-    padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    padding: 6px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
     background: var(--card); border: 1.5px solid var(--border); color: var(--ink);
     display: inline-flex; align-items: center; gap: 5px;
   }
   .pill-toggle.active {
     background: var(--gold-soft); border-color: #f59e0b; color: #92400e;
+  }
+
+  /* Missing All-In-One Visual Card */
+  .missing-board {
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
+  }
+  .missing-board-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 8px;
+  }
+  .missing-board-title { font-size: 13px; font-weight: 900; }
+  .missing-board-sub { font-size: 10.5px; color: var(--muted); font-weight: 700; }
+  .color-swatch-bar {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px;
+  }
+  .swatch-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800;
+    border: 1.5px solid rgba(45,38,64,0.14);
+  }
+  .missing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
+  }
+  .scan-tile {
+    position: relative; border-radius: 14px; overflow: hidden;
+    background: #fff; border: 2px solid var(--tile-hex, #efe7f5);
+    text-align: center; cursor: pointer; user-select: none;
+    box-shadow: 0 3px 10px rgba(45, 38, 64, 0.07);
+    transition: transform 0.14s;
+  }
+  .scan-tile:active { transform: scale(0.96); }
+  .scan-color-band {
+    background: var(--tile-hex); color: var(--tile-ink, #2d2640);
+    font-size: 10px; font-weight: 900; padding: 4px 4px;
+    letter-spacing: 0.2px; text-transform: uppercase;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .scan-body { padding: 4px 4px 7px; }
+  .scan-name { font-size: 12px; font-weight: 900; line-height: 1.15; margin-top: 1px; }
+  .scan-code {
+    display: inline-block; margin-top: 2px;
+    font-size: 10px; font-weight: 800; color: var(--ink);
+    background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
+  }
+  .wish-star {
+    position: absolute; top: 24px; right: 4px; z-index: 3;
+    background: linear-gradient(135deg, #f59e0b, #fb923c); color: #fff;
+    font-size: 8.5px; font-weight: 900; padding: 1px 5px; border-radius: 6px;
   }
 
   /* Master Case Cards */
@@ -180,9 +237,9 @@
     font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
   }
   .box-visual {
-    position: relative; width: 100%; height: 82px;
+    position: relative; width: 100%; height: 78px;
     display: flex; align-items: center; justify-content: center;
-    margin: 4px 0 4px;
+    margin: 2px 0 4px;
   }
   .pokeball-seal {
     position: absolute; inset: 0; display: flex; flex-direction: column;
@@ -297,6 +354,10 @@
   .list-main { flex: 1; min-width: 0; }
   .list-title { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .list-meta { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .mini-tag {
+    font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 7px;
+    background: #f5f1fa; color: var(--muted);
+  }
   .qty-ctrl { display: flex; align-items: center; gap: 6px; }
   .qty-btn {
     width: 28px; height: 28px; border-radius: 9px; background: #f2ebf8;
@@ -304,39 +365,12 @@
   }
   .qty-val { font-size: 13px; font-weight: 800; min-width: 18px; text-align: center; }
 
-  /* Spots */
-  .spot-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 18px; padding: 12px 14px; margin-bottom: 10px;
-    box-shadow: var(--shadow);
-  }
-  .spot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .spot-name { font-size: 14px; font-weight: 800; margin: 0; }
-  .spot-addr { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
-  .dist-badge {
-    background: var(--purple-soft); color: #5b21b6; font-size: 11px; font-weight: 800;
-    padding: 4px 8px; border-radius: 10px; white-space: nowrap;
-  }
-  .spot-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0; }
-  .mini-tag {
-    font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 7px;
-    background: #f5f1fa; color: var(--muted);
-  }
-  .mini-tag.sight { background: var(--mint-soft); color: #065f46; }
-  .mini-tag.soldout { background: #fee2e2; color: #991b1b; }
-  .spot-note { font-size: 12px; color: var(--ink); line-height: 1.4; margin: 0 0 8px; }
-  .spot-actions { display: flex; flex-wrap: wrap; gap: 6px; }
-  .spot-link {
-    text-decoration: none; font-size: 11px; font-weight: 800;
-    padding: 6px 10px; border-radius: 9px; background: #f3effa; color: var(--ink);
-  }
-
   /* Bottom Sticky Bar */
   .bottom-bar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
-    background: rgba(255, 252, 254, 0.92);
+    background: rgba(255, 252, 254, 0.94);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border); padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border); padding: 9px 14px calc(9px + env(safe-area-inset-bottom));
   }
   .bottom-inner {
     max-width: 720px; margin: 0 auto; display: flex; gap: 8px;
@@ -359,16 +393,28 @@
   .modal-head h3 { margin: 0; font-size: 17px; font-weight: 900; }
   .close-x { width: 32px; height: 32px; border-radius: 50%; background: #f2ebf8; font-size: 16px; font-weight: 800; }
 
-  /* Fullscreen Flashcard */
+  /* Fullscreen All-Missing Visual Poster */
   .flash-bg {
     position: fixed; inset: 0; z-index: 80; background: #1d152e; color: #fff;
-    display: none; flex-direction: column; justify-content: space-between;
-    padding: 20px 18px calc(24px + env(safe-area-inset-bottom)); text-align: center;
+    display: none; flex-direction: column;
+    padding: 14px 12px calc(16px + env(safe-area-inset-bottom));
+    overflow-y: auto;
   }
   .flash-bg.open { display: flex; }
-  .flash-card-box {
-    background: #fff; color: var(--ink); border-radius: 28px; padding: 24px 18px;
-    max-width: 420px; width: 100%; margin: 0 auto;
+  .poster-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; max-width: 560px; width: 100%; margin-left: auto; margin-right: auto;
+  }
+  .poster-wrap {
+    max-width: 560px; width: 100%; margin: 0 auto;
+    background: #ffffff; color: var(--ink); border-radius: 22px; padding: 12px;
+  }
+  .poster-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .poster-hint {
+    text-align: center; font-size: 11px; color: rgba(255,255,255,0.75);
+    font-weight: 700; margin-top: 10px;
   }
 
   /* Toast & Confetti */
@@ -381,12 +427,6 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   #confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
-
-  .field { margin-bottom: 10px; }
-  .field label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
-  .field input, .field select, .field textarea {
-    width: 100%; padding: 9px 11px; border-radius: 11px; border: 1.5px solid var(--border); font-size: 13px;
-  }
 </style>
 </head>
 <body>
@@ -399,7 +439,7 @@
     <div class="brand-row">
       <div class="brand">
         <div class="brand-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24">
+          <svg width="22" height="22" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="#fff"/>
             <path d="M2 12a10 10 0 0 1 20 0z" fill="#ff4d79"/>
             <rect x="2" y="10.8" width="20" height="2.4" fill="#2d2640"/>
@@ -409,14 +449,18 @@
         </div>
         <div>
           <h1>Pokémon 2026 Toy Hunter</h1>
-          <p>Toronto Happy Meal Tracker · Codes 30275-XX</p>
+          <p>Happy Meal Tracker · Codes 30275-XX</p>
         </div>
       </div>
       <div class="top-actions">
         <button class="icon-btn" id="soundToggle" title="Toggle celebration chime">🔔</button>
-        <button class="share-pill" onclick="openShareModal()">💌 Share</button>
       </div>
     </div>
+
+    <a class="hunter-link-bar" href="https://www.happymealshunter.xyz/location/cmw5guzss00kisicyr6gi4sew" target="_blank" rel="noopener">
+      <span>📍 Live Store Tracker — HappyMealsHunter</span>
+      <span class="open-pill">Open Map ↗</span>
+    </a>
 
     <div class="progress-wrap">
       <div class="progress-meta">
@@ -432,7 +476,6 @@
       <button class="tab-btn active" data-tab="map" onclick="switchTab('map')">🎨 Box Map</button>
       <button class="tab-btn" data-tab="decoder" onclick="switchTab('decoder')">🔍 Decoder</button>
       <button class="tab-btn" data-tab="list" onclick="switchTab('list')">📋 List</button>
-      <button class="tab-btn" data-tab="spots" onclick="switchTab('spots')">📍 Spots</button>
     </nav>
   </div>
 </header>
@@ -442,13 +485,15 @@
   <section id="tab-map" class="section active">
     <div class="toolbar">
       <div class="seg-group">
-        <button class="seg-btn active" id="modeCasesBtn" onclick="setMapMode('cases')">Master Cases</button>
-        <button class="seg-btn" id="modePhotoBtn" onclick="setMapMode('photo')">📷 My Guide Photo</button>
+        <button class="seg-btn active" id="modeMissingBtn" onclick="setMapMode('missing')">🌈 Missing</button>
+        <button class="seg-btn" id="modeCasesBtn" onclick="setMapMode('cases')">All 15 Cases</button>
+        <button class="seg-btn" id="modePhotoBtn" onclick="setMapMode('photo')">📷 Photo</button>
       </div>
-      <button class="pill-toggle" id="spotlightBtn" onclick="toggleSpotlight()">✨ Spotlight Needed</button>
+      <button class="pill-toggle" id="spotlightBtn" style="display:none;" onclick="toggleSpotlight()">✨ Dim Caught</button>
     </div>
 
-    <div id="casesView"></div>
+    <div id="missingView"></div>
+    <div id="casesView" style="display:none;"></div>
 
     <div id="photoView" style="display:none;">
       <div class="photo-card">
@@ -495,7 +540,7 @@
     <div class="card">
       <h2>🔍 Instant Code & Color Decoder</h2>
       <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;">
-        Check the bottom flap under the FSC sticker (`30275-XX`) or tap a number / box color below:
+        Check the bottom flap under the FSC sticker (<code>30275-XX</code>) or tap a number / box color below:
       </div>
       <div class="code-input-row">
         <span class="code-prefix">30275-</span>
@@ -507,11 +552,11 @@
     </div>
 
     <div class="card" style="text-align:center;">
-      <h2>📱 Counter Flashcard Mode</h2>
+      <h2>📱 All Missing Colors Visual</h2>
       <p style="font-size:12px;color:var(--muted);margin:0 0 12px;font-weight:600;">
-        Full-screen high-contrast cards of your remaining targets to show crew members right at the counter.
+        Full-screen grid of all remaining missing Pokémon & box colors on one screen for fast scanning at the counter.
       </p>
-      <button class="btn-primary" style="width:100%;" onclick="openFlashcards()">Launch Counter Flashcards</button>
+      <button class="btn-primary" style="width:100%;" onclick="openMissingPoster()">Open Full-Screen Visual</button>
     </div>
   </section>
 
@@ -528,54 +573,13 @@
     </div>
     <div id="checklistWrap"></div>
   </section>
-
-  <!-- TAB 4: TORONTO SPOTS -->
-  <section id="tab-spots" class="section">
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-        <h2 style="margin:0;">📍 Toronto McDonald's Radar</h2>
-        <button class="btn-primary" style="padding:7px 12px;font-size:12px;" onclick="openSightingModal()">+ Log Sighting</button>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
-        <button class="pill-toggle" id="gpsBtn" onclick="useLiveGPS()">📡 Use Live GPS</button>
-        <button class="pill-toggle" onclick="setAreaPreset('union')">Union</button>
-        <button class="pill-toggle" onclick="setAreaPreset('lawrence')">3400 Yonge</button>
-        <button class="pill-toggle" onclick="setAreaPreset('sheppard')">4808 Yonge</button>
-      </div>
-      <div class="seg-group" id="spotFilters">
-        <button class="seg-btn active" onclick="setSpotFilter('all', this)">All</button>
-        <button class="seg-btn" onclick="setSpotFilter('parking', this)">🅿️ Parking</button>
-        <button class="seg-btn" onclick="setSpotFilter('indoor', this)">🏢 Indoor</button>
-        <button class="seg-btn" onclick="setSpotFilter('24h', this)">🌙 24h</button>
-      </div>
-    </div>
-    <div id="spotsWrap"></div>
-  </section>
 </main>
 
 <!-- Bottom Bar -->
 <div class="bottom-bar">
   <div class="bottom-inner">
-    <button class="btn-secondary" onclick="openFlashcards()">📱 Flashcards</button>
-    <button class="btn-primary" onclick="openShareModal()">💌 Send to Husband</button>
-  </div>
-</div>
-
-<!-- Share Modal -->
-<div class="modal-bg" id="shareModal" onclick="if(event.target===this)closeModal('shareModal')">
-  <div class="modal-sheet">
-    <div class="modal-head">
-      <h3>💌 Send Live Snapshot to Husband</h3>
-      <button class="close-x" onclick="closeModal('shareModal')">✕</button>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.45;">
-      Your caught toys, duplicates, and store sightings are packed directly into the link below (<code>?s=...</code>). When he opens it on his phone, it loads your exact progress automatically!
-    </p>
-    <textarea id="sharePreview" rows="6" readonly style="width:100%;padding:10px;border-radius:12px;border:1.5px solid var(--border);font-size:12px;background:#faf7fd;margin-bottom:10px;"></textarea>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <button class="btn-primary" onclick="copyShareText()">📋 Copy Checklist & Live Link for WhatsApp / Text</button>
-      <button class="btn-secondary" onclick="copyLinkOnly()">🔗 Copy Live Link Only</button>
-    </div>
+    <button class="btn-primary" onclick="openMissingPoster()">🌈 Missing Colors Visual</button>
+    <button class="btn-secondary" style="flex:0.65;" onclick="openTradeModal()">🤝 Trade Card</button>
   </div>
 </div>
 
@@ -594,48 +598,20 @@
   </div>
 </div>
 
-<!-- Sighting Modal -->
-<div class="modal-bg" id="sightingModal" onclick="if(event.target===this)closeModal('sightingModal')">
-  <div class="modal-sheet">
-    <div class="modal-head">
-      <h3>📍 Log Box Sighting</h3>
-      <button class="close-x" onclick="closeModal('sightingModal')">✕</button>
-    </div>
-    <div class="field">
-      <label>McDonald's Location</label>
-      <select id="sightSpotSelect"></select>
-    </div>
-    <div class="field">
-      <label>Or Add New Store Name / Address (optional)</label>
-      <input id="sightNewStore" placeholder="e.g. 5200 Yonge St (Empress Walk)" />
-    </div>
-    <div class="field">
-      <label>What box colors / codes did they have?</label>
-      <input id="sightNote" placeholder="e.g. Bright green -12 Sprigatito & tan -09 Eevee!" />
-    </div>
-    <div class="field">
-      <label>Status</label>
-      <select id="sightStatus">
-        <option value="spotted">🟢 Toys Spotted</option>
-        <option value="soldout">🔴 Sold Out / Only Dupes</option>
-      </select>
-    </div>
-    <button class="btn-primary" style="width:100%;" onclick="saveSighting()">Save Sighting</button>
-  </div>
-</div>
-
-<!-- Fullscreen Flashcards -->
+<!-- Fullscreen All-Missing Visual Poster -->
 <div class="flash-bg" id="flashOverlay">
-  <div style="display:flex;justify-content:space-between;align-items:center;">
-    <span id="flashCounter" style="font-size:13px;font-weight:800;opacity:0.85;">Target 1 of 7</span>
-    <button class="close-x" style="background:rgba(255,255,255,0.18);color:#fff;" onclick="closeFlashcards()">✕</button>
+  <div class="poster-head">
+    <div>
+      <div style="font-size:15px;font-weight:900;">🌈 Missing Box Colors</div>
+      <div id="posterCount" style="font-size:11px;opacity:0.8;font-weight:700;">7 toys still needed</div>
+    </div>
+    <button class="close-x" style="background:rgba(255,255,255,0.18);color:#fff;" onclick="closeMissingPoster()">✕</button>
   </div>
-  <div class="flash-card-box" id="flashContent"></div>
-  <div style="display:flex;gap:10px;max-width:420px;width:100%;margin:0 auto;">
-    <button class="btn-secondary" style="flex:1;padding:14px;" onclick="stepFlash(-1)">← Prev</button>
-    <button class="btn-primary" style="flex:1.4;padding:14px;" onclick="catchFromFlash()">✅ Caught It!</button>
-    <button class="btn-secondary" style="flex:1;padding:14px;" onclick="stepFlash(1)">Next →</button>
+  <div class="poster-wrap">
+    <div class="color-swatch-bar" id="posterSwatches"></div>
+    <div class="poster-grid" id="posterGrid"></div>
   </div>
+  <div class="poster-hint">Tap any Pokémon to mark it caught · Show this screen at the counter to scan missing box colors</div>
 </div>
 
 <script>
@@ -657,45 +633,21 @@ const TOYS = [
   { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', accent:'#d97706', defaultQty:0 }
 ];
 
-// Order matching the 5x3 reference screenshot grid
 const PHOTO_ORDER = ['13','07','04','10','01','14','08','05','11','02','15','09','06','12','03'];
-
-const DEFAULT_SPOTS = [
-  { id:'union', name:"McDonald's – Union Station", addr:'65 Front St W (York Concourse)', lat:43.6452, lng:-79.3806, phone:'416-368-7890', tags:['indoor'], note:'Recently had Blue boxes & Espurr/Squirtle reports. Fast counter ask.' },
-  { id:'123yonge', name:"McDonald's – 123 Yonge St", addr:'123 Yonge St (at Adelaide)', lat:43.6502, lng:-79.3788, phone:'416-364-5201', tags:['indoor','24h'], note:'Steps from King Station; busy lunch rush, quieter mid-afternoon.' },
-  { id:'127church', name:"McDonald's – 127 Church St", addr:'127 Church St (at Richmond E)', lat:43.6524, lng:-79.3755, phone:'416-364-1565', tags:['indoor','24h'], note:'Off the main Yonge strip — sometimes holds older/different cases.' },
-  { id:'eaton', name:"McDonald's – Eaton Centre", addr:'260 Yonge St (Urban Eatery)', lat:43.6544, lng:-79.3807, phone:'416-598-4012', tags:['indoor'], note:'Easy PATH / indoor walk from Queen or Dundas.' },
-  { id:'356yonge', name:"McDonald's – 356 Yonge St (Elm)", addr:'356 Yonge St (near Elm St)', lat:43.6582, lng:-79.3818, phone:'416-593-5523', tags:['indoor','24h'], note:'Case 4 hotspot (Sprigatito -12 & Charmander -11 previously spotted).' },
-  { id:'470yonge', name:"McDonald's – 470 Yonge St", addr:'470 Yonge St (near Maitland)', lat:43.6620, lng:-79.3837, phone:'416-925-8410', tags:['indoor','24h'], note:'Quick walk north from College Station.' },
-  { id:'3400yonge', name:"McDonald's – 3400 Yonge St", addr:'3400 Yonge St (near Lawrence)', lat:43.7327, lng:-79.4037, phone:'416-481-6322', tags:['parking','indoor'], note:'Free on-site parking lot + walk-in counter. Great 3 PM drive-home stop.' },
-  { id:'4808yonge', name:"McDonald's – 4808 Yonge St", addr:'4808 Yonge St (at Sheppard)', lat:43.7615, lng:-79.4109, phone:'416-226-3120', tags:['parking','indoor'], note:'North York lot near Sheppard; spots can be tight, easy walk-in.' },
-  { id:'1966eglinton', name:"McDonald's – 1966 Eglinton Ave E", addr:'1966 Eglinton Ave E (Scarborough)', lat:43.7279, lng:-79.2932, phone:'416-757-9121', tags:['parking','24h'], note:'Case 3 (Eevee / Bulbasaur / Espurr) reported by GTA collectors.' },
-  { id:'3150stclair', name:"McDonald's – 3150 St Clair Ave E", addr:'3150 St Clair Ave E', lat:43.7098, lng:-79.2869, phone:'416-759-4411', tags:['parking'], note:'Friendly staff for buying solo toys without a full meal.' }
-];
-
-const PRESETS = {
-  union: { lat: 43.6452, lng: -79.3806, label: 'Union Station' },
-  lawrence: { lat: 43.7327, lng: -79.4037, label: '3400 Yonge (Lawrence)' },
-  sheppard: { lat: 43.7615, lng: -79.4109, label: '4808 Yonge (Sheppard)' }
-};
+const LIGHT_HEXES = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5','#f7d4b2'];
 
 let state = {
   qty: {},
-  sightings: {}, // spotId -> { text, status, ts }
-  customSpots: [],
   sound: true,
   overlay: { top: 4, bottom: 2, left: 2, right: 2 }
 };
 
 let ui = {
   tab: 'map',
-  mapMode: 'cases',
+  mapMode: 'missing',
   spotlight: false,
   listFilter: 'all',
-  spotFilter: 'all',
-  selectedCode: '12',
-  userLoc: null,
-  flashIdx: 0
+  selectedCode: '12'
 };
 
 function initDefaultState() {
@@ -711,54 +663,31 @@ function loadState() {
       state = { ...state, ...parsed, qty: { ...state.qty, ...(parsed.qty || {}) } };
     }
   } catch (e) {}
-
-  // Hydrate from URL ?s=... if shared
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const s = params.get('s');
-    if (s) {
-      const decoded = JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))));
-      if (decoded.q) {
-        TOYS.forEach((t, idx) => { state.qty[t.id] = Number(decoded.q[idx] || 0); });
-      }
-      if (decoded.sg) state.sightings = decoded.sg;
-      if (decoded.cs) state.customSpots = decoded.cs;
-      saveState();
-      showToast('💌 Loaded synced checklist from link!');
-    }
-  } catch (e) {}
 }
 
 function saveState() {
   try { localStorage.setItem('poke2026_v4', JSON.stringify(state)); } catch (e) {}
 }
 
-function encodeShareUrl() {
-  const payload = {
-    q: TOYS.map(t => state.qty[t.id] || 0),
-    sg: state.sightings,
-    cs: state.customSpots
-  };
-  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
-    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  const base = window.location.href.split('?')[0];
-  return `${base}?s=${b64}`;
+function getNeededList() {
+  return TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0) || a.id.localeCompare(b.id));
+}
+
+function getContrastInk(hex) {
+  return LIGHT_HEXES.includes(hex) ? '#2d2640' : '#ffffff';
 }
 
 // Cute inline SVG generator for box + chibi character
-function renderBoxAndChibi(toy, size = 74) {
+function renderBoxAndChibi(toy, size = 72) {
   const chibi = getChibiFace(toy.id);
-  const darkText = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5','#f7d4b2'].includes(toy.hex);
-  const strokeCol = darkText ? '#2d2640' : '#ffffff';
+  const strokeCol = getContrastInk(toy.hex);
   return `
   <svg width="${size}" height="${size}" viewBox="0 0 88 88" aria-label="${toy.name}">
-    <!-- Box -->
     <rect x="14" y="6" width="60" height="54" rx="10" fill="${toy.hex}" stroke="rgba(45,38,64,0.16)" stroke-width="2"/>
     <rect x="14" y="29" width="60" height="6" fill="#2d2640"/>
     <circle cx="44" cy="32" r="10" fill="#2d2640"/>
     <circle cx="44" cy="32" r="6" fill="${toy.hex}"/>
     <text x="44" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="${strokeCol}" opacity="0.88">POKÉMON</text>
-    <!-- Chibi badge overlapping bottom -->
     <g transform="translate(22, 42)">
       ${chibi}
     </g>
@@ -798,14 +727,16 @@ function pokeballSvg(size = 46) {
   </svg>`;
 }
 
-// Rendering
 function renderAll() {
   renderProgress();
+  renderMissingVisual();
   renderCases();
   renderPhotoOverlay();
   renderDecoder();
   renderChecklist();
-  renderSpots();
+  if (document.getElementById('flashOverlay').classList.contains('open')) {
+    renderMissingPoster();
+  }
   document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
 }
 
@@ -816,8 +747,54 @@ function renderProgress() {
   document.getElementById('progressText').textContent = `${caught} / ${TOYS.length} Caught (${pct}%)`;
   document.getElementById('leftBadge').textContent = left === 0 ? '🎉 Set Complete!' : `${left} Left to Hunt`;
   document.getElementById('progressFill').style.width = `${pct}%`;
-  document.getElementById('spotlightBtn').textContent = `✨ Spotlight Needed (${left})`;
   document.getElementById('spotlightBtn').classList.toggle('active', ui.spotlight);
+}
+
+function buildScanTilesHtml(list, iconSize = 62) {
+  return list.map(t => {
+    const ink = getContrastInk(t.hex);
+    return `
+      <div class="scan-tile" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="toggleToy('${t.id}')">
+        <div class="scan-color-band">${t.color}</div>
+        ${t.wish ? '<span class="wish-star">★ WISH</span>' : ''}
+        <div class="scan-body">
+          <div>${renderBoxAndChibi(t, iconSize)}</div>
+          <div class="scan-name">${t.name}</div>
+          <div class="scan-code">-${t.id}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function buildSwatchesHtml(list) {
+  return list.map(t => {
+    const ink = getContrastInk(t.hex);
+    return `<span class="swatch-chip" style="background:${t.hex};color:${ink};">${t.wish ? '★ ' : ''}${t.color} (-${t.id})</span>`;
+  }).join('');
+}
+
+function renderMissingVisual() {
+  const wrap = document.getElementById('missingView');
+  const needed = getNeededList();
+  if (!needed.length) {
+    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:26px 14px;">
+      <div style="font-size:34px;margin-bottom:6px;">🎉</div>
+      <div style="font-size:16px;font-weight:900;">All 15 Pokémon Caught!</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Your 2026 Happy Meal set is complete.</div>
+    </div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="missing-board">
+      <div class="missing-board-head">
+        <div>
+          <div class="missing-board-title">🌈 Still Missing (${needed.length}) — Quick Color Scan</div>
+          <div class="missing-board-sub">Tap any toy to mark it caught</div>
+        </div>
+      </div>
+      <div class="color-swatch-bar">${buildSwatchesHtml(needed)}</div>
+      <div class="missing-grid">${buildScanTilesHtml(needed, 62)}</div>
+    </div>`;
 }
 
 function renderCases() {
@@ -840,8 +817,8 @@ function renderCases() {
           ${t.wish && !caught ? '<span class="wish-ribbon">★ WISH</span>' : ''}
           ${q > 1 ? `<span class="dupe-chip">x${q}</span>` : ''}
           <div class="box-visual">
-            ${renderBoxAndChibi(t, 76)}
-            ${caught ? `<div class="pokeball-seal">${pokeballSvg(44)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
+            ${renderBoxAndChibi(t, 72)}
+            ${caught ? `<div class="pokeball-seal">${pokeballSvg(42)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
           </div>
           <div class="toy-name">${t.name}</div>
           <div class="toy-code">-${t.id}</div>
@@ -853,13 +830,16 @@ function renderCases() {
   wrap.innerHTML = html;
 }
 
-// Photo Overlay
+// Map Mode Switching
 function setMapMode(mode) {
   ui.mapMode = mode;
+  document.getElementById('modeMissingBtn').classList.toggle('active', mode === 'missing');
   document.getElementById('modeCasesBtn').classList.toggle('active', mode === 'cases');
   document.getElementById('modePhotoBtn').classList.toggle('active', mode === 'photo');
+  document.getElementById('missingView').style.display = mode === 'missing' ? 'block' : 'none';
   document.getElementById('casesView').style.display = mode === 'cases' ? 'block' : 'none';
   document.getElementById('photoView').style.display = mode === 'photo' ? 'block' : 'none';
+  document.getElementById('spotlightBtn').style.display = mode === 'cases' ? 'inline-flex' : 'none';
   if (mode === 'photo') renderPhotoOverlay();
 }
 
@@ -983,7 +963,7 @@ function renderDecoderVerdict(id) {
   const res = document.getElementById('decoderResult');
   res.innerHTML = `
     <div class="verdict-box ${caught ? 'skip' : 'grab'}">
-      <div>${renderBoxAndChibi(t, 84)}</div>
+      <div>${renderBoxAndChibi(t, 82)}</div>
       <div class="verdict-title">${caught ? '✋ ALREADY CAUGHT' : (t.wish ? '🌟 TOP WISH — GRAB IT!' : '✅ GRAB IT!')}</div>
       <div style="font-size:15px;font-weight:800;margin-bottom:4px;">${t.name} · 30275-${t.id} (${t.color} Box)</div>
       <div class="verdict-sub">
@@ -1056,83 +1036,6 @@ function renderChecklist() {
   }).join('');
 }
 
-// Spots
-function getAllSpots() {
-  return [...DEFAULT_SPOTS, ...(state.customSpots || [])];
-}
-
-function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function useLiveGPS() {
-  if (!navigator.geolocation) return showToast('GPS not available on this browser');
-  showToast('📡 Getting live GPS...');
-  navigator.geolocation.getCurrentPosition(pos => {
-    ui.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: 'Live GPS' };
-    document.getElementById('gpsBtn').classList.add('active');
-    renderSpots();
-    showToast('📍 Sorted by your live location!');
-  }, () => showToast('Location permission denied — use area presets!'));
-}
-
-function setAreaPreset(key) {
-  ui.userLoc = PRESETS[key];
-  document.getElementById('gpsBtn').classList.remove('active');
-  renderSpots();
-  showToast(`📍 Sorted from ${PRESETS[key].label}`);
-}
-
-function setSpotFilter(f, btn) {
-  ui.spotFilter = f;
-  document.querySelectorAll('#spotFilters .seg-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderSpots();
-}
-
-function renderSpots() {
-  let spots = getAllSpots();
-  if (ui.spotFilter !== 'all') spots = spots.filter(s => (s.tags || []).includes(ui.spotFilter));
-  if (ui.userLoc) {
-    spots = spots.map(s => ({
-      ...s,
-      dist: s.lat ? haversine(ui.userLoc.lat, ui.userLoc.lng, s.lat, s.lng) : 999
-    })).sort((a, b) => a.dist - b.dist);
-  }
-  const wrap = document.getElementById('spotsWrap');
-  wrap.innerHTML = spots.map(s => {
-    const sg = state.sightings[s.id];
-    const distHtml = s.dist !== undefined && s.dist < 500
-      ? `<span class="dist-badge">${s.dist.toFixed(1)} km · ~${Math.max(2, Math.round(s.dist * 2.5))}m drive</span>`
-      : '';
-    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + s.addr + ' Toronto')}`;
-    return `
-      <div class="spot-card">
-        <div class="spot-top">
-          <div>
-            <div class="spot-name">${s.name}</div>
-            <div class="spot-addr">${s.addr}</div>
-          </div>
-          ${distHtml}
-        </div>
-        <div class="spot-tags">
-          ${(s.tags || []).map(t => `<span class="mini-tag">${t === 'parking' ? '🅿️ Parking' : t === 'indoor' ? '🏢 Indoor' : '🌙 24h'}</span>`).join('')}
-          ${sg ? `<span class="mini-tag ${sg.status === 'soldout' ? 'soldout' : 'sight'}">${sg.status === 'soldout' ? '🔴 ' : '🟢 '}${sg.text}</span>` : ''}
-        </div>
-        <p class="spot-note">${s.note || ''}</p>
-        <div class="spot-actions">
-          <a class="spot-link" href="${mapUrl}" target="_blank" rel="noopener">🗺️ Directions</a>
-          ${s.phone ? `<a class="spot-link" href="tel:${s.phone}">📞 Call</a>` : ''}
-          <button class="spot-link" onclick="openSightingModal('${s.id}')">✏️ Update Sighting</button>
-        </div>
-      </div>`;
-  }).join('');
-}
-
 // Actions & Celebration
 function toggleToy(id) {
   const cur = state.qty[id] || 0;
@@ -1168,11 +1071,9 @@ function switchTab(tab) {
   document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// Celebration chime + confetti
 document.getElementById('soundToggle').onclick = () => {
   state.sound = !state.sound;
   saveState();
-  renderProgress();
   document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
   showToast(state.sound ? '🔔 Celebration chime ON' : '🔕 Sound muted');
 };
@@ -1235,30 +1136,24 @@ function celebrate(toy) {
 // Modals
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-function openShareModal() {
-  const caught = TOYS.filter(t => (state.qty[t.id] || 0) > 0).length;
-  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
-  const url = encodeShareUrl();
-  const lines = [
-    `🎒 Pokémon 2026 Happy Meal Hunt (${caught}/15 Caught!)`,
-    ``,
-    `Still Looking For (${needed.length}):`,
-    ...needed.map(t => `${t.wish ? '⭐' : '•'} ${t.name} — ${t.color} box (30275-${t.id})`),
-    ``,
-    `🔗 Live Synced Tracker:`,
-    url
-  ];
-  document.getElementById('sharePreview').value = lines.join('\n');
-  document.getElementById('shareModal').classList.add('open');
+// Fullscreen All-Missing Visual Poster
+function openMissingPoster() {
+  const list = getNeededList();
+  if (!list.length) return showToast('🎉 You caught all 15 toys!');
+  renderMissingPoster();
+  document.getElementById('flashOverlay').classList.add('open');
 }
 
-function copyShareText() {
-  const txt = document.getElementById('sharePreview').value;
-  navigator.clipboard?.writeText(txt).then(() => showToast('📋 Copied checklist & live link!'));
+function closeMissingPoster() {
+  document.getElementById('flashOverlay').classList.remove('open');
 }
 
-function copyLinkOnly() {
-  navigator.clipboard?.writeText(encodeShareUrl()).then(() => showToast('🔗 Live link copied!'));
+function renderMissingPoster() {
+  const list = getNeededList();
+  if (!list.length) return closeMissingPoster();
+  document.getElementById('posterCount').textContent = `${list.length} toy${list.length === 1 ? '' : 's'} still needed`;
+  document.getElementById('posterSwatches').innerHTML = buildSwatchesHtml(list);
+  document.getElementById('posterGrid').innerHTML = buildScanTilesHtml(list, 60);
 }
 
 // Trade Card PNG
@@ -1280,9 +1175,8 @@ function drawTradeCard() {
   ctx.fillText('North York / Yonge Line Meetup · Brand New Sealed / Unplayed', 34, 82);
 
   const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
-  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+  const needed = getNeededList();
 
-  // FT Card
   ctx.fillStyle = '#ffffff'; roundRect(ctx, 34, 108, 310, 376, 18); ctx.fill();
   ctx.fillStyle = '#10b981'; ctx.font = 'bold 20px -apple-system, sans-serif';
   ctx.fillText('⇄ FOR TRADE (EXTRAS)', 54, 146);
@@ -1297,7 +1191,6 @@ function drawTradeCard() {
     });
   }
 
-  // ISO Card
   ctx.fillStyle = '#ffffff'; roundRect(ctx, 376, 108, 310, 376, 18); ctx.fill();
   ctx.fillStyle = '#ff6b9d'; ctx.font = 'bold 20px -apple-system, sans-serif';
   ctx.fillText('🔍 LOOKING FOR (ISO)', 396, 146);
@@ -1324,87 +1217,9 @@ function downloadTradePng() {
 
 function copyTradeText() {
   const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
-  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+  const needed = getNeededList();
   const txt = `[Toronto / North York] 2026 McDonald's Pokémon Happy Meal Toy Trade!\n\nFT (Extras): ${dupes.length ? dupes.map(t => `${t.name} (-${t.id})`).join(', ') : 'None yet'}\nISO (Looking for): ${needed.map(t => `${t.wish ? '⭐' : ''}${t.name} (-${t.id})`).join(', ')}\n\nCan meet along the Yonge subway line / North York. DM to swap!`;
   navigator.clipboard?.writeText(txt).then(() => showToast('📋 Trade post copied!'));
-}
-
-// Sighting Modal
-function openSightingModal(spotId) {
-  const sel = document.getElementById('sightSpotSelect');
-  sel.innerHTML = getAllSpots().map(s => `<option value="${s.id}" ${s.id === spotId ? 'selected' : ''}>${s.name}</option>`).join('');
-  document.getElementById('sightNewStore').value = '';
-  document.getElementById('sightNote').value = spotId && state.sightings[spotId] ? state.sightings[spotId].text : '';
-  document.getElementById('sightingModal').classList.add('open');
-}
-
-function saveSighting() {
-  let spotId = document.getElementById('sightSpotSelect').value;
-  const newStore = document.getElementById('sightNewStore').value.trim();
-  const note = document.getElementById('sightNote').value.trim();
-  const status = document.getElementById('sightStatus').value;
-  if (!note) return showToast('Enter what boxes you saw!');
-  if (newStore) {
-    spotId = 'custom_' + Date.now();
-    state.customSpots.push({ id: spotId, name: newStore, addr: 'Toronto, ON', tags: ['indoor'], note: 'Added by you' });
-  }
-  state.sightings[spotId] = { text: note, status, ts: Date.now() };
-  saveState();
-  closeModal('sightingModal');
-  renderSpots();
-  showToast('📍 Sighting saved!');
-}
-
-// Counter Flashcards
-function getNeededList() {
-  return TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
-}
-
-function openFlashcards() {
-  const list = getNeededList();
-  if (!list.length) return showToast('🎉 You caught all 15 toys!');
-  ui.flashIdx = 0;
-  renderFlashcard();
-  document.getElementById('flashOverlay').classList.add('open');
-}
-
-function closeFlashcards() { document.getElementById('flashOverlay').classList.remove('open'); }
-
-function stepFlash(dir) {
-  const list = getNeededList();
-  if (!list.length) return closeFlashcards();
-  ui.flashIdx = (ui.flashIdx + dir + list.length) % list.length;
-  renderFlashcard();
-}
-
-function renderFlashcard() {
-  const list = getNeededList();
-  if (!list.length) return closeFlashcards();
-  const t = list[ui.flashIdx % list.length];
-  document.getElementById('flashCounter').textContent = `Target ${ui.flashIdx + 1} of ${list.length}`;
-  document.getElementById('flashContent').innerHTML = `
-    ${t.wish ? '<div style="display:inline-block;background:#fef3c7;color:#92400e;font-weight:900;font-size:12px;padding:4px 12px;border-radius:999px;margin-bottom:10px;">★ TOP PRIORITY WISH</div>' : ''}
-    <div>${renderBoxAndChibi(t, 138)}</div>
-    <div style="font-size:28px;font-weight:900;margin-top:8px;">${t.name}</div>
-    <div style="font-size:18px;font-weight:800;color:var(--muted);margin:4px 0 12px;">${t.color} Box</div>
-    <div style="background:#f3effa;border-radius:14px;padding:12px;font-size:22px;font-weight:900;letter-spacing:1px;">
-      30275-${t.id}
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:700;">Master Case ${t.caseNum} · Check bottom flap under FSC sticker</div>
-  `;
-}
-
-function catchFromFlash() {
-  const list = getNeededList();
-  const t = list[ui.flashIdx % list.length];
-  if (!t) return;
-  toggleToy(t.id);
-  const nextList = getNeededList();
-  if (!nextList.length) closeFlashcards();
-  else {
-    ui.flashIdx = ui.flashIdx % nextList.length;
-    renderFlashcard();
-  }
 }
 
 let toastTimer;
