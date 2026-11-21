@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="PokéHunter 26" />
+<title>Pokémon 2026 Happy Meal Toy Hunter</title>
+<style>
+  :root {
+    --bg: #fff8fb;
+    --bg-grad: linear-gradient(160deg, #fff6fa 0%, #f5f3ff 50%, #effaf8 100%);
+    --card: #ffffff;
+    --ink: #2d2640;
+    --muted: #766d8f;
+    --border: #efe7f5;
+    --pink: #ff6b9d;
+    --pink-soft: #ffe4ee;
+    --purple: #8b5cf6;
+    --purple-soft: #ede9fe;
+    --mint: #10b981;
+    --mint-soft: #d1fae5;
+    --gold: #f59e0b;
+    --gold-soft: #fef3c7;
+    --red: #ef4444;
+    --shadow: 0 8px 24px rgba(107, 79, 155, 0.09);
+    --radius: 20px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-grad);
+    background-attachment: fixed;
+    color: var(--ink);
+    padding-bottom: 92px;
+    min-height: 100vh;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  input, select, textarea { font-family: inherit; }
+
+  /* Header */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(255, 250, 253, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 10px;
+  }
+  .topbar-inner { max-width: 720px; margin: 0 auto; }
+  .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-icon {
+    width: 38px; height: 38px; border-radius: 13px;
+    background: linear-gradient(135deg, #ff7aa8, #a78bfa);
+    display: grid; place-items: center;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+    flex-shrink: 0;
+  }
+  .brand h1 { font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
+  .brand p { font-size: 11px; margin: 1px 0 0; color: var(--muted); font-weight: 600; }
+  .top-actions { display: flex; align-items: center; gap: 6px; }
+  .icon-btn {
+    width: 36px; height: 36px; border-radius: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    display: grid; place-items: center; font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .share-pill {
+    padding: 8px 12px; border-radius: 12px;
+    background: linear-gradient(135deg, #ff6b9d, #ff8bb3);
+    color: #fff; font-weight: 700; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 5px;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.28);
+  }
+
+  /* Progress Bar */
+  .progress-wrap { margin-top: 10px; }
+  .progress-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; font-weight: 700; margin-bottom: 5px;
+  }
+  .progress-meta .badge {
+    background: var(--pink-soft); color: #c81e5d;
+    padding: 2px 8px; border-radius: 999px; font-size: 11px;
+  }
+  .progress-track {
+    height: 10px; border-radius: 999px; background: #ede7f3; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, #ff6b9d, #a78bfa, #34d399);
+    transition: width 0.4s cubic-bezier(.22,1,.36,1);
+  }
+
+  /* Tabs */
+  .tabs {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    margin-top: 10px; background: #f2ebf8; padding: 4px; border-radius: 14px;
+  }
+  .tab-btn {
+    padding: 8px 4px; border-radius: 10px; font-size: 12px; font-weight: 700;
+    color: var(--muted); transition: all 0.2s; text-align: center;
+  }
+  .tab-btn.active {
+    background: var(--card); color: var(--ink);
+    box-shadow: 0 2px 8px rgba(107, 79, 155, 0.12);
+  }
+
+  /* Main Container */
+  .container { max-width: 720px; margin: 0 auto; padding: 14px 14px 24px; }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Controls & Pills */
+  .toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 12px;
+  }
+  .seg-group {
+    display: inline-flex; background: #f2ebf8; padding: 3px; border-radius: 12px; gap: 3px;
+  }
+  .seg-btn {
+    padding: 6px 10px; border-radius: 9px; font-size: 12px; font-weight: 700; color: var(--muted);
+  }
+  .seg-btn.active { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .pill-toggle {
+    padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    background: var(--card); border: 1.5px solid var(--border); color: var(--ink);
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .pill-toggle.active {
+    background: var(--gold-soft); border-color: #f59e0b; color: #92400e;
+  }
+
+  /* Master Case Cards */
+  .case-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px; margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .case-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; gap: 8px;
+  }
+  .case-title { font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+  .case-tag {
+    font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+    background: #f3effa; color: var(--muted);
+  }
+  .case-tag.done { background: var(--mint-soft); color: #065f46; }
+  .case-tag.hot { background: var(--gold-soft); color: #92400e; }
+  .box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+  .toy-tile {
+    position: relative; border-radius: 16px; padding: 9px 6px 8px;
+    background: #fcfaff; border: 1.5px solid #efe7f5;
+    text-align: center; transition: transform 0.15s, opacity 0.2s, border-color 0.2s;
+    cursor: pointer; overflow: hidden; user-select: none;
+  }
+  .toy-tile:active { transform: scale(0.96); }
+  .toy-tile.wish:not(.caught) {
+    border-color: #f59e0b; background: linear-gradient(180deg, #fffdf4, #fff7e0);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.16);
+  }
+  .toy-tile.caught { background: #f6fdf9; border-color: #a7f3d0; }
+  .spotlight-on .toy-tile.caught { opacity: 0.34; filter: grayscale(0.35); }
+  .wish-ribbon {
+    position: absolute; top: 5px; left: 5px; z-index: 4;
+    background: linear-gradient(135deg, #f59e0b, #fb923c); color: #fff;
+    font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+  }
+  .dupe-chip {
+    position: absolute; top: 5px; right: 5px; z-index: 4;
+    background: var(--purple); color: #fff;
+    font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
+  }
+  .box-visual {
+    position: relative; width: 100%; height: 82px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 4px 0 4px;
+  }
+  .pokeball-seal {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; pointer-events: none;
+    animation: popIn 0.28s cubic-bezier(.22,1.4,.36,1);
+  }
+  @keyframes popIn { from { transform: scale(0.4) rotate(-18deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+  .caught-pill {
+    margin-top: -6px; background: #10b981; color: #fff;
+    font-size: 9px; font-weight: 900; padding: 2px 7px; border-radius: 999px;
+    letter-spacing: 0.4px; box-shadow: 0 2px 6px rgba(16,185,129,0.4);
+  }
+  .toy-name { font-size: 12px; font-weight: 800; margin: 2px 0 1px; line-height: 1.15; }
+  .toy-code {
+    display: inline-block; font-size: 10px; font-weight: 800;
+    color: var(--muted); background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
+  }
+  .toy-color-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+
+  /* Photo Overlay Mode */
+  .photo-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+  }
+  .upload-box {
+    border: 2px dashed #d8c8ee; border-radius: 16px; padding: 22px 14px;
+    text-align: center; background: #fbf8ff;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    background: linear-gradient(135deg, #ff6b9d, #a78bfa); color: #fff;
+    font-weight: 800; font-size: 13px; padding: 10px 16px; border-radius: 13px;
+    box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    background: #f3effa; color: var(--ink); font-weight: 700; font-size: 12px;
+    padding: 8px 12px; border-radius: 11px;
+  }
+  .photo-stage {
+    position: relative; width: 100%; border-radius: 14px; overflow: hidden;
+    background: #111; margin-top: 10px;
+  }
+  .photo-stage img { display: block; width: 100%; height: auto; }
+  .photo-overlay-grid {
+    position: absolute; display: grid;
+    grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, 1fr);
+  }
+  .photo-cell {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: 1px dashed rgba(255,255,255,0.22);
+  }
+  .photo-cell .cell-tag {
+    position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 16, 36, 0.72); color: #fff; font-size: 8px;
+    font-weight: 800; padding: 1px 4px; border-radius: 4px; white-space: nowrap;
+  }
+  .sliders { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .slider-row { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .slider-row input { width: 100%; accent-color: var(--pink); }
+
+  /* Decoder & Counter */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px; margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .card h2 { font-size: 15px; margin: 0 0 8px; font-weight: 800; }
+  .code-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .code-prefix {
+    background: #f2ebf8; padding: 10px 12px; border-radius: 12px;
+    font-weight: 800; font-size: 14px; color: var(--muted);
+  }
+  .code-input {
+    flex: 1; padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--border);
+    font-size: 16px; font-weight: 800; outline: none;
+  }
+  .code-input:focus { border-color: var(--pink); }
+  .num-pad { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 10px; }
+  .num-btn {
+    padding: 8px 4px; border-radius: 10px; font-size: 12px; font-weight: 800;
+    background: #f7f3fc; color: var(--ink); border: 1.5px solid transparent;
+  }
+  .num-btn.caught { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+  .num-btn.wish { background: #fffbeb; color: #b45309; border-color: #fcd34d; }
+  .num-btn.selected { border-color: var(--ink); transform: scale(1.04); }
+  .color-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .color-pill {
+    padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 800;
+    border: 1.5px solid var(--border); background: #fff; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,0.12); }
+
+  .verdict-box {
+    border-radius: 16px; padding: 14px; text-align: center;
+    border: 2px solid var(--border); background: #fcfaff;
+  }
+  .verdict-box.grab { background: #ecfdf5; border-color: #10b981; }
+  .verdict-box.skip { background: #fef2f2; border-color: #f87171; }
+  .verdict-title { font-size: 18px; font-weight: 900; margin: 4px 0; }
+  .verdict-sub { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.4; }
+
+  /* Checklist */
+  .list-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 16px; padding: 10px 12px; margin-bottom: 8px;
+    box-shadow: 0 3px 10px rgba(107, 79, 155, 0.05);
+  }
+  .list-item.caught { border-color: #a7f3d0; background: #f8fffb; }
+  .list-item.wish:not(.caught) { border-color: #fbbf24; background: #fffdf5; }
+  .list-main { flex: 1; min-width: 0; }
+  .list-title { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .list-meta { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .qty-ctrl { display: flex; align-items: center; gap: 6px; }
+  .qty-btn {
+    width: 28px; height: 28px; border-radius: 9px; background: #f2ebf8;
+    font-weight: 900; font-size: 15px; color: var(--ink);
+  }
+  .qty-val { font-size: 13px; font-weight: 800; min-width: 18px; text-align: center; }
+
+  /* Spots */
+  .spot-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 12px 14px; margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .spot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .spot-name { font-size: 14px; font-weight: 800; margin: 0; }
+  .spot-addr { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .dist-badge {
+    background: var(--purple-soft); color: #5b21b6; font-size: 11px; font-weight: 800;
+    padding: 4px 8px; border-radius: 10px; white-space: nowrap;
+  }
+  .spot-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0; }
+  .mini-tag {
+    font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 7px;
+    background: #f5f1fa; color: var(--muted);
+  }
+  .mini-tag.sight { background: var(--mint-soft); color: #065f46; }
+  .mini-tag.soldout { background: #fee2e2; color: #991b1b; }
+  .spot-note { font-size: 12px; color: var(--ink); line-height: 1.4; margin: 0 0 8px; }
+  .spot-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .spot-link {
+    text-decoration: none; font-size: 11px; font-weight: 800;
+    padding: 6px 10px; border-radius: 9px; background: #f3effa; color: var(--ink);
+  }
+
+  /* Bottom Sticky Bar */
+  .bottom-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+    background: rgba(255, 252, 254, 0.92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border); padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+  .bottom-inner {
+    max-width: 720px; margin: 0 auto; display: flex; gap: 8px;
+  }
+  .bottom-inner button { flex: 1; }
+
+  /* Modals */
+  .modal-bg {
+    position: fixed; inset: 0; z-index: 60; background: rgba(29, 21, 46, 0.55);
+    backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center;
+  }
+  .modal-bg.open { display: flex; }
+  .modal-sheet {
+    width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
+    background: #fff; border-radius: 24px 24px 0 0; padding: 18px 16px 26px;
+    animation: slideUp 0.22s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .modal-head h3 { margin: 0; font-size: 17px; font-weight: 900; }
+  .close-x { width: 32px; height: 32px; border-radius: 50%; background: #f2ebf8; font-size: 16px; font-weight: 800; }
+
+  /* Fullscreen Flashcard */
+  .flash-bg {
+    position: fixed; inset: 0; z-index: 80; background: #1d152e; color: #fff;
+    display: none; flex-direction: column; justify-content: space-between;
+    padding: 20px 18px calc(24px + env(safe-area-inset-bottom)); text-align: center;
+  }
+  .flash-bg.open { display: flex; }
+  .flash-card-box {
+    background: #fff; color: var(--ink); border-radius: 28px; padding: 24px 18px;
+    max-width: 420px; width: 100%; margin: 0 auto;
+  }
+
+  /* Toast & Confetti */
+  .toast {
+    position: fixed; top: 72px; left: 50%; transform: translateX(-50%) translateY(-10px);
+    background: #2d2640; color: #fff; font-size: 12px; font-weight: 800;
+    padding: 9px 16px; border-radius: 999px; opacity: 0; pointer-events: none;
+    transition: all 0.25s; z-index: 95; white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
+
+  .field { margin-bottom: 10px; }
+  .field label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 9px 11px; border-radius: 11px; border: 1.5px solid var(--border); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+<div class="toast" id="toast"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#fff"/>
+            <path d="M2 12a10 10 0 0 1 20 0z" fill="#ff4d79"/>
+            <rect x="2" y="10.8" width="20" height="2.4" fill="#2d2640"/>
+            <circle cx="12" cy="12" r="3.6" fill="#2d2640"/>
+            <circle cx="12" cy="12" r="2" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Pokémon 2026 Toy Hunter</h1>
+          <p>Toronto Happy Meal Tracker · Codes 30275-XX</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="soundToggle" title="Toggle celebration chime">🔔</button>
+        <button class="share-pill" onclick="openShareModal()">💌 Share</button>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="progressText">8 / 15 Caught (53%)</span>
+        <span class="badge" id="leftBadge">7 Left to Hunt</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:53%"></div>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="map" onclick="switchTab('map')">🎨 Box Map</button>
+      <button class="tab-btn" data-tab="decoder" onclick="switchTab('decoder')">🔍 Decoder</button>
+      <button class="tab-btn" data-tab="list" onclick="switchTab('list')">📋 List</button>
+      <button class="tab-btn" data-tab="spots" onclick="switchTab('spots')">📍 Spots</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <!-- TAB 1: BOX MAP -->
+  <section id="tab-map" class="section active">
+    <div class="toolbar">
+      <div class="seg-group">
+        <button class="seg-btn active" id="modeCasesBtn" onclick="setMapMode('cases')">Master Cases</button>
+        <button class="seg-btn" id="modePhotoBtn" onclick="setMapMode('photo')">📷 My Guide Photo</button>
+      </div>
+      <button class="pill-toggle" id="spotlightBtn" onclick="toggleSpotlight()">✨ Spotlight Needed</button>
+    </div>
+
+    <div id="casesView"></div>
+
+    <div id="photoView" style="display:none;">
+      <div class="photo-card">
+        <div class="upload-box" id="uploadPrompt">
+          <div style="font-size:28px;margin-bottom:6px;">📷</div>
+          <div style="font-weight:800;font-size:14px;margin-bottom:4px;">Use Your Own Cropped Guide Photo</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">
+            Load your cropped 5×3 box guide screenshot. It stays private on your phone and places tappable Pokéball seals right over the real toys!
+          </div>
+          <label class="btn-primary" style="cursor:pointer;">
+            Upload Guide Photo
+            <input type="file" accept="image/*" id="photoInput" style="display:none;" onchange="handlePhotoUpload(event)" />
+          </label>
+        </div>
+
+        <div id="photoStageWrap" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:12px;font-weight:800;">Tap any box to stamp Pokéball</span>
+            <div style="display:flex;gap:6px;">
+              <label class="btn-secondary" style="cursor:pointer;">
+                Replace Photo
+                <input type="file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)" />
+              </label>
+              <button class="btn-secondary" onclick="clearGuidePhoto()">Remove</button>
+            </div>
+          </div>
+          <div class="photo-stage" id="photoStage">
+            <img id="guideImg" alt="Uploaded guide" />
+            <div class="photo-overlay-grid" id="photoOverlayGrid"></div>
+          </div>
+          <div class="sliders">
+            <div class="slider-row">Top Edge: <span id="valTop">4</span>%<input type="range" min="0" max="30" value="4" id="slTop" oninput="updateOverlayBounds()"></div>
+            <div class="slider-row">Bottom Edge: <span id="valBottom">2</span>%<input type="range" min="0" max="30" value="2" id="slBottom" oninput="updateOverlayBounds()"></div>
+            <div class="slider-row">Left Edge: <span id="valLeft">2</span>%<input type="range" min="0" max="20" value="2" id="slLeft" oninput="updateOverlayBounds()"></div>
+            <div class="slider-row">Right Edge: <span id="valRight">2</span>%<input type="range" min="0" max="20" value="2" id="slRight" oninput="updateOverlayBounds()"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: DECODER & COUNTER -->
+  <section id="tab-decoder" class="section">
+    <div class="card">
+      <h2>🔍 Instant Code & Color Decoder</h2>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;">
+        Check the bottom flap under the FSC sticker (`30275-XX`) or tap a number / box color below:
+      </div>
+      <div class="code-input-row">
+        <span class="code-prefix">30275-</span>
+        <input class="code-input" id="codeInput" type="number" min="1" max="15" placeholder="09 or 12..." oninput="decodeTyped(this.value)" />
+      </div>
+      <div class="num-pad" id="numPad"></div>
+      <div class="color-pills" id="colorPills"></div>
+      <div id="decoderResult"></div>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <h2>📱 Counter Flashcard Mode</h2>
+      <p style="font-size:12px;color:var(--muted);margin:0 0 12px;font-weight:600;">
+        Full-screen high-contrast cards of your remaining targets to show crew members right at the counter.
+      </p>
+      <button class="btn-primary" style="width:100%;" onclick="openFlashcards()">Launch Counter Flashcards</button>
+    </div>
+  </section>
+
+  <!-- TAB 3: CHECKLIST & TRADES -->
+  <section id="tab-list" class="section">
+    <div class="toolbar">
+      <div class="seg-group" id="listFilters">
+        <button class="seg-btn active" onclick="setListFilter('all', this)">All</button>
+        <button class="seg-btn" onclick="setListFilter('need', this)">Need</button>
+        <button class="seg-btn" onclick="setListFilter('caught', this)">Caught</button>
+        <button class="seg-btn" onclick="setListFilter('dupes', this)">Trades</button>
+      </div>
+      <button class="btn-primary" style="padding:7px 12px;font-size:12px;" onclick="openTradeModal()">🤝 Trade Card</button>
+    </div>
+    <div id="checklistWrap"></div>
+  </section>
+
+  <!-- TAB 4: TORONTO SPOTS -->
+  <section id="tab-spots" class="section">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <h2 style="margin:0;">📍 Toronto McDonald's Radar</h2>
+        <button class="btn-primary" style="padding:7px 12px;font-size:12px;" onclick="openSightingModal()">+ Log Sighting</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+        <button class="pill-toggle" id="gpsBtn" onclick="useLiveGPS()">📡 Use Live GPS</button>
+        <button class="pill-toggle" onclick="setAreaPreset('union')">Union</button>
+        <button class="pill-toggle" onclick="setAreaPreset('lawrence')">3400 Yonge</button>
+        <button class="pill-toggle" onclick="setAreaPreset('sheppard')">4808 Yonge</button>
+      </div>
+      <div class="seg-group" id="spotFilters">
+        <button class="seg-btn active" onclick="setSpotFilter('all', this)">All</button>
+        <button class="seg-btn" onclick="setSpotFilter('parking', this)">🅿️ Parking</button>
+        <button class="seg-btn" onclick="setSpotFilter('indoor', this)">🏢 Indoor</button>
+        <button class="seg-btn" onclick="setSpotFilter('24h', this)">🌙 24h</button>
+      </div>
+    </div>
+    <div id="spotsWrap"></div>
+  </section>
+</main>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <div class="bottom-inner">
+    <button class="btn-secondary" onclick="openFlashcards()">📱 Flashcards</button>
+    <button class="btn-primary" onclick="openShareModal()">💌 Send to Husband</button>
+  </div>
+</div>
+
+<!-- Share Modal -->
+<div class="modal-bg" id="shareModal" onclick="if(event.target===this)closeModal('shareModal')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>💌 Send Live Snapshot to Husband</h3>
+      <button class="close-x" onclick="closeModal('shareModal')">✕</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.45;">
+      Your caught toys, duplicates, and store sightings are packed directly into the link below (<code>?s=...</code>). When he opens it on his phone, it loads your exact progress automatically!
+    </p>
+    <textarea id="sharePreview" rows="6" readonly style="width:100%;padding:10px;border-radius:12px;border:1.5px solid var(--border);font-size:12px;background:#faf7fd;margin-bottom:10px;"></textarea>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <button class="btn-primary" onclick="copyShareText()">📋 Copy Checklist & Live Link for WhatsApp / Text</button>
+      <button class="btn-secondary" onclick="copyLinkOnly()">🔗 Copy Live Link Only</button>
+    </div>
+  </div>
+</div>
+
+<!-- Trade Card Modal -->
+<div class="modal-bg" id="tradeModal" onclick="if(event.target===this)closeModal('tradeModal')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>🤝 Toronto Local Trade Card</h3>
+      <button class="close-x" onclick="closeModal('tradeModal')">✕</button>
+    </div>
+    <canvas id="tradeCanvas" width="720" height="520" style="width:100%;border-radius:14px;border:1px solid var(--border);margin-bottom:10px;"></canvas>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn-primary" style="flex:1;" onclick="downloadTradePng()">⬇️ Download PNG</button>
+      <button class="btn-secondary" style="flex:1;" onclick="copyTradeText()">📋 Copy r/askTO Text</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sighting Modal -->
+<div class="modal-bg" id="sightingModal" onclick="if(event.target===this)closeModal('sightingModal')">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <h3>📍 Log Box Sighting</h3>
+      <button class="close-x" onclick="closeModal('sightingModal')">✕</button>
+    </div>
+    <div class="field">
+      <label>McDonald's Location</label>
+      <select id="sightSpotSelect"></select>
+    </div>
+    <div class="field">
+      <label>Or Add New Store Name / Address (optional)</label>
+      <input id="sightNewStore" placeholder="e.g. 5200 Yonge St (Empress Walk)" />
+    </div>
+    <div class="field">
+      <label>What box colors / codes did they have?</label>
+      <input id="sightNote" placeholder="e.g. Bright green -12 Sprigatito & tan -09 Eevee!" />
+    </div>
+    <div class="field">
+      <label>Status</label>
+      <select id="sightStatus">
+        <option value="spotted">🟢 Toys Spotted</option>
+        <option value="soldout">🔴 Sold Out / Only Dupes</option>
+      </select>
+    </div>
+    <button class="btn-primary" style="width:100%;" onclick="saveSighting()">Save Sighting</button>
+  </div>
+</div>
+
+<!-- Fullscreen Flashcards -->
+<div class="flash-bg" id="flashOverlay">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <span id="flashCounter" style="font-size:13px;font-weight:800;opacity:0.85;">Target 1 of 7</span>
+    <button class="close-x" style="background:rgba(255,255,255,0.18);color:#fff;" onclick="closeFlashcards()">✕</button>
+  </div>
+  <div class="flash-card-box" id="flashContent"></div>
+  <div style="display:flex;gap:10px;max-width:420px;width:100%;margin:0 auto;">
+    <button class="btn-secondary" style="flex:1;padding:14px;" onclick="stepFlash(-1)">← Prev</button>
+    <button class="btn-primary" style="flex:1.4;padding:14px;" onclick="catchFromFlash()">✅ Caught It!</button>
+    <button class="btn-secondary" style="flex:1;padding:14px;" onclick="stepFlash(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+const TOYS = [
+  { id:'01', name:'Pikachu',    caseNum:1, color:'Yellow',       family:'yellow', hex:'#ffd83d', accent:'#facc15', defaultQty:2 },
+  { id:'02', name:'Weedle',     caseNum:1, color:'Hot Pink',     family:'pink',   hex:'#f4438c', accent:'#ec4899', defaultQty:1 },
+  { id:'03', name:'Munchlax',   caseNum:1, color:'Teal Blue',    family:'blue',   hex:'#24a8db', accent:'#0ea5e9', defaultQty:1 },
+  { id:'04', name:'Torchic',    caseNum:2, color:'Golden Yellow',family:'yellow', hex:'#ffca28', accent:'#f59e0b', defaultQty:1 },
+  { id:'05', name:'Sobble',     caseNum:2, color:'Royal Blue',   family:'blue',   hex:'#1b6be6', accent:'#2563eb', defaultQty:1 },
+  { id:'06', name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', accent:'#4b5563', defaultQty:1 },
+  { id:'07', name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', accent:'#a855f7', defaultQty:0 },
+  { id:'08', name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', accent:'#34d399', defaultQty:1 },
+  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', accent:'#d97706', defaultQty:0, wish:true },
+  { id:'10', name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', accent:'#9ca3af', defaultQty:0 },
+  { id:'11', name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', accent:'#ea580c', defaultQty:0 },
+  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', accent:'#65a30d', defaultQty:0, wish:true },
+  { id:'13', name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', accent:'#38bdf8', defaultQty:0 },
+  { id:'14', name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', accent:'#0284c7', defaultQty:1 },
+  { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', accent:'#d97706', defaultQty:0 }
+];
+
+// Order matching the 5x3 reference screenshot grid
+const PHOTO_ORDER = ['13','07','04','10','01','14','08','05','11','02','15','09','06','12','03'];
+
+const DEFAULT_SPOTS = [
+  { id:'union', name:"McDonald's – Union Station", addr:'65 Front St W (York Concourse)', lat:43.6452, lng:-79.3806, phone:'416-368-7890', tags:['indoor'], note:'Recently had Blue boxes & Espurr/Squirtle reports. Fast counter ask.' },
+  { id:'123yonge', name:"McDonald's – 123 Yonge St", addr:'123 Yonge St (at Adelaide)', lat:43.6502, lng:-79.3788, phone:'416-364-5201', tags:['indoor','24h'], note:'Steps from King Station; busy lunch rush, quieter mid-afternoon.' },
+  { id:'127church', name:"McDonald's – 127 Church St", addr:'127 Church St (at Richmond E)', lat:43.6524, lng:-79.3755, phone:'416-364-1565', tags:['indoor','24h'], note:'Off the main Yonge strip — sometimes holds older/different cases.' },
+  { id:'eaton', name:"McDonald's – Eaton Centre", addr:'260 Yonge St (Urban Eatery)', lat:43.6544, lng:-79.3807, phone:'416-598-4012', tags:['indoor'], note:'Easy PATH / indoor walk from Queen or Dundas.' },
+  { id:'356yonge', name:"McDonald's – 356 Yonge St (Elm)", addr:'356 Yonge St (near Elm St)', lat:43.6582, lng:-79.3818, phone:'416-593-5523', tags:['indoor','24h'], note:'Case 4 hotspot (Sprigatito -12 & Charmander -11 previously spotted).' },
+  { id:'470yonge', name:"McDonald's – 470 Yonge St", addr:'470 Yonge St (near Maitland)', lat:43.6620, lng:-79.3837, phone:'416-925-8410', tags:['indoor','24h'], note:'Quick walk north from College Station.' },
+  { id:'3400yonge', name:"McDonald's – 3400 Yonge St", addr:'3400 Yonge St (near Lawrence)', lat:43.7327, lng:-79.4037, phone:'416-481-6322', tags:['parking','indoor'], note:'Free on-site parking lot + walk-in counter. Great 3 PM drive-home stop.' },
+  { id:'4808yonge', name:"McDonald's – 4808 Yonge St", addr:'4808 Yonge St (at Sheppard)', lat:43.7615, lng:-79.4109, phone:'416-226-3120', tags:['parking','indoor'], note:'North York lot near Sheppard; spots can be tight, easy walk-in.' },
+  { id:'1966eglinton', name:"McDonald's – 1966 Eglinton Ave E", addr:'1966 Eglinton Ave E (Scarborough)', lat:43.7279, lng:-79.2932, phone:'416-757-9121', tags:['parking','24h'], note:'Case 3 (Eevee / Bulbasaur / Espurr) reported by GTA collectors.' },
+  { id:'3150stclair', name:"McDonald's – 3150 St Clair Ave E", addr:'3150 St Clair Ave E', lat:43.7098, lng:-79.2869, phone:'416-759-4411', tags:['parking'], note:'Friendly staff for buying solo toys without a full meal.' }
+];
+
+const PRESETS = {
+  union: { lat: 43.6452, lng: -79.3806, label: 'Union Station' },
+  lawrence: { lat: 43.7327, lng: -79.4037, label: '3400 Yonge (Lawrence)' },
+  sheppard: { lat: 43.7615, lng: -79.4109, label: '4808 Yonge (Sheppard)' }
+};
+
+let state = {
+  qty: {},
+  sightings: {}, // spotId -> { text, status, ts }
+  customSpots: [],
+  sound: true,
+  overlay: { top: 4, bottom: 2, left: 2, right: 2 }
+};
+
+let ui = {
+  tab: 'map',
+  mapMode: 'cases',
+  spotlight: false,
+  listFilter: 'all',
+  spotFilter: 'all',
+  selectedCode: '12',
+  userLoc: null,
+  flashIdx: 0
+};
+
+function initDefaultState() {
+  TOYS.forEach(t => { state.qty[t.id] = t.defaultQty; });
+}
+
+function loadState() {
+  initDefaultState();
+  try {
+    const saved = localStorage.getItem('poke2026_v4');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state = { ...state, ...parsed, qty: { ...state.qty, ...(parsed.qty || {}) } };
+    }
+  } catch (e) {}
+
+  // Hydrate from URL ?s=... if shared
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('s');
+    if (s) {
+      const decoded = JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))));
+      if (decoded.q) {
+        TOYS.forEach((t, idx) => { state.qty[t.id] = Number(decoded.q[idx] || 0); });
+      }
+      if (decoded.sg) state.sightings = decoded.sg;
+      if (decoded.cs) state.customSpots = decoded.cs;
+      saveState();
+      showToast('💌 Loaded synced checklist from link!');
+    }
+  } catch (e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem('poke2026_v4', JSON.stringify(state)); } catch (e) {}
+}
+
+function encodeShareUrl() {
+  const payload = {
+    q: TOYS.map(t => state.qty[t.id] || 0),
+    sg: state.sightings,
+    cs: state.customSpots
+  };
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
+    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const base = window.location.href.split('?')[0];
+  return `${base}?s=${b64}`;
+}
+
+// Cute inline SVG generator for box + chibi character
+function renderBoxAndChibi(toy, size = 74) {
+  const chibi = getChibiFace(toy.id);
+  const darkText = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5','#f7d4b2'].includes(toy.hex);
+  const strokeCol = darkText ? '#2d2640' : '#ffffff';
+  return `
+  <svg width="${size}" height="${size}" viewBox="0 0 88 88" aria-label="${toy.name}">
+    <!-- Box -->
+    <rect x="14" y="6" width="60" height="54" rx="10" fill="${toy.hex}" stroke="rgba(45,38,64,0.16)" stroke-width="2"/>
+    <rect x="14" y="29" width="60" height="6" fill="#2d2640"/>
+    <circle cx="44" cy="32" r="10" fill="#2d2640"/>
+    <circle cx="44" cy="32" r="6" fill="${toy.hex}"/>
+    <text x="44" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="${strokeCol}" opacity="0.88">POKÉMON</text>
+    <!-- Chibi badge overlapping bottom -->
+    <g transform="translate(22, 42)">
+      ${chibi}
+    </g>
+  </svg>`;
+}
+
+function getChibiFace(id) {
+  const faces = {
+    '01': `<polygon points="5,10 10,0 16,11" fill="#ffd83d" stroke="#2d2640" stroke-width="1.5"/><polygon points="39,10 34,0 28,11" fill="#ffd83d" stroke="#2d2640" stroke-width="1.5"/><rect x="6" y="8" width="32" height="28" rx="9" fill="#ffe14d" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.6" fill="#2d2640"/><circle cx="29" cy="21" r="2.6" fill="#2d2640"/><circle cx="11" cy="26" r="3" fill="#ff5a79"/><circle cx="33" cy="26" r="3" fill="#ff5a79"/><path d="M19 25 q3 3 6 0" stroke="#2d2640" stroke-width="1.6" fill="none" stroke-linecap="round"/>`,
+    '02': `<polygon points="22,0 17,10 27,10" fill="#fef3c7" stroke="#2d2640" stroke-width="1.4"/><rect x="7" y="9" width="30" height="27" rx="9" fill="#e5b06b" stroke="#2d2640" stroke-width="1.6"/><circle cx="16" cy="21" r="2.2" fill="#2d2640"/><circle cx="28" cy="21" r="2.2" fill="#2d2640"/><ellipse cx="22" cy="27" rx="4.5" ry="3.2" fill="#f472b6" stroke="#2d2640" stroke-width="1.2"/>`,
+    '03': `<polygon points="7,12 11,3 17,11" fill="#248ab8" stroke="#2d2640" stroke-width="1.4"/><polygon points="37,12 33,3 27,11" fill="#248ab8" stroke="#2d2640" stroke-width="1.4"/><rect x="6" y="9" width="32" height="27" rx="9" fill="#299bc9" stroke="#2d2640" stroke-width="1.6"/><path d="M9 22 q13 -4 26 0 v10 q0 4-4 4 H13 q-4 0-4-4z" fill="#fef3d6"/><circle cx="16" cy="24" r="2.3" fill="#2d2640"/><circle cx="28" cy="24" r="2.3" fill="#2d2640"/>`,
+    '04': `<path d="M16,9 L20,1 L24,8 L29,2 L29,10 Z" fill="#ffd83d" stroke="#2d2640" stroke-width="1.3"/><rect x="7" y="9" width="30" height="27" rx="9" fill="#ff7a29" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.4" fill="#2d2640"/><circle cx="29" cy="21" r="2.4" fill="#2d2640"/><polygon points="22,22 18,28 26,28" fill="#ffd83d" stroke="#2d2640" stroke-width="1.2"/>`,
+    '05': `<path d="M22,1 C27,4 27,10 22,10 C18,10 18,4 22,1 Z" fill="#ffe14d" stroke="#2d2640" stroke-width="1.3"/><rect x="6" y="9" width="32" height="27" rx="9" fill="#7dd3fc" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="3" fill="#fff" stroke="#2d2640" stroke-width="1.2"/><circle cx="29" cy="21" r="3" fill="#fff" stroke="#2d2640" stroke-width="1.2"/><circle cx="15" cy="21" r="1.5" fill="#2d2640"/><circle cx="29" cy="21" r="1.5" fill="#2d2640"/><circle cx="11" cy="27" r="2.5" fill="#38bdf8"/><circle cx="33" cy="27" r="2.5" fill="#38bdf8"/>`,
+    '06': `<polygon points="6,12 10,0 17,10" fill="#27272a" stroke="#2d2640" stroke-width="1.4"/><polygon points="38,12 34,0 27,10" fill="#27272a" stroke="#2d2640" stroke-width="1.4"/><rect x="6" y="9" width="32" height="27" rx="9" fill="#27272a" stroke="#18181b" stroke-width="1.6"/><circle cx="22" cy="17" r="3.4" fill="none" stroke="#facc15" stroke-width="2"/><circle cx="14" cy="24" r="2.4" fill="#ef4444"/><circle cx="30" cy="24" r="2.4" fill="#ef4444"/>`,
+    '07': `<circle cx="12" cy="12" r="6" fill="#d8b4fe" stroke="#2d2640" stroke-width="1.4"/><circle cx="32" cy="12" r="6" fill="#d8b4fe" stroke="#2d2640" stroke-width="1.4"/><rect x="7" y="10" width="30" height="26" rx="10" fill="#e9d5ff" stroke="#2d2640" stroke-width="1.6"/><circle cx="16" cy="22" r="3.2" fill="#9333ea"/><circle cx="28" cy="22" r="3.2" fill="#9333ea"/><circle cx="15" cy="21" r="1.1" fill="#fff"/><circle cx="27" cy="21" r="1.1" fill="#fff"/>`,
+    '08': `<rect x="6" y="9" width="32" height="27" rx="9" fill="#6ee7b7" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.6" fill="#dc2626"/><circle cx="29" cy="21" r="2.6" fill="#dc2626"/><circle cx="15" cy="20" r="0.9" fill="#fff"/><circle cx="29" cy="20" r="0.9" fill="#fff"/><rect x="18" y="12" width="5" height="4" rx="1" fill="#059669"/><path d="M16 28 q6 3 12 0" stroke="#2d2640" stroke-width="1.5" fill="none"/>`,
+    '09': `<polygon points="5,13 2,0 16,10" fill="#c9843b" stroke="#2d2640" stroke-width="1.4"/><polygon points="39,13 42,0 28,10" fill="#c9843b" stroke="#2d2640" stroke-width="1.4"/><rect x="7" y="9" width="30" height="27" rx="9" fill="#d9944a" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.6" fill="#2d2640"/><circle cx="29" cy="21" r="2.6" fill="#2d2640"/><circle cx="14.5" cy="20" r="0.9" fill="#fff"/><circle cx="28.5" cy="20" r="0.9" fill="#fff"/><path d="M19 26 q3 2.5 6 0" stroke="#2d2640" stroke-width="1.5" fill="none"/>`,
+    '10': `<circle cx="9" cy="11" r="7" fill="#e5e7eb" stroke="#2d2640" stroke-width="1.4"/><circle cx="35" cy="11" r="7" fill="#e5e7eb" stroke="#2d2640" stroke-width="1.4"/><circle cx="9" cy="11" r="3.5" fill="#fbcfe8"/><circle cx="35" cy="11" r="3.5" fill="#fbcfe8"/><rect x="8" y="10" width="28" height="26" rx="10" fill="#f3f4f6" stroke="#2d2640" stroke-width="1.6"/><circle cx="16" cy="22" r="2.4" fill="#2d2640"/><circle cx="28" cy="22" r="2.4" fill="#2d2640"/><circle cx="22" cy="25" r="1.6" fill="#f472b6"/>`,
+    '11': `<rect x="7" y="9" width="30" height="27" rx="10" fill="#ff7a18" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.6" fill="#0f766e"/><circle cx="29" cy="21" r="2.6" fill="#0f766e"/><circle cx="14.5" cy="20" r="0.9" fill="#fff"/><circle cx="28.5" cy="20" r="0.9" fill="#fff"/><path d="M17 28 q5 3 10 0" stroke="#2d2640" stroke-width="1.5" fill="none"/>`,
+    '12': `<polygon points="6,12 8,1 17,10" fill="#a3e635" stroke="#2d2640" stroke-width="1.4"/><polygon points="38,12 36,1 27,10" fill="#a3e635" stroke="#2d2640" stroke-width="1.4"/><rect x="7" y="9" width="30" height="27" rx="9" fill="#dcfce7" stroke="#2d2640" stroke-width="1.6"/><path d="M22,12 L18,22 L26,22 Z" fill="#65a30d"/><circle cx="15" cy="22" r="2.6" fill="#ec4899"/><circle cx="29" cy="22" r="2.6" fill="#ec4899"/><path d="M19 28 q3 2 6 0" stroke="#2d2640" stroke-width="1.4" fill="none"/>`,
+    '13': `<rect x="7" y="9" width="30" height="27" rx="10" fill="#5cc8f5" stroke="#2d2640" stroke-width="1.6"/><circle cx="15" cy="21" r="2.6" fill="#7c2d12"/><circle cx="29" cy="21" r="2.6" fill="#7c2d12"/><circle cx="14.5" cy="20" r="0.9" fill="#fff"/><circle cx="28.5" cy="20" r="0.9" fill="#fff"/><path d="M17 28 q5 3 10 0" stroke="#2d2640" stroke-width="1.5" fill="none"/>`,
+    '14': `<rect x="7" y="9" width="30" height="27" rx="10" fill="#22a7f0" stroke="#2d2640" stroke-width="1.6"/><ellipse cx="22" cy="24" rx="11" ry="9" fill="#fff"/><circle cx="16" cy="22" r="2.3" fill="#2d2640"/><circle cx="28" cy="22" r="2.3" fill="#2d2640"/><polygon points="22,23 18,28 26,28" fill="#facc15" stroke="#2d2640" stroke-width="1.2"/>`,
+    '15': `<rect x="7" y="9" width="30" height="27" rx="10" fill="#e7c697" stroke="#2d2640" stroke-width="1.6"/><circle cx="16" cy="21" r="6" fill="#fff"/><circle cx="28" cy="21" r="6" fill="#fff"/><circle cx="16" cy="21" r="2.2" fill="#2d2640"/><circle cx="28" cy="21" r="2.2" fill="#2d2640"/><polygon points="22,21 19,26 25,26" fill="#fb923c"/><path d="M18 31 L22 29 L26 31 L22 34 Z" fill="#22c55e"/>`
+  };
+  return faces[id] || '';
+}
+
+function pokeballSvg(size = 46) {
+  return `
+  <svg width="${size}" height="${size}" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="28" fill="#fff" stroke="#2d2640" stroke-width="4"/>
+    <path d="M4 32a28 28 0 0 1 56 0z" fill="#ff4d79" stroke="#2d2640" stroke-width="4"/>
+    <rect x="4" y="29" width="56" height="6" fill="#2d2640"/>
+    <circle cx="32" cy="32" r="10" fill="#2d2640"/>
+    <circle cx="32" cy="32" r="5.5" fill="#fff"/>
+    <ellipse cx="22" cy="18" rx="6" ry="3.2" transform="rotate(-24 22 18)" fill="#fff" opacity="0.55"/>
+  </svg>`;
+}
+
+// Rendering
+function renderAll() {
+  renderProgress();
+  renderCases();
+  renderPhotoOverlay();
+  renderDecoder();
+  renderChecklist();
+  renderSpots();
+  document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
+}
+
+function renderProgress() {
+  const caught = TOYS.filter(t => (state.qty[t.id] || 0) > 0).length;
+  const pct = Math.round((caught / TOYS.length) * 100);
+  const left = TOYS.length - caught;
+  document.getElementById('progressText').textContent = `${caught} / ${TOYS.length} Caught (${pct}%)`;
+  document.getElementById('leftBadge').textContent = left === 0 ? '🎉 Set Complete!' : `${left} Left to Hunt`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('spotlightBtn').textContent = `✨ Spotlight Needed (${left})`;
+  document.getElementById('spotlightBtn').classList.toggle('active', ui.spotlight);
+}
+
+function renderCases() {
+  const wrap = document.getElementById('casesView');
+  wrap.classList.toggle('spotlight-on', ui.spotlight);
+  let html = '';
+  for (let c = 1; c <= 5; c++) {
+    const group = TOYS.filter(t => t.caseNum === c);
+    const done = group.every(t => (state.qty[t.id] || 0) > 0);
+    const hasWish = group.some(t => t.wish && !(state.qty[t.id] > 0));
+    const tag = done ? `<span class="case-tag done">CASE COMPLETE ✨</span>`
+              : hasWish ? `<span class="case-tag hot">★ TOP WISH INSIDE</span>`
+              : `<span class="case-tag">${group.filter(t=>state.qty[t.id]>0).length}/3 Caught</span>`;
+    html += `<div class="case-card"><div class="case-head"><div class="case-title">📦 Master Case ${c}</div>${tag}</div><div class="box-grid">`;
+    group.forEach(t => {
+      const q = state.qty[t.id] || 0;
+      const caught = q > 0;
+      html += `
+        <div class="toy-tile ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}" onclick="toggleToy('${t.id}')">
+          ${t.wish && !caught ? '<span class="wish-ribbon">★ WISH</span>' : ''}
+          ${q > 1 ? `<span class="dupe-chip">x${q}</span>` : ''}
+          <div class="box-visual">
+            ${renderBoxAndChibi(t, 76)}
+            ${caught ? `<div class="pokeball-seal">${pokeballSvg(44)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
+          </div>
+          <div class="toy-name">${t.name}</div>
+          <div class="toy-code">-${t.id}</div>
+          <div class="toy-color-lbl">${t.color}</div>
+        </div>`;
+    });
+    html += `</div></div>`;
+  }
+  wrap.innerHTML = html;
+}
+
+// Photo Overlay
+function setMapMode(mode) {
+  ui.mapMode = mode;
+  document.getElementById('modeCasesBtn').classList.toggle('active', mode === 'cases');
+  document.getElementById('modePhotoBtn').classList.toggle('active', mode === 'photo');
+  document.getElementById('casesView').style.display = mode === 'cases' ? 'block' : 'none';
+  document.getElementById('photoView').style.display = mode === 'photo' ? 'block' : 'none';
+  if (mode === 'photo') renderPhotoOverlay();
+}
+
+function handlePhotoUpload(ev) {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try { localStorage.setItem('poke2026_guide_photo', e.target.result); } catch (err) {
+      showToast('Photo loaded (too large to persist permanently)');
+    }
+    document.getElementById('guideImg').src = e.target.result;
+    document.getElementById('uploadPrompt').style.display = 'none';
+    document.getElementById('photoStageWrap').style.display = 'block';
+    renderPhotoOverlay();
+    showToast('📷 Guide photo loaded!');
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearGuidePhoto() {
+  localStorage.removeItem('poke2026_guide_photo');
+  document.getElementById('guideImg').src = '';
+  document.getElementById('uploadPrompt').style.display = 'block';
+  document.getElementById('photoStageWrap').style.display = 'none';
+}
+
+function updateOverlayBounds() {
+  state.overlay = {
+    top: +document.getElementById('slTop').value,
+    bottom: +document.getElementById('slBottom').value,
+    left: +document.getElementById('slLeft').value,
+    right: +document.getElementById('slRight').value
+  };
+  saveState();
+  applyOverlayBounds();
+}
+
+function applyOverlayBounds() {
+  const o = state.overlay;
+  document.getElementById('valTop').textContent = o.top;
+  document.getElementById('valBottom').textContent = o.bottom;
+  document.getElementById('valLeft').textContent = o.left;
+  document.getElementById('valRight').textContent = o.right;
+  const g = document.getElementById('photoOverlayGrid');
+  g.style.top = o.top + '%';
+  g.style.bottom = o.bottom + '%';
+  g.style.left = o.left + '%';
+  g.style.right = o.right + '%';
+}
+
+function renderPhotoOverlay() {
+  const savedImg = localStorage.getItem('poke2026_guide_photo');
+  const imgEl = document.getElementById('guideImg');
+  if (savedImg && !imgEl.src) {
+    imgEl.src = savedImg;
+    document.getElementById('uploadPrompt').style.display = 'none';
+    document.getElementById('photoStageWrap').style.display = 'block';
+  }
+  document.getElementById('slTop').value = state.overlay.top;
+  document.getElementById('slBottom').value = state.overlay.bottom;
+  document.getElementById('slLeft').value = state.overlay.left;
+  document.getElementById('slRight').value = state.overlay.right;
+  applyOverlayBounds();
+
+  const grid = document.getElementById('photoOverlayGrid');
+  grid.innerHTML = PHOTO_ORDER.map(id => {
+    const t = TOYS.find(x => x.id === id);
+    const caught = (state.qty[id] || 0) > 0;
+    return `<div class="photo-cell" onclick="toggleToy('${id}')">
+      ${caught ? pokeballSvg(40) : ''}
+      <span class="cell-tag">${t.name} -${id}</span>
+    </div>`;
+  }).join('');
+}
+
+// Decoder
+function renderDecoder() {
+  const pad = document.getElementById('numPad');
+  pad.innerHTML = TOYS.map(t => {
+    const caught = (state.qty[t.id] || 0) > 0;
+    const cls = `${caught ? 'caught' : ''} ${t.wish && !caught ? 'wish' : ''} ${ui.selectedCode === t.id ? 'selected' : ''}`;
+    return `<button class="num-btn ${cls}" onclick="selectCode('${t.id}')">-${t.id}</button>`;
+  }).join('');
+
+  const families = [
+    { key:'green', label:'Green', hex:'#84d91a' },
+    { key:'orange', label:'Tan / Orange', hex:'#f29c2b' },
+    { key:'blue', label:'Blue', hex:'#5cc8f5' },
+    { key:'purple', label:'Purple', hex:'#c889f0' },
+    { key:'grey', label:'White / Grey', hex:'#d1d5db' },
+    { key:'yellow', label:'Yellow', hex:'#ffd83d' },
+    { key:'pink', label:'Pink', hex:'#f4438c' }
+  ];
+  document.getElementById('colorPills').innerHTML = families.map(f =>
+    `<button class="color-pill" onclick="filterByColor('${f.key}')"><span class="dot" style="background:${f.hex}"></span>${f.label}</button>`
+  ).join('');
+
+  renderDecoderVerdict(ui.selectedCode);
+}
+
+function decodeTyped(val) {
+  const n = parseInt(val, 10);
+  if (n >= 1 && n <= 15) {
+    ui.selectedCode = String(n).padStart(2, '0');
+    renderDecoder();
+  }
+}
+
+function selectCode(id) {
+  ui.selectedCode = id;
+  document.getElementById('codeInput').value = id;
+  renderDecoder();
+}
+
+function renderDecoderVerdict(id) {
+  const t = TOYS.find(x => x.id === id) || TOYS[11];
+  const caught = (state.qty[t.id] || 0) > 0;
+  const mates = TOYS.filter(x => x.caseNum === t.caseNum && x.id !== t.id);
+  const matesNeeded = mates.filter(x => !(state.qty[x.id] > 0));
+  const res = document.getElementById('decoderResult');
+  res.innerHTML = `
+    <div class="verdict-box ${caught ? 'skip' : 'grab'}">
+      <div>${renderBoxAndChibi(t, 84)}</div>
+      <div class="verdict-title">${caught ? '✋ ALREADY CAUGHT' : (t.wish ? '🌟 TOP WISH — GRAB IT!' : '✅ GRAB IT!')}</div>
+      <div style="font-size:15px;font-weight:800;margin-bottom:4px;">${t.name} · 30275-${t.id} (${t.color} Box)</div>
+      <div class="verdict-sub">
+        Ships in <strong>Master Case ${t.caseNum}</strong> with ${mates.map(m => `${m.name} (-${m.id})`).join(' & ')}.<br/>
+        ${matesNeeded.length ? `💡 <strong>Carton Clue:</strong> Ask if they also have ${matesNeeded.map(m => `<strong>${m.color} (-${m.id} ${m.name})</strong>`).join(' or ')}!` : '✨ All other toys in this carton are already caught.'}
+      </div>
+      <div style="margin-top:10px;">
+        <button class="btn-primary" onclick="toggleToy('${t.id}')">${caught ? 'Mark as Uncaught' : '✅ Mark Caught Now'}</button>
+      </div>
+    </div>`;
+}
+
+function filterByColor(family) {
+  const matches = TOYS.filter(t => t.family === family);
+  const res = document.getElementById('decoderResult');
+  res.innerHTML = matches.map(t => {
+    const caught = (state.qty[t.id] || 0) > 0;
+    return `
+      <div class="list-item ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}" onclick="selectCode('${t.id}')" style="cursor:pointer;">
+        <div>${renderBoxAndChibi(t, 52)}</div>
+        <div class="list-main">
+          <div class="list-title">${t.name} <span class="toy-code">30275-${t.id}</span></div>
+          <div class="list-meta">${t.color} Box · Case ${t.caseNum} · <strong>${caught ? 'Already have' : 'NEED!'}</strong></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Checklist
+function setListFilter(f, btn) {
+  ui.listFilter = f;
+  document.querySelectorAll('#listFilters .seg-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChecklist();
+}
+
+function renderChecklist() {
+  let list = [...TOYS];
+  if (ui.listFilter === 'need') list = list.filter(t => !(state.qty[t.id] > 0));
+  if (ui.listFilter === 'caught') list = list.filter(t => (state.qty[t.id] || 0) > 0);
+  if (ui.listFilter === 'dupes') list = list.filter(t => (state.qty[t.id] || 0) > 1);
+  list.sort((a, b) => (b.wish ? 1 : 0) - (a.wish ? 1 : 0) || a.id.localeCompare(b.id));
+
+  const wrap = document.getElementById('checklistWrap');
+  if (!list.length) {
+    wrap.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);font-weight:700;">No toys in this filter!</div>`;
+    return;
+  }
+  wrap.innerHTML = list.map(t => {
+    const q = state.qty[t.id] || 0;
+    const caught = q > 0;
+    return `
+      <div class="list-item ${caught ? 'caught' : ''} ${t.wish ? 'wish' : ''}">
+        <div onclick="toggleToy('${t.id}')" style="cursor:pointer;">${renderBoxAndChibi(t, 54)}</div>
+        <div class="list-main" onclick="toggleToy('${t.id}')" style="cursor:pointer;">
+          <div class="list-title">
+            ${t.name}
+            <span class="toy-code">30275-${t.id}</span>
+            ${t.wish && !caught ? '<span class="mini-tag" style="background:#fef3c7;color:#92400e;">★ Top Wish</span>' : ''}
+            ${q > 1 ? `<span class="mini-tag" style="background:#ede9fe;color:#5b21b6;">⇄ Trade x${q-1}</span>` : ''}
+          </div>
+          <div class="list-meta">${t.color} Box · Master Case ${t.caseNum}</div>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty('${t.id}', -1)">−</button>
+          <span class="qty-val">${q}</span>
+          <button class="qty-btn" onclick="changeQty('${t.id}', 1)">+</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Spots
+function getAllSpots() {
+  return [...DEFAULT_SPOTS, ...(state.customSpots || [])];
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function useLiveGPS() {
+  if (!navigator.geolocation) return showToast('GPS not available on this browser');
+  showToast('📡 Getting live GPS...');
+  navigator.geolocation.getCurrentPosition(pos => {
+    ui.userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: 'Live GPS' };
+    document.getElementById('gpsBtn').classList.add('active');
+    renderSpots();
+    showToast('📍 Sorted by your live location!');
+  }, () => showToast('Location permission denied — use area presets!'));
+}
+
+function setAreaPreset(key) {
+  ui.userLoc = PRESETS[key];
+  document.getElementById('gpsBtn').classList.remove('active');
+  renderSpots();
+  showToast(`📍 Sorted from ${PRESETS[key].label}`);
+}
+
+function setSpotFilter(f, btn) {
+  ui.spotFilter = f;
+  document.querySelectorAll('#spotFilters .seg-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSpots();
+}
+
+function renderSpots() {
+  let spots = getAllSpots();
+  if (ui.spotFilter !== 'all') spots = spots.filter(s => (s.tags || []).includes(ui.spotFilter));
+  if (ui.userLoc) {
+    spots = spots.map(s => ({
+      ...s,
+      dist: s.lat ? haversine(ui.userLoc.lat, ui.userLoc.lng, s.lat, s.lng) : 999
+    })).sort((a, b) => a.dist - b.dist);
+  }
+  const wrap = document.getElementById('spotsWrap');
+  wrap.innerHTML = spots.map(s => {
+    const sg = state.sightings[s.id];
+    const distHtml = s.dist !== undefined && s.dist < 500
+      ? `<span class="dist-badge">${s.dist.toFixed(1)} km · ~${Math.max(2, Math.round(s.dist * 2.5))}m drive</span>`
+      : '';
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + s.addr + ' Toronto')}`;
+    return `
+      <div class="spot-card">
+        <div class="spot-top">
+          <div>
+            <div class="spot-name">${s.name}</div>
+            <div class="spot-addr">${s.addr}</div>
+          </div>
+          ${distHtml}
+        </div>
+        <div class="spot-tags">
+          ${(s.tags || []).map(t => `<span class="mini-tag">${t === 'parking' ? '🅿️ Parking' : t === 'indoor' ? '🏢 Indoor' : '🌙 24h'}</span>`).join('')}
+          ${sg ? `<span class="mini-tag ${sg.status === 'soldout' ? 'soldout' : 'sight'}">${sg.status === 'soldout' ? '🔴 ' : '🟢 '}${sg.text}</span>` : ''}
+        </div>
+        <p class="spot-note">${s.note || ''}</p>
+        <div class="spot-actions">
+          <a class="spot-link" href="${mapUrl}" target="_blank" rel="noopener">🗺️ Directions</a>
+          ${s.phone ? `<a class="spot-link" href="tel:${s.phone}">📞 Call</a>` : ''}
+          <button class="spot-link" onclick="openSightingModal('${s.id}')">✏️ Update Sighting</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Actions & Celebration
+function toggleToy(id) {
+  const cur = state.qty[id] || 0;
+  if (cur === 0) {
+    state.qty[id] = 1;
+    celebrate(TOYS.find(t => t.id === id));
+  } else {
+    state.qty[id] = 0;
+  }
+  saveState();
+  renderAll();
+}
+
+function changeQty(id, delta) {
+  const prev = state.qty[id] || 0;
+  const next = Math.max(0, prev + delta);
+  state.qty[id] = next;
+  if (prev === 0 && next > 0) celebrate(TOYS.find(t => t.id === id));
+  saveState();
+  renderAll();
+}
+
+function toggleSpotlight() {
+  ui.spotlight = !ui.spotlight;
+  renderProgress();
+  renderCases();
+}
+
+function switchTab(tab) {
+  ui.tab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// Celebration chime + confetti
+document.getElementById('soundToggle').onclick = () => {
+  state.sound = !state.sound;
+  saveState();
+  renderProgress();
+  document.getElementById('soundToggle').textContent = state.sound ? '🔔' : '🔕';
+  showToast(state.sound ? '🔔 Celebration chime ON' : '🔕 Sound muted');
+};
+
+function playChime() {
+  if (!state.sound) return;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.14, ctx.currentTime + i * 0.08 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.08 + 0.22);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.08);
+      osc.stop(ctx.currentTime + i * 0.08 + 0.24);
+    });
+  } catch (e) {}
+}
+
+function launchConfetti() {
+  const c = document.getElementById('confettiCanvas');
+  const ctx = c.getContext('2d');
+  c.width = window.innerWidth; c.height = window.innerHeight;
+  const colors = ['#ff6b9d','#a78bfa','#34d399','#fbbf24','#38bdf8'];
+  const parts = Array.from({length: 55}, () => ({
+    x: c.width / 2 + (Math.random() - 0.5) * 120,
+    y: c.height * 0.4,
+    vx: (Math.random() - 0.5) * 11,
+    vy: -Math.random() * 10 - 3,
+    size: Math.random() * 7 + 4,
+    col: colors[Math.floor(Math.random() * colors.length)],
+    rot: Math.random() * 6
+  }));
+  let frame = 0;
+  function tick() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    parts.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.36; p.rot += 0.15;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.col; ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
+      ctx.restore();
+    });
+    if (++frame < 55) requestAnimationFrame(tick);
+    else ctx.clearRect(0, 0, c.width, c.height);
+  }
+  tick();
+}
+
+function celebrate(toy) {
+  playChime();
+  launchConfetti();
+  showToast(`🎉 Caught ${toy.name} (-${toy.id})!`);
+}
+
+// Modals
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openShareModal() {
+  const caught = TOYS.filter(t => (state.qty[t.id] || 0) > 0).length;
+  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+  const url = encodeShareUrl();
+  const lines = [
+    `🎒 Pokémon 2026 Happy Meal Hunt (${caught}/15 Caught!)`,
+    ``,
+    `Still Looking For (${needed.length}):`,
+    ...needed.map(t => `${t.wish ? '⭐' : '•'} ${t.name} — ${t.color} box (30275-${t.id})`),
+    ``,
+    `🔗 Live Synced Tracker:`,
+    url
+  ];
+  document.getElementById('sharePreview').value = lines.join('\n');
+  document.getElementById('shareModal').classList.add('open');
+}
+
+function copyShareText() {
+  const txt = document.getElementById('sharePreview').value;
+  navigator.clipboard?.writeText(txt).then(() => showToast('📋 Copied checklist & live link!'));
+}
+
+function copyLinkOnly() {
+  navigator.clipboard?.writeText(encodeShareUrl()).then(() => showToast('🔗 Live link copied!'));
+}
+
+// Trade Card PNG
+function openTradeModal() {
+  document.getElementById('tradeModal').classList.add('open');
+  drawTradeCard();
+}
+
+function drawTradeCard() {
+  const c = document.getElementById('tradeCanvas');
+  const ctx = c.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 720, 520);
+  grad.addColorStop(0, '#fff5f9'); grad.addColorStop(1, '#f1ecff');
+  ctx.fillStyle = grad; ctx.fillRect(0, 0, 720, 520);
+
+  ctx.fillStyle = '#2d2640'; ctx.font = 'bold 28px -apple-system, sans-serif';
+  ctx.fillText('🎒 Toronto Pokémon 2026 Happy Meal Trade', 34, 54);
+  ctx.fillStyle = '#766d8f'; ctx.font = '600 16px -apple-system, sans-serif';
+  ctx.fillText('North York / Yonge Line Meetup · Brand New Sealed / Unplayed', 34, 82);
+
+  const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
+  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+
+  // FT Card
+  ctx.fillStyle = '#ffffff'; roundRect(ctx, 34, 108, 310, 376, 18); ctx.fill();
+  ctx.fillStyle = '#10b981'; ctx.font = 'bold 20px -apple-system, sans-serif';
+  ctx.fillText('⇄ FOR TRADE (EXTRAS)', 54, 146);
+  ctx.fillStyle = '#2d2640'; ctx.font = '600 18px -apple-system, sans-serif';
+  if (!dupes.length) {
+    ctx.fillText('No extras logged yet', 54, 188);
+  } else {
+    dupes.forEach((t, i) => {
+      ctx.fillStyle = t.hex; ctx.beginPath(); ctx.arc(64, 184 + i*38, 9, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#2d2640';
+      ctx.fillText(`${t.name} (-${t.id})  x${state.qty[t.id]-1}`, 84, 190 + i*38);
+    });
+  }
+
+  // ISO Card
+  ctx.fillStyle = '#ffffff'; roundRect(ctx, 376, 108, 310, 376, 18); ctx.fill();
+  ctx.fillStyle = '#ff6b9d'; ctx.font = 'bold 20px -apple-system, sans-serif';
+  ctx.fillText('🔍 LOOKING FOR (ISO)', 396, 146);
+  ctx.font = '600 17px -apple-system, sans-serif';
+  needed.slice(0, 8).forEach((t, i) => {
+    ctx.fillStyle = t.hex; ctx.beginPath(); ctx.arc(406, 184 + i*36, 9, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#2d2640';
+    ctx.fillText(`${t.wish ? '★ ' : ''}${t.name} (-${t.id})`, 426, 190 + i*36);
+  });
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x+r, y); ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r); ctx.arcTo(x, y+h, x, y, r); ctx.arcTo(x, y, x+w, y, r); ctx.closePath();
+}
+
+function downloadTradePng() {
+  const link = document.createElement('a');
+  link.download = 'toronto-pokemon-2026-trade-card.png';
+  link.href = document.getElementById('tradeCanvas').toDataURL('image/png');
+  link.click();
+  showToast('⬇️ Trade card PNG downloaded!');
+}
+
+function copyTradeText() {
+  const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
+  const needed = TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+  const txt = `[Toronto / North York] 2026 McDonald's Pokémon Happy Meal Toy Trade!\n\nFT (Extras): ${dupes.length ? dupes.map(t => `${t.name} (-${t.id})`).join(', ') : 'None yet'}\nISO (Looking for): ${needed.map(t => `${t.wish ? '⭐' : ''}${t.name} (-${t.id})`).join(', ')}\n\nCan meet along the Yonge subway line / North York. DM to swap!`;
+  navigator.clipboard?.writeText(txt).then(() => showToast('📋 Trade post copied!'));
+}
+
+// Sighting Modal
+function openSightingModal(spotId) {
+  const sel = document.getElementById('sightSpotSelect');
+  sel.innerHTML = getAllSpots().map(s => `<option value="${s.id}" ${s.id === spotId ? 'selected' : ''}>${s.name}</option>`).join('');
+  document.getElementById('sightNewStore').value = '';
+  document.getElementById('sightNote').value = spotId && state.sightings[spotId] ? state.sightings[spotId].text : '';
+  document.getElementById('sightingModal').classList.add('open');
+}
+
+function saveSighting() {
+  let spotId = document.getElementById('sightSpotSelect').value;
+  const newStore = document.getElementById('sightNewStore').value.trim();
+  const note = document.getElementById('sightNote').value.trim();
+  const status = document.getElementById('sightStatus').value;
+  if (!note) return showToast('Enter what boxes you saw!');
+  if (newStore) {
+    spotId = 'custom_' + Date.now();
+    state.customSpots.push({ id: spotId, name: newStore, addr: 'Toronto, ON', tags: ['indoor'], note: 'Added by you' });
+  }
+  state.sightings[spotId] = { text: note, status, ts: Date.now() };
+  saveState();
+  closeModal('sightingModal');
+  renderSpots();
+  showToast('📍 Sighting saved!');
+}
+
+// Counter Flashcards
+function getNeededList() {
+  return TOYS.filter(t => !(state.qty[t.id] > 0)).sort((a,b) => (b.wish?1:0)-(a.wish?1:0));
+}
+
+function openFlashcards() {
+  const list = getNeededList();
+  if (!list.length) return showToast('🎉 You caught all 15 toys!');
+  ui.flashIdx = 0;
+  renderFlashcard();
+  document.getElementById('flashOverlay').classList.add('open');
+}
+
+function closeFlashcards() { document.getElementById('flashOverlay').classList.remove('open'); }
+
+function stepFlash(dir) {
+  const list = getNeededList();
+  if (!list.length) return closeFlashcards();
+  ui.flashIdx = (ui.flashIdx + dir + list.length) % list.length;
+  renderFlashcard();
+}
+
+function renderFlashcard() {
+  const list = getNeededList();
+  if (!list.length) return closeFlashcards();
+  const t = list[ui.flashIdx % list.length];
+  document.getElementById('flashCounter').textContent = `Target ${ui.flashIdx + 1} of ${list.length}`;
+  document.getElementById('flashContent').innerHTML = `
+    ${t.wish ? '<div style="display:inline-block;background:#fef3c7;color:#92400e;font-weight:900;font-size:12px;padding:4px 12px;border-radius:999px;margin-bottom:10px;">★ TOP PRIORITY WISH</div>' : ''}
+    <div>${renderBoxAndChibi(t, 138)}</div>
+    <div style="font-size:28px;font-weight:900;margin-top:8px;">${t.name}</div>
+    <div style="font-size:18px;font-weight:800;color:var(--muted);margin:4px 0 12px;">${t.color} Box</div>
+    <div style="background:#f3effa;border-radius:14px;padding:12px;font-size:22px;font-weight:900;letter-spacing:1px;">
+      30275-${t.id}
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:700;">Master Case ${t.caseNum} · Check bottom flap under FSC sticker</div>
+  `;
+}
+
+function catchFromFlash() {
+  const list = getNeededList();
+  const t = list[ui.flashIdx % list.length];
+  if (!t) return;
+  toggleToy(t.id);
+  const nextList = getNeededList();
+  if (!nextList.length) closeFlashcards();
+  else {
+    ui.flashIdx = ui.flashIdx % nextList.length;
+    renderFlashcard();
+  }
+}
+
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2300);
+}
+
+loadState();
+renderAll();
+</script>
+</body>
+</html>
