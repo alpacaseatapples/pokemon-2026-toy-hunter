@@ -40,7 +40,6 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
   input, select, textarea { font-family: inherit; }
 
-  /* Header */
   .topbar {
     position: sticky; top: 0; z-index: 30;
     background: rgba(255, 250, 253, 0.92);
@@ -62,7 +61,6 @@
   .brand h1 { font-size: 15px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
   .brand p { font-size: 11px; margin: 1px 0 0; color: var(--muted); font-weight: 600; }
 
-  /* Top External Store Map Link */
   .hunter-link-bar {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     margin-top: 8px; padding: 8px 12px; border-radius: 12px;
@@ -77,7 +75,6 @@
     box-shadow: 0 1px 4px rgba(0,0,0,0.06); white-space: nowrap;
   }
 
-  /* Progress Bar */
   .progress-wrap { margin-top: 8px; }
   .progress-meta {
     display: flex; justify-content: space-between; align-items: center;
@@ -96,7 +93,6 @@
     transition: width 0.4s cubic-bezier(.22,1,.36,1);
   }
 
-  /* Tabs */
   .tabs {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
     margin-top: 8px; background: #f2ebf8; padding: 4px; border-radius: 13px;
@@ -110,13 +106,11 @@
     box-shadow: 0 2px 8px rgba(107, 79, 155, 0.12);
   }
 
-  /* Main Container */
   .container { max-width: 720px; margin: 0 auto; padding: 12px 12px 20px; }
   .section { display: none; }
   .section.active { display: block; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-  /* Controls & Pills */
   .toolbar {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
     gap: 8px; margin-bottom: 10px;
@@ -137,7 +131,6 @@
     background: var(--gold-soft); border-color: #f59e0b; color: #92400e;
   }
 
-  /* Tappable Wish Star Button */
   .wish-btn {
     position: absolute; z-index: 6;
     width: 26px; height: 26px; border-radius: 50%;
@@ -162,7 +155,6 @@
     background: var(--gold-soft); color: #d97706; border-color: #fbbf24;
   }
 
-  /* Missing All-In-One Visual Card */
   .missing-board {
     background: var(--card); border: 1.5px solid var(--border);
     border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
@@ -210,7 +202,6 @@
     background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
   }
 
-  /* Master Case Cards */
   .case-card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 12px; margin-bottom: 12px;
@@ -271,7 +262,6 @@
   }
   .toy-color-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
 
-  /* Photo Overlay Mode */
   .photo-card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
@@ -313,7 +303,6 @@
   .slider-row { font-size: 11px; font-weight: 700; color: var(--muted); }
   .slider-row input { width: 100%; accent-color: var(--pink); }
 
-  /* Decoder & Counter */
   .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 14px; margin-bottom: 12px;
@@ -354,7 +343,6 @@
   .verdict-title { font-size: 18px; font-weight: 900; margin: 4px 0; }
   .verdict-sub { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.4; }
 
-  /* Checklist */
   .list-item {
     display: flex; align-items: center; gap: 8px;
     background: var(--card); border: 1.5px solid var(--border);
@@ -377,7 +365,6 @@
   }
   .qty-val { font-size: 13px; font-weight: 800; min-width: 16px; text-align: center; }
 
-  /* Bottom Sticky Bar */
   .bottom-bar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
     background: rgba(255, 252, 254, 0.94);
@@ -389,7 +376,6 @@
   }
   .bottom-inner button { flex: 1; }
 
-  /* Modals */
   .modal-bg {
     position: fixed; inset: 0; z-index: 60; background: rgba(29, 21, 46, 0.55);
     backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center;
@@ -405,7 +391,6 @@
   .modal-head h3 { margin: 0; font-size: 17px; font-weight: 900; }
   .close-x { width: 32px; height: 32px; border-radius: 50%; background: #f2ebf8; font-size: 16px; font-weight: 800; }
 
-  /* Fullscreen All-Missing Visual Poster */
   .flash-bg {
     position: fixed; inset: 0; z-index: 80; background: #1d152e; color: #fff;
     display: none; flex-direction: column;
@@ -429,7 +414,6 @@
     font-weight: 700; margin-top: 10px;
   }
 
-  /* Toast & Confetti */
   .toast {
     position: fixed; top: 72px; left: 50%; transform: translateX(-50%) translateY(-10px);
     background: #2d2640; color: #fff; font-size: 12px; font-weight: 800;
@@ -490,7 +474,6 @@
 </header>
 
 <main class="container">
-  <!-- TAB 1: BOX MAP -->
   <section id="tab-map" class="section active">
     <div class="toolbar">
       <div class="seg-group">
@@ -545,7 +528,6 @@
     </div>
   </section>
 
-  <!-- TAB 2: DECODER & COUNTER -->
   <section id="tab-decoder" class="section">
     <div class="card">
       <h2>🔍 Instant Code & Color Decoder</h2>
@@ -570,7 +552,6 @@
     </div>
   </section>
 
-  <!-- TAB 3: CHECKLIST & TRADES -->
   <section id="tab-list" class="section">
     <div class="toolbar">
       <div class="seg-group" id="listFilters">
@@ -586,7 +567,6 @@
   </section>
 </main>
 
-<!-- Bottom Bar -->
 <div class="bottom-bar">
   <div class="bottom-inner">
     <button class="btn-primary" onclick="openMissingPoster()">🌈 Missing Colors Visual</button>
@@ -594,7 +574,6 @@
   </div>
 </div>
 
-<!-- Trade Card Modal -->
 <div class="modal-bg" id="tradeModal" onclick="if(event.target===this)closeModal('tradeModal')">
   <div class="modal-sheet">
     <div class="modal-head">
@@ -609,7 +588,6 @@
   </div>
 </div>
 
-<!-- Fullscreen All-Missing Visual Poster -->
 <div class="flash-bg" id="flashOverlay">
   <div class="poster-head">
     <div>
@@ -869,7 +847,6 @@ function renderCases() {
   wrap.innerHTML = html;
 }
 
-// Map Mode Switching
 function setMapMode(mode) {
   ui.mapMode = mode;
   document.getElementById('modeMissingBtn').classList.toggle('active', mode === 'missing');
@@ -956,7 +933,6 @@ function renderPhotoOverlay() {
   }).join('');
 }
 
-// Decoder
 function renderDecoder() {
   const pad = document.getElementById('numPad');
   pad.innerHTML = TOYS.map(t => {
@@ -1037,7 +1013,6 @@ function filterByColor(family) {
   }).join('');
 }
 
-// Checklist
 function setListFilter(f, btn) {
   ui.listFilter = f;
   document.querySelectorAll('#listFilters .seg-btn').forEach(b => b.classList.remove('active'));
@@ -1083,7 +1058,6 @@ function renderChecklist() {
   }).join('');
 }
 
-// Actions
 function toggleWish(id, ev) {
   if (ev) ev.stopPropagation();
   const next = !state.wish[id];
@@ -1168,10 +1142,8 @@ function celebrate(toy) {
   showToast(`🎉 Caught ${toy.name} (-${toy.id})!`);
 }
 
-// Modals
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-// Fullscreen All-Missing Visual Poster
 function openMissingPoster() {
   const list = getNeededList();
   if (!list.length) return showToast('🎉 You caught all 15 toys!');
@@ -1191,7 +1163,6 @@ function renderMissingPoster() {
   document.getElementById('posterGrid').innerHTML = buildScanTilesHtml(list, 60);
 }
 
-// Trade Card PNG
 function openTradeModal() {
   document.getElementById('tradeModal').classList.add('open');
   drawTradeCard();
