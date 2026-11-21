@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="PokéHunter 26" />
-<title>Pokémon 2026 Happy Meal Toy Hunter</title>
+<title>Pokémon 2026 Happy Meal Toy & Card Hunter</title>
 <style>
   :root {
     --bg: #fff8fb;
@@ -23,9 +23,8 @@
     --mint-soft: #d1fae5;
     --gold: #f59e0b;
     --gold-soft: #fef3c7;
-    --red: #ef4444;
-    --shadow: 0 8px 24px rgba(107, 79, 155, 0.09);
-    --radius: 20px;
+    --shadow: 0 6px 20px rgba(107, 79, 155, 0.08);
+    --radius: 18px;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -34,117 +33,114 @@
     background: var(--bg-grad);
     background-attachment: fixed;
     color: var(--ink);
-    padding-bottom: 84px;
+    padding-bottom: 24px;
     min-height: 100vh;
   }
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
   input, select, textarea { font-family: inherit; }
 
+  /* Compact Sticky Header */
   .topbar {
     position: sticky; top: 0; z-index: 30;
-    background: rgba(255, 250, 253, 0.92);
+    background: rgba(255, 250, 253, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
-    padding: 10px 14px 10px;
+    padding: 8px 12px 8px;
   }
   .topbar-inner { max-width: 720px; margin: 0 auto; }
-  .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand-icon {
-    width: 36px; height: 36px; border-radius: 12px;
-    background: linear-gradient(135deg, #ff7aa8, #a78bfa);
-    display: grid; place-items: center;
-    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
-    flex-shrink: 0;
-  }
-  .brand h1 { font-size: 15px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
-  .brand p { font-size: 11px; margin: 1px 0 0; color: var(--muted); font-weight: 600; }
-
-  .hunter-link-bar {
+  .header-row {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    margin-top: 8px; padding: 8px 12px; border-radius: 12px;
-    background: linear-gradient(135deg, #ede9fe, #ffe4ee);
-    border: 1px solid #e2d4f8;
-    color: var(--ink); text-decoration: none;
-    font-size: 12px; font-weight: 800;
   }
-  .hunter-link-bar .open-pill {
-    background: #fff; color: #7c3aed; padding: 3px 8px;
-    border-radius: 999px; font-size: 11px; font-weight: 800;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06); white-space: nowrap;
+  .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .brand-icon {
+    width: 30px; height: 30px; border-radius: 10px;
+    background: linear-gradient(135deg, #ff7aa8, #a78bfa);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .brand h1 { font-size: 14.5px; margin: 0; font-weight: 900; letter-spacing: -0.2px; white-space: nowrap; }
+  .header-pills { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+  .stat-pill {
+    background: var(--pink-soft); color: #be185d;
+    font-size: 10.5px; font-weight: 800; padding: 4px 7px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .stat-pill.cards-pill {
+    background: var(--purple-soft); color: #5b21b6;
+  }
+  .map-pill {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: #fff; text-decoration: none;
+    font-size: 10.5px; font-weight: 800; padding: 4.5px 8px; border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.28); white-space: nowrap;
   }
 
-  .progress-wrap { margin-top: 8px; }
-  .progress-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11.5px; font-weight: 700; margin-bottom: 4px;
-  }
-  .progress-meta .badge {
-    background: var(--pink-soft); color: #c81e5d;
-    padding: 2px 8px; border-radius: 999px; font-size: 10.5px;
-  }
   .progress-track {
-    height: 8px; border-radius: 999px; background: #ede7f3; overflow: hidden;
+    height: 5px; border-radius: 999px; background: #ede7f3; overflow: hidden; margin-top: 7px;
   }
   .progress-fill {
     height: 100%; border-radius: 999px;
     background: linear-gradient(90deg, #ff6b9d, #a78bfa, #34d399);
-    transition: width 0.4s cubic-bezier(.22,1,.36,1);
+    transition: width 0.35s cubic-bezier(.22,1,.36,1);
   }
 
   .tabs {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
-    margin-top: 8px; background: #f2ebf8; padding: 4px; border-radius: 13px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+    margin-top: 7px; background: #f2ebf8; padding: 3px; border-radius: 11px;
   }
   .tab-btn {
-    padding: 7px 4px; border-radius: 9px; font-size: 12px; font-weight: 700;
-    color: var(--muted); transition: all 0.2s; text-align: center;
+    padding: 6px 2px; border-radius: 8px; font-size: 11px; font-weight: 800;
+    color: var(--muted); transition: all 0.18s; text-align: center; white-space: nowrap;
   }
   .tab-btn.active {
     background: var(--card); color: var(--ink);
-    box-shadow: 0 2px 8px rgba(107, 79, 155, 0.12);
+    box-shadow: 0 2px 6px rgba(107, 79, 155, 0.12);
   }
 
-  .container { max-width: 720px; margin: 0 auto; padding: 12px 12px 20px; }
+  /* Main Container */
+  .container { max-width: 720px; margin: 0 auto; padding: 10px 10px 20px; }
   .section { display: none; }
-  .section.active { display: block; animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .section.active { display: block; animation: fadeIn 0.18s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 
+  /* Controls */
   .toolbar {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 10px;
+    gap: 6px; margin-bottom: 9px;
   }
+  .toolbar-right { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
   .seg-group {
-    display: inline-flex; background: #f2ebf8; padding: 3px; border-radius: 12px; gap: 3px;
+    display: inline-flex; background: #f2ebf8; padding: 3px; border-radius: 11px; gap: 2px; flex-wrap: wrap;
   }
   .seg-btn {
-    padding: 6px 9px; border-radius: 9px; font-size: 11.5px; font-weight: 700; color: var(--muted);
+    padding: 5px 8px; border-radius: 8px; font-size: 11px; font-weight: 800; color: var(--muted);
   }
-  .seg-btn.active { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .seg-btn.active { background: #fff; color: var(--ink); box-shadow: 0 2px 5px rgba(0,0,0,0.06); }
   .pill-toggle {
-    padding: 6px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
+    padding: 5px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
     background: var(--card); border: 1.5px solid var(--border); color: var(--ink);
     display: inline-flex; align-items: center; gap: 4px;
   }
   .pill-toggle.active {
     background: var(--gold-soft); border-color: #f59e0b; color: #92400e;
   }
+  .pill-toggle.locked {
+    background: #fee2e2; border-color: #ef4444; color: #991b1b;
+  }
 
+  /* Tappable Wish Star */
   .wish-btn {
     position: absolute; z-index: 6;
-    width: 26px; height: 26px; border-radius: 50%;
-    display: grid; place-items: center; font-size: 14px; line-height: 1;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 13px; line-height: 1;
     background: rgba(255, 255, 255, 0.92); color: #b7aec9;
     border: 1.5px solid #e6dcf2;
-    box-shadow: 0 2px 5px rgba(45, 38, 64, 0.1);
-    transition: transform 0.15s, background 0.15s, color 0.15s;
+    box-shadow: 0 2px 4px rgba(45, 38, 64, 0.1);
   }
-  .wish-btn:active { transform: scale(0.88); }
   .wish-btn.active {
     background: linear-gradient(135deg, #f59e0b, #fb923c);
     color: #fff; border-color: #f59e0b;
-    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
   }
   .wish-btn-inline {
     width: 30px; height: 30px; border-radius: 10px; flex-shrink: 0;
@@ -155,207 +151,307 @@
     background: var(--gold-soft); color: #d97706; border-color: #fbbf24;
   }
 
+  /* Missing All-In-One Visual Card */
   .missing-board {
     background: var(--card); border: 1.5px solid var(--border);
     border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
   }
   .missing-board-head {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+    gap: 8px; margin-bottom: 7px;
   }
-  .missing-board-title { font-size: 13px; font-weight: 900; }
-  .missing-board-sub { font-size: 10.5px; color: var(--muted); font-weight: 700; }
+  .missing-board-title { font-size: 12.5px; font-weight: 900; }
+  .missing-board-sub { font-size: 10px; color: var(--muted); font-weight: 700; }
   .color-swatch-bar {
-    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px;
+    display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px;
   }
   .swatch-chip {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 800;
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 2.5px 7px; border-radius: 999px; font-size: 10px; font-weight: 800;
     border: 1.5px solid rgba(45,38,64,0.14);
   }
   .missing-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
   }
   .scan-tile {
-    position: relative; border-radius: 14px; overflow: hidden;
+    position: relative; border-radius: 13px; overflow: hidden;
     background: #fff; border: 2px solid var(--tile-hex, #efe7f5);
     text-align: center; cursor: pointer; user-select: none;
-    box-shadow: 0 3px 10px rgba(45, 38, 64, 0.07);
+    box-shadow: 0 3px 8px rgba(45, 38, 64, 0.06);
     transition: transform 0.14s;
   }
   .scan-tile:active { transform: scale(0.96); }
   .scan-tile.wish {
-    box-shadow: 0 0 0 2px #f59e0b, 0 4px 12px rgba(245, 158, 11, 0.24);
+    box-shadow: 0 0 0 2px #f59e0b, 0 4px 10px rgba(245, 158, 11, 0.22);
   }
   .scan-color-band {
     background: var(--tile-hex); color: var(--tile-ink, #2d2640);
-    font-size: 10px; font-weight: 900; padding: 4px 4px;
-    letter-spacing: 0.2px; text-transform: uppercase;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-size: 9.5px; font-weight: 900; padding: 3.5px 4px;
+    text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .scan-body { position: relative; padding: 6px 4px 7px; }
-  .scan-tile .wish-btn { top: 4px; right: 4px; width: 24px; height: 24px; font-size: 13px; }
-  .scan-name { font-size: 12px; font-weight: 900; line-height: 1.15; margin-top: 1px; }
+  .scan-body { position: relative; padding: 5px 4px 6px; }
+  .scan-tile .wish-btn { top: 4px; right: 4px; }
+  .scan-name { font-size: 11.5px; font-weight: 900; line-height: 1.15; margin-top: 1px; }
   .scan-code {
     display: inline-block; margin-top: 2px;
-    font-size: 10px; font-weight: 800; color: var(--ink);
+    font-size: 9.5px; font-weight: 800; color: var(--ink);
     background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
   }
 
+  /* 2026 TCG Realistic Cards Grid */
+  .cards-summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 9px 12px; margin-bottom: 9px; box-shadow: var(--shadow);
+  }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .tcg-wrap {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .tcg-card {
+    position: relative; border-radius: 11px; overflow: hidden;
+    background: var(--card-bg);
+    border: 4px solid #d1d5db;
+    padding: 5px 5px 6px;
+    cursor: pointer; user-select: none;
+    box-shadow: 0 4px 12px rgba(45, 38, 64, 0.13);
+    transition: transform 0.14s, box-shadow 0.18s;
+  }
+  .tcg-card:active { transform: scale(0.96); }
+  .tcg-card.holo {
+    border-color: #c4b5fd;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.24);
+  }
+  .tcg-card.owned {
+    border-color: #10b981;
+    box-shadow: 0 0 0 1.5px #10b981, 0 4px 12px rgba(16, 185, 129, 0.22);
+  }
+  .tcg-card.wish:not(.owned) {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 1.5px #f59e0b, 0 4px 12px rgba(245, 158, 11, 0.25);
+  }
+  /* Confetti Holofoil shimmer overlay */
+  .tcg-card.holo::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(255,255,255,0.85) 0 1.5px, transparent 2px),
+      radial-gradient(circle at 78% 18%, rgba(253,224,71,0.9) 0 1.6px, transparent 2.2px),
+      radial-gradient(circle at 64% 46%, rgba(244,114,182,0.8) 0 1.6px, transparent 2.2px),
+      radial-gradient(circle at 28% 58%, rgba(56,189,248,0.85) 0 1.5px, transparent 2.2px),
+      radial-gradient(circle at 82% 64%, rgba(167,139,250,0.85) 0 1.6px, transparent 2.2px),
+      linear-gradient(125deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.34) 45%, rgba(244,114,182,0.18) 55%, rgba(56,189,248,0.18) 65%, rgba(255,255,255,0) 85%);
+  }
+  .tcg-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 2px;
+    margin-bottom: 3px; position: relative; z-index: 3;
+  }
+  .tcg-stage {
+    font-size: 7px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px;
+    background: rgba(255,255,255,0.82); color: #2d2640;
+    padding: 1px 4px; border-radius: 4px;
+  }
+  .tcg-type-orb {
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--type-hex); color: #fff;
+    display: grid; place-items: center; font-size: 8.5px;
+    border: 1px solid rgba(255,255,255,0.8); flex-shrink: 0;
+  }
+  .tcg-title-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 2px;
+    margin-bottom: 3px; position: relative; z-index: 3;
+  }
+  .tcg-name {
+    font-size: 10.5px; font-weight: 900; color: var(--card-ink, #1e1b2e);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tcg-art-frame {
+    position: relative; width: 100%; aspect-ratio: 4 / 3.3;
+    border-radius: 6px; overflow: hidden;
+    background: var(--art-bg);
+    border: 2px solid rgba(255,255,255,0.85);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.12);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+  }
+  .tcg-art-frame img {
+    width: 88%; height: 88%; object-fit: contain;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.22));
+    transition: transform 0.2s;
+  }
+  .tcg-fallback {
+    display: none; font-size: 26px;
+  }
+  .holo-pill {
+    position: absolute; bottom: 3px; left: 3px; z-index: 4;
+    background: linear-gradient(90deg, #f59e0b, #ec4899, #8b5cf6);
+    color: #fff; font-size: 7px; font-weight: 900; padding: 1.5px 5px;
+    border-radius: 999px; letter-spacing: 0.3px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+  .tcg-owned-badge {
+    position: absolute; top: 3px; left: 3px; z-index: 5;
+    background: #10b981; color: #fff; font-size: 8px; font-weight: 900;
+    padding: 1.5px 5px; border-radius: 999px;
+    box-shadow: 0 2px 5px rgba(16,185,129,0.45);
+  }
+  .tcg-card .wish-btn {
+    top: 3px; right: 3px; width: 20px; height: 20px; font-size: 11px; z-index: 6;
+  }
+  .tcg-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 4px; position: relative; z-index: 3;
+    font-size: 8px; font-weight: 900; color: var(--card-ink, #1e1b2e); opacity: 0.85;
+  }
+  .tcg-set-tag {
+    background: rgba(255,255,255,0.75); color: #2d2640;
+    padding: 0.5px 4px; border-radius: 3px; font-size: 7.5px; font-weight: 900;
+  }
+  .tcg-qty-row {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .tcg-qbtn {
+    width: 22px; height: 22px; border-radius: 7px; background: #fff;
+    border: 1.5px solid var(--border);
+    font-weight: 900; font-size: 13px; color: var(--ink);
+  }
+  .tcg-qval { font-size: 11.5px; font-weight: 800; min-width: 14px; text-align: center; }
+  .source-note {
+    text-align: center; font-size: 10.5px; color: var(--muted); margin-top: 12px; font-weight: 600;
+  }
+  .source-note a { color: var(--purple); font-weight: 800; text-decoration: none; }
+
+  /* Master Case Cards */
   .case-card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 12px; margin-bottom: 12px;
+    border-radius: var(--radius); padding: 11px; margin-bottom: 10px;
     box-shadow: var(--shadow);
   }
   .case-head {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 10px; gap: 8px;
+    margin-bottom: 8px; gap: 8px;
   }
-  .case-title { font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+  .case-title { font-size: 12.5px; font-weight: 800; }
   .case-tag {
-    font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+    font-size: 9.5px; font-weight: 800; padding: 2.5px 8px; border-radius: 999px;
     background: #f3effa; color: var(--muted);
   }
   .case-tag.done { background: var(--mint-soft); color: #065f46; }
   .case-tag.hot { background: var(--gold-soft); color: #92400e; }
-  .box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
 
   .toy-tile {
-    position: relative; border-radius: 16px; padding: 9px 6px 8px;
+    position: relative; border-radius: 14px; padding: 8px 5px 7px;
     background: #fcfaff; border: 1.5px solid #efe7f5;
-    text-align: center; transition: transform 0.15s, opacity 0.2s, border-color 0.2s;
+    text-align: center; transition: transform 0.14s, opacity 0.2s;
     cursor: pointer; overflow: hidden; user-select: none;
   }
   .toy-tile:active { transform: scale(0.96); }
   .toy-tile.wish:not(.caught) {
     border-color: #f59e0b; background: linear-gradient(180deg, #fffdf4, #fff7e0);
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.16);
   }
   .toy-tile.caught { background: #f6fdf9; border-color: #a7f3d0; }
-  .spotlight-on .toy-tile.caught { opacity: 0.34; filter: grayscale(0.35); }
-  .toy-tile .wish-btn { top: 5px; right: 5px; width: 24px; height: 24px; font-size: 13px; }
+  .spotlight-on .toy-tile.caught { opacity: 0.32; filter: grayscale(0.35); }
+  .toy-tile .wish-btn { top: 4px; right: 4px; }
   .dupe-chip {
-    position: absolute; top: 5px; left: 5px; z-index: 4;
+    position: absolute; top: 4px; left: 4px; z-index: 4;
     background: var(--purple); color: #fff;
     font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
   }
   .box-visual {
-    position: relative; width: 100%; height: 78px;
+    position: relative; width: 100%; height: 72px;
     display: flex; align-items: center; justify-content: center;
-    margin: 2px 0 4px;
+    margin: 2px 0 3px;
   }
   .pokeball-seal {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; pointer-events: none;
-    animation: popIn 0.28s cubic-bezier(.22,1.4,.36,1);
   }
-  @keyframes popIn { from { transform: scale(0.4) rotate(-18deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
   .caught-pill {
     margin-top: -6px; background: #10b981; color: #fff;
-    font-size: 9px; font-weight: 900; padding: 2px 7px; border-radius: 999px;
-    letter-spacing: 0.4px; box-shadow: 0 2px 6px rgba(16,185,129,0.4);
+    font-size: 8.5px; font-weight: 900; padding: 2px 6px; border-radius: 999px;
   }
-  .toy-name { font-size: 12px; font-weight: 800; margin: 2px 0 1px; line-height: 1.15; }
+  .toy-name { font-size: 11.5px; font-weight: 800; margin: 2px 0 1px; line-height: 1.15; }
   .toy-code {
-    display: inline-block; font-size: 10px; font-weight: 800;
+    display: inline-block; font-size: 9.5px; font-weight: 800;
     color: var(--muted); background: #f2ebf8; padding: 1px 6px; border-radius: 6px;
   }
-  .toy-color-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+  .toy-color-lbl { font-size: 9.5px; color: var(--muted); margin-top: 2px; font-weight: 600; }
 
-  .photo-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
-  }
-  .upload-box {
-    border: 2px dashed #d8c8ee; border-radius: 16px; padding: 22px 14px;
-    text-align: center; background: #fbf8ff;
-  }
+  /* Buttons & Cards */
   .btn-primary {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
     background: linear-gradient(135deg, #ff6b9d, #a78bfa); color: #fff;
-    font-weight: 800; font-size: 13px; padding: 10px 16px; border-radius: 13px;
-    box-shadow: 0 4px 14px rgba(167, 139, 250, 0.35);
+    font-weight: 800; font-size: 12px; padding: 8px 13px; border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(167, 139, 250, 0.3);
   }
   .btn-secondary {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    background: #f3effa; color: var(--ink); font-weight: 700; font-size: 12px;
-    padding: 8px 12px; border-radius: 11px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    background: #f3effa; color: var(--ink); font-weight: 700; font-size: 11.5px;
+    padding: 7px 11px; border-radius: 10px;
   }
-  .photo-stage {
-    position: relative; width: 100%; border-radius: 14px; overflow: hidden;
-    background: #111; margin-top: 10px;
+  .btn-danger {
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    background: #fee2e2; color: #991b1b; font-weight: 800; font-size: 11.5px;
+    padding: 7px 11px; border-radius: 10px;
   }
-  .photo-stage img { display: block; width: 100%; height: auto; }
-  .photo-overlay-grid {
-    position: absolute; display: grid;
-    grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, 1fr);
-  }
-  .photo-cell {
-    position: relative; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; border: 1px dashed rgba(255,255,255,0.22);
-  }
-  .photo-cell .cell-tag {
-    position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-    background: rgba(20, 16, 36, 0.72); color: #fff; font-size: 8px;
-    font-weight: 800; padding: 1px 4px; border-radius: 4px; white-space: nowrap;
-  }
-  .sliders { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-  .slider-row { font-size: 11px; font-weight: 700; color: var(--muted); }
-  .slider-row input { width: 100%; accent-color: var(--pink); }
-
   .card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px; margin-bottom: 12px;
+    border-radius: var(--radius); padding: 13px; margin-bottom: 10px;
     box-shadow: var(--shadow);
   }
-  .card h2 { font-size: 15px; margin: 0 0 8px; font-weight: 800; }
-  .code-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .card h2 { font-size: 14.5px; margin: 0 0 8px; font-weight: 800; }
+
+  /* Decoder */
+  .code-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 9px; }
   .code-prefix {
-    background: #f2ebf8; padding: 10px 12px; border-radius: 12px;
-    font-weight: 800; font-size: 14px; color: var(--muted);
+    background: #f2ebf8; padding: 9px 11px; border-radius: 11px;
+    font-weight: 800; font-size: 13.5px; color: var(--muted);
   }
   .code-input {
-    flex: 1; padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--border);
-    font-size: 16px; font-weight: 800; outline: none;
+    flex: 1; padding: 9px 11px; border-radius: 11px; border: 1.5px solid var(--border);
+    font-size: 15px; font-weight: 800; outline: none;
   }
   .code-input:focus { border-color: var(--pink); }
-  .num-pad { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 10px; }
+  .num-pad { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-bottom: 9px; }
   .num-btn {
-    padding: 8px 4px; border-radius: 10px; font-size: 12px; font-weight: 800;
+    padding: 7px 4px; border-radius: 9px; font-size: 11.5px; font-weight: 800;
     background: #f7f3fc; color: var(--ink); border: 1.5px solid transparent;
   }
   .num-btn.caught { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
   .num-btn.wish { background: #fffbeb; color: #b45309; border-color: #fcd34d; }
   .num-btn.selected { border-color: var(--ink); transform: scale(1.04); }
-  .color-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .color-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
   .color-pill {
-    padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 800;
+    padding: 5px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
     border: 1.5px solid var(--border); background: #fff; display: inline-flex; align-items: center; gap: 5px;
   }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,0.12); }
 
   .verdict-box {
-    border-radius: 16px; padding: 14px; text-align: center;
+    border-radius: 15px; padding: 12px; text-align: center;
     border: 2px solid var(--border); background: #fcfaff;
   }
   .verdict-box.grab { background: #ecfdf5; border-color: #10b981; }
   .verdict-box.skip { background: #fef2f2; border-color: #f87171; }
-  .verdict-title { font-size: 18px; font-weight: 900; margin: 4px 0; }
-  .verdict-sub { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.4; }
+  .verdict-title { font-size: 17px; font-weight: 900; margin: 3px 0; }
+  .verdict-sub { font-size: 11.5px; color: var(--muted); font-weight: 600; line-height: 1.4; }
 
+  /* Checklist */
   .list-item {
     display: flex; align-items: center; gap: 8px;
     background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 16px; padding: 10px 10px; margin-bottom: 8px;
-    box-shadow: 0 3px 10px rgba(107, 79, 155, 0.05);
+    border-radius: 15px; padding: 9px 10px; margin-bottom: 7px;
+    box-shadow: 0 2px 8px rgba(107, 79, 155, 0.05);
   }
   .list-item.caught { border-color: #a7f3d0; background: #f8fffb; }
   .list-item.wish:not(.caught) { border-color: #fbbf24; background: #fffdf5; }
   .list-main { flex: 1; min-width: 0; }
-  .list-title { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-  .list-meta { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .list-title { font-size: 13.5px; font-weight: 800; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .list-meta { font-size: 10.5px; color: var(--muted); font-weight: 600; margin-top: 2px; }
   .mini-tag {
-    font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 7px;
+    font-size: 9.5px; font-weight: 700; padding: 2.5px 6px; border-radius: 7px;
     background: #f5f1fa; color: var(--muted);
   }
   .qty-ctrl { display: flex; align-items: center; gap: 5px; }
@@ -365,17 +461,7 @@
   }
   .qty-val { font-size: 13px; font-weight: 800; min-width: 16px; text-align: center; }
 
-  .bottom-bar {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
-    background: rgba(255, 252, 254, 0.94);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border); padding: 9px 14px calc(9px + env(safe-area-inset-bottom));
-  }
-  .bottom-inner {
-    max-width: 720px; margin: 0 auto; display: flex; gap: 8px;
-  }
-  .bottom-inner button { flex: 1; }
-
+  /* Modals */
   .modal-bg {
     position: fixed; inset: 0; z-index: 60; background: rgba(29, 21, 46, 0.55);
     backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center;
@@ -383,59 +469,67 @@
   .modal-bg.open { display: flex; }
   .modal-sheet {
     width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
-    background: #fff; border-radius: 24px 24px 0 0; padding: 18px 16px 26px;
-    animation: slideUp 0.22s ease;
+    background: #fff; border-radius: 22px 22px 0 0; padding: 16px 15px 24px;
   }
-  @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
-  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .modal-head h3 { margin: 0; font-size: 17px; font-weight: 900; }
-  .close-x { width: 32px; height: 32px; border-radius: 50%; background: #f2ebf8; font-size: 16px; font-weight: 800; }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .modal-head h3 { margin: 0; font-size: 16px; font-weight: 900; }
+  .close-x { width: 30px; height: 30px; border-radius: 50%; background: #f2ebf8; font-size: 15px; font-weight: 800; }
 
+  /* Fullscreen Counter Visual */
   .flash-bg {
     position: fixed; inset: 0; z-index: 80; background: #1d152e; color: #fff;
     display: none; flex-direction: column;
-    padding: 14px 12px calc(16px + env(safe-area-inset-bottom));
+    padding: 12px 10px calc(14px + env(safe-area-inset-bottom));
     overflow-y: auto;
   }
   .flash-bg.open { display: flex; }
   .poster-head {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 10px; max-width: 560px; width: 100%; margin-left: auto; margin-right: auto;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    margin-bottom: 9px; max-width: 560px; width: 100%; margin-left: auto; margin-right: auto;
   }
   .poster-wrap {
     max-width: 560px; width: 100%; margin: 0 auto;
-    background: #ffffff; color: var(--ink); border-radius: 22px; padding: 12px;
+    background: #ffffff; color: var(--ink); border-radius: 20px; padding: 10px;
   }
   .poster-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
   }
   .poster-hint {
-    text-align: center; font-size: 11px; color: rgba(255,255,255,0.75);
-    font-weight: 700; margin-top: 10px;
+    text-align: center; font-size: 11px; color: rgba(255,255,255,0.78);
+    font-weight: 700; margin-top: 9px;
   }
 
+  /* Toast with Undo */
   .toast {
-    position: fixed; top: 72px; left: 50%; transform: translateX(-50%) translateY(-10px);
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(16px);
     background: #2d2640; color: #fff; font-size: 12px; font-weight: 800;
-    padding: 9px 16px; border-radius: 999px; opacity: 0; pointer-events: none;
-    transition: all 0.25s; z-index: 95; white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    padding: 9px 14px; border-radius: 999px; opacity: 0; pointer-events: none;
+    transition: all 0.22s; z-index: 95; white-space: nowrap;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    display: inline-flex; align-items: center; gap: 10px;
   }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  .toast-undo {
+    background: #ff6b9d; color: #fff; font-size: 11px; font-weight: 900;
+    padding: 3px 9px; border-radius: 999px;
+  }
   #confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 90; }
 </style>
 </head>
 <body>
 
 <canvas id="confettiCanvas"></canvas>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast">
+  <span id="toastMsg"></span>
+  <button class="toast-undo" id="toastUndoBtn" style="display:none;" onclick="undoLastAction()">Undo</button>
+</div>
 
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="brand-row">
+    <div class="header-row">
       <div class="brand">
         <div class="brand-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24">
+          <svg width="18" height="18" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="#fff"/>
             <path d="M2 12a10 10 0 0 1 20 0z" fill="#ff4d79"/>
             <rect x="2" y="10.8" width="20" height="2.4" fill="#2d2640"/>
@@ -443,30 +537,22 @@
             <circle cx="12" cy="12" r="2" fill="#fff"/>
           </svg>
         </div>
-        <div>
-          <h1>Pokémon 2026 Toy Hunter</h1>
-          <p>Happy Meal Tracker · Codes 30275-XX</p>
-        </div>
+        <h1>PokéHunter 26</h1>
+      </div>
+      <div class="header-pills">
+        <span class="stat-pill" id="progressPill">8/15 Toys</span>
+        <span class="stat-pill cards-pill" id="cardsPill">0/15 Cards</span>
+        <a class="map-pill" href="https://www.happymealshunter.xyz/location/cmw5guzss00kisicyr6gi4sew" target="_blank" rel="noopener">📍 Map ↗</a>
       </div>
     </div>
 
-    <a class="hunter-link-bar" href="https://www.happymealshunter.xyz/location/cmw5guzss00kisicyr6gi4sew" target="_blank" rel="noopener">
-      <span>📍 Live Store Tracker — HappyMealsHunter</span>
-      <span class="open-pill">Open Map ↗</span>
-    </a>
-
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="progressText">8 / 15 Caught (53%)</span>
-        <span class="badge" id="leftBadge">7 Left to Hunt</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill" style="width:53%"></div>
-      </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:53%"></div>
     </div>
 
     <nav class="tabs">
-      <button class="tab-btn active" data-tab="map" onclick="switchTab('map')">🎨 Box Map</button>
+      <button class="tab-btn active" data-tab="map" onclick="switchTab('map')">🌈 Missing</button>
+      <button class="tab-btn" data-tab="cards" onclick="switchTab('cards')">🃏 Cards</button>
       <button class="tab-btn" data-tab="decoder" onclick="switchTab('decoder')">🔍 Decoder</button>
       <button class="tab-btn" data-tab="list" onclick="switchTab('list')">📋 List</button>
     </nav>
@@ -474,66 +560,57 @@
 </header>
 
 <main class="container">
+  <!-- TAB 1: MISSING / CASES -->
   <section id="tab-map" class="section active">
     <div class="toolbar">
       <div class="seg-group">
-        <button class="seg-btn active" id="modeMissingBtn" onclick="setMapMode('missing')">🌈 Missing</button>
-        <button class="seg-btn" id="modeCasesBtn" onclick="setMapMode('cases')">All 15 Cases</button>
-        <button class="seg-btn" id="modePhotoBtn" onclick="setMapMode('photo')">📷 Photo</button>
+        <button class="seg-btn active" id="modeMissingBtn" onclick="setMapMode('missing')">Missing</button>
+        <button class="seg-btn" id="modeCasesBtn" onclick="setMapMode('cases')">All 15</button>
       </div>
-      <button class="pill-toggle" id="wishOnlyBtn" onclick="toggleWishOnly()">★ Wish Only</button>
-      <button class="pill-toggle" id="spotlightBtn" style="display:none;" onclick="toggleSpotlight()">✨ Dim Caught</button>
+      <div class="toolbar-right">
+        <button class="pill-toggle" id="wishOnlyBtn" onclick="toggleWishOnly()">★ Wish (2)</button>
+        <button class="pill-toggle" id="lockBtn" onclick="toggleLock()">🔓 Lock</button>
+        <button class="pill-toggle" id="spotlightBtn" style="display:none;" onclick="toggleSpotlight()">✨ Dim Caught</button>
+        <button class="pill-toggle" onclick="openMissingPoster()">⛶ Full</button>
+      </div>
     </div>
 
     <div id="missingView"></div>
     <div id="casesView" style="display:none;"></div>
+  </section>
 
-    <div id="photoView" style="display:none;">
-      <div class="photo-card">
-        <div class="upload-box" id="uploadPrompt">
-          <div style="font-size:28px;margin-bottom:6px;">📷</div>
-          <div style="font-weight:800;font-size:14px;margin-bottom:4px;">Use Your Own Cropped Guide Photo</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">
-            Load your cropped 5×3 box guide screenshot. It stays private on your phone and places tappable Pokéball seals right over the real toys!
-          </div>
-          <label class="btn-primary" style="cursor:pointer;">
-            Upload Guide Photo
-            <input type="file" accept="image/*" id="photoInput" style="display:none;" onchange="handlePhotoUpload(event)" />
-          </label>
-        </div>
-
-        <div id="photoStageWrap" style="display:none;">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-            <span style="font-size:12px;font-weight:800;">Tap any box to stamp Pokéball</span>
-            <div style="display:flex;gap:6px;">
-              <label class="btn-secondary" style="cursor:pointer;">
-                Replace Photo
-                <input type="file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)" />
-              </label>
-              <button class="btn-secondary" onclick="clearGuidePhoto()">Remove</button>
-            </div>
-          </div>
-          <div class="photo-stage" id="photoStage">
-            <img id="guideImg" alt="Uploaded guide" />
-            <div class="photo-overlay-grid" id="photoOverlayGrid"></div>
-          </div>
-          <div class="sliders">
-            <div class="slider-row">Top Edge: <span id="valTop">4</span>%<input type="range" min="0" max="30" value="4" id="slTop" oninput="updateOverlayBounds()"></div>
-            <div class="slider-row">Bottom Edge: <span id="valBottom">2</span>%<input type="range" min="0" max="30" value="2" id="slBottom" oninput="updateOverlayBounds()"></div>
-            <div class="slider-row">Left Edge: <span id="valLeft">2</span>%<input type="range" min="0" max="20" value="2" id="slLeft" oninput="updateOverlayBounds()"></div>
-            <div class="slider-row">Right Edge: <span id="valRight">2</span>%<input type="range" min="0" max="20" value="2" id="slRight" oninput="updateOverlayBounds()"></div>
-          </div>
-        </div>
+  <!-- TAB 2: 2026 MCDONALD'S TCG CARDS (M26EN) -->
+  <section id="tab-cards" class="section">
+    <div class="cards-summary">
+      <div>
+        <div style="font-size:13px;font-weight:900;">🃏 McDonald's 2026 Cards (M26EN)</div>
+        <div id="cardsSub" style="font-size:10.5px;color:var(--muted);font-weight:700;">0/15 Collected · 0/7 Confetti Holos</div>
       </div>
+      <span class="stat-pill cards-pill" id="cardsPctPill">0%</span>
+    </div>
+
+    <div class="toolbar">
+      <div class="seg-group" id="cardFilters">
+        <button class="seg-btn active" onclick="setCardFilter('all', this)">All (15)</button>
+        <button class="seg-btn" onclick="setCardFilter('need', this)">Need</button>
+        <button class="seg-btn" onclick="setCardFilter('holo', this)">✨ Holos</button>
+        <button class="seg-btn" onclick="setCardFilter('wish', this)">★ Wish</button>
+        <button class="seg-btn" onclick="setCardFilter('owned', this)">Have</button>
+        <button class="seg-btn" onclick="setCardFilter('dupes', this)">Dupes</button>
+      </div>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="source-note">
+      2 cards per Happy Meal (7 Confetti Holos + 8 Standard) · Set list via
+      <a href="https://bulbapedia.bulbagarden.net/wiki/McDonald%27s_Collection_2026_(TCG)" target="_blank" rel="noopener">Bulbapedia</a>
     </div>
   </section>
 
+  <!-- TAB 3: DECODER -->
   <section id="tab-decoder" class="section">
     <div class="card">
-      <h2>🔍 Instant Code & Color Decoder</h2>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;">
-        Check the bottom flap under the FSC sticker (<code>30275-XX</code>) or tap a number / box color below:
-      </div>
+      <h2>🔍 Code & Color Decoder (30275-XX)</h2>
       <div class="code-input-row">
         <span class="code-prefix">30275-</span>
         <input class="code-input" id="codeInput" type="number" min="1" max="15" placeholder="09 or 12..." oninput="decodeTyped(this.value)" />
@@ -542,16 +619,9 @@
       <div class="color-pills" id="colorPills"></div>
       <div id="decoderResult"></div>
     </div>
-
-    <div class="card" style="text-align:center;">
-      <h2>📱 All Missing Colors Visual</h2>
-      <p style="font-size:12px;color:var(--muted);margin:0 0 12px;font-weight:600;">
-        Full-screen grid of all remaining missing Pokémon & box colors on one screen for fast scanning at the counter.
-      </p>
-      <button class="btn-primary" style="width:100%;" onclick="openMissingPoster()">Open Full-Screen Visual</button>
-    </div>
   </section>
 
+  <!-- TAB 4: CHECKLIST, TRADES & RESET -->
   <section id="tab-list" class="section">
     <div class="toolbar">
       <div class="seg-group" id="listFilters">
@@ -561,19 +631,25 @@
         <button class="seg-btn" onclick="setListFilter('caught', this)">Caught</button>
         <button class="seg-btn" onclick="setListFilter('dupes', this)">Trades</button>
       </div>
-      <button class="btn-primary" style="padding:7px 12px;font-size:12px;" onclick="openTradeModal()">🤝 Trade Card</button>
+      <button class="btn-primary" style="padding:6px 10px;font-size:11.5px;" onclick="openTradeModal()">🤝 Trade Card</button>
     </div>
     <div id="checklistWrap"></div>
+
+    <div class="card" style="margin-top:14px;">
+      <h2 style="font-size:13px;margin-bottom:6px;">⚙️ Collection Controls</h2>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:9px;font-weight:600;">
+        Start a second set or reset counts—all actions support one-tap Undo.
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-secondary" style="flex:1;" onclick="resetToDefault()">↺ Reset Toys (8/15)</button>
+        <button class="btn-danger" style="flex:1;" onclick="clearAllToys()">🗑️ Clear Toys (0/15)</button>
+        <button class="btn-danger" style="flex:1;" onclick="clearAllCards()">🃏 Clear Cards (0/15)</button>
+      </div>
+    </div>
   </section>
 </main>
 
-<div class="bottom-bar">
-  <div class="bottom-inner">
-    <button class="btn-primary" onclick="openMissingPoster()">🌈 Missing Colors Visual</button>
-    <button class="btn-secondary" style="flex:0.65;" onclick="openTradeModal()">🤝 Trade Card</button>
-  </div>
-</div>
-
+<!-- Trade Card Modal -->
 <div class="modal-bg" id="tradeModal" onclick="if(event.target===this)closeModal('tradeModal')">
   <div class="modal-sheet">
     <div class="modal-head">
@@ -588,62 +664,98 @@
   </div>
 </div>
 
+<!-- Fullscreen Counter Visual -->
 <div class="flash-bg" id="flashOverlay">
   <div class="poster-head">
     <div>
-      <div style="font-size:15px;font-weight:900;">🌈 Missing Box Colors</div>
+      <div style="font-size:14.5px;font-weight:900;">🌈 Missing Box Colors</div>
       <div id="posterCount" style="font-size:11px;opacity:0.8;font-weight:700;">7 toys still needed</div>
     </div>
-    <button class="close-x" style="background:rgba(255,255,255,0.18);color:#fff;" onclick="closeMissingPoster()">✕</button>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="pill-toggle" id="posterLockBtn" onclick="toggleLock()">🔓 Lock</button>
+      <button class="close-x" style="background:rgba(255,255,255,0.18);color:#fff;" onclick="closeMissingPoster()">✕</button>
+    </div>
   </div>
   <div class="poster-wrap">
     <div class="color-swatch-bar" id="posterSwatches"></div>
     <div class="poster-grid" id="posterGrid"></div>
   </div>
-  <div class="poster-hint">Tap ★ to add/remove from Wish List · Tap a toy to mark it caught</div>
+  <div class="poster-hint" id="posterHint">Sorted by box color · Tap 🔒 Lock before handing phone to crew</div>
 </div>
 
 <script>
 const TOYS = [
-  { id:'01', name:'Pikachu',    caseNum:1, color:'Yellow',       family:'yellow', hex:'#ffd83d', accent:'#facc15', defaultQty:2 },
-  { id:'02', name:'Weedle',     caseNum:1, color:'Hot Pink',     family:'pink',   hex:'#f4438c', accent:'#ec4899', defaultQty:1 },
-  { id:'03', name:'Munchlax',   caseNum:1, color:'Teal Blue',    family:'blue',   hex:'#24a8db', accent:'#0ea5e9', defaultQty:1 },
-  { id:'04', name:'Torchic',    caseNum:2, color:'Golden Yellow',family:'yellow', hex:'#ffca28', accent:'#f59e0b', defaultQty:1 },
-  { id:'05', name:'Sobble',     caseNum:2, color:'Royal Blue',   family:'blue',   hex:'#1b6be6', accent:'#2563eb', defaultQty:1 },
-  { id:'06', name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', accent:'#4b5563', defaultQty:1 },
-  { id:'07', name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', accent:'#a855f7', defaultQty:0 },
-  { id:'08', name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', accent:'#34d399', defaultQty:1 },
-  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', accent:'#d97706', defaultQty:0, defaultWish:true },
-  { id:'10', name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', accent:'#9ca3af', defaultQty:0 },
-  { id:'11', name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', accent:'#ea580c', defaultQty:0 },
-  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', accent:'#65a30d', defaultQty:0, defaultWish:true },
-  { id:'13', name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', accent:'#38bdf8', defaultQty:0 },
-  { id:'14', name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', accent:'#0284c7', defaultQty:1 },
-  { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', accent:'#d97706', defaultQty:0 }
+  { id:'12', name:'Sprigatito', caseNum:4, color:'Bright Green', family:'green',  hex:'#84d91a', colorOrder:1,  defaultQty:0, defaultWish:true },
+  { id:'08', name:'Bulbasaur',  caseNum:3, color:'Mint Green',   family:'green',  hex:'#79e2c7', colorOrder:2,  defaultQty:1 },
+  { id:'01', name:'Pikachu',    caseNum:1, color:'Yellow',       family:'yellow', hex:'#ffd83d', colorOrder:3,  defaultQty:2 },
+  { id:'04', name:'Torchic',    caseNum:2, color:'Golden Yellow',family:'yellow', hex:'#ffca28', colorOrder:4,  defaultQty:1 },
+  { id:'11', name:'Charmander', caseNum:4, color:'Orange',       family:'orange', hex:'#ff7a18', colorOrder:5,  defaultQty:0 },
+  { id:'09', name:'Eevee',      caseNum:3, color:'Tan / Amber',  family:'orange', hex:'#f29c2b', colorOrder:6,  defaultQty:0, defaultWish:true },
+  { id:'15', name:'Rowlet',     caseNum:5, color:'Cream / Tan',  family:'orange', hex:'#f7d4b2', colorOrder:7,  defaultQty:0 },
+  { id:'02', name:'Weedle',     caseNum:1, color:'Hot Pink',     family:'pink',   hex:'#f4438c', colorOrder:8,  defaultQty:1 },
+  { id:'07', name:'Espurr',     caseNum:3, color:'Purple',       family:'purple', hex:'#c889f0', colorOrder:9,  defaultQty:0 },
+  { id:'13', name:'Squirtle',   caseNum:5, color:'Baby Blue',    family:'blue',   hex:'#5cc8f5', colorOrder:10, defaultQty:0 },
+  { id:'14', name:'Piplup',     caseNum:5, color:'Sky Blue',     family:'blue',   hex:'#22a7f0', colorOrder:11, defaultQty:1 },
+  { id:'03', name:'Munchlax',   caseNum:1, color:'Teal Blue',    family:'blue',   hex:'#24a8db', colorOrder:12, defaultQty:1 },
+  { id:'05', name:'Sobble',     caseNum:2, color:'Royal Blue',   family:'blue',   hex:'#1b6be6', colorOrder:13, defaultQty:1 },
+  { id:'10', name:'Minccino',   caseNum:4, color:'White / Grey', family:'grey',   hex:'#e5e2dc', colorOrder:14, defaultQty:0 },
+  { id:'06', name:'Umbreon',    caseNum:2, color:'Dark Grey',    family:'grey',   hex:'#6b7280', colorOrder:15, defaultQty:1 }
 ];
 
-const PHOTO_ORDER = ['13','07','04','10','01','14','08','05','11','02','15','09','06','12','03'];
-const LIGHT_HEXES = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5','#f7d4b2'];
-
-let state = {
-  qty: {},
-  wish: {},
-  overlay: { top: 4, bottom: 2, left: 2, right: 2 }
+// Official McDonald's Collection 2026 (M26EN) 15-card set with official Pokémon artwork + TCG type styling
+const TYPE_THEMES = {
+  Grass:     { hex:'#16a34a', cardBg:'linear-gradient(155deg,#dcfce7,#86efac)', artBg:'radial-gradient(circle at 50% 45%,#f0fdf4,#4ade80)', ink:'#14532d', icon:'🍃' },
+  Fire:      { hex:'#dc2626', cardBg:'linear-gradient(155deg,#fee2e2,#fca5a5)', artBg:'radial-gradient(circle at 50% 45%,#fff7ed,#fb923c)', ink:'#7f1d1d', icon:'🔥' },
+  Water:     { hex:'#0284c7', cardBg:'linear-gradient(155deg,#e0f2fe,#7dd3fc)', artBg:'radial-gradient(circle at 50% 45%,#f0f9ff,#38bdf8)', ink:'#0c4a6e', icon:'💧' },
+  Lightning: { hex:'#ca8a04', cardBg:'linear-gradient(155deg,#fef9c3,#fde047)', artBg:'radial-gradient(circle at 50% 45%,#fefce8,#facc15)', ink:'#713f12', icon:'⚡' },
+  Psychic:   { hex:'#9333ea', cardBg:'linear-gradient(155deg,#f3e8ff,#d8b4fe)', artBg:'radial-gradient(circle at 50% 45%,#faf5ff,#c084fc)', ink:'#581c87', icon:'🔮' },
+  Fighting:  { hex:'#b45309', cardBg:'linear-gradient(155deg,#ffedd5,#fdba74)', artBg:'radial-gradient(circle at 50% 45%,#fff7ed,#f97316)', ink:'#7c2d12', icon:'🥊' },
+  Darkness:  { hex:'#1e293b', cardBg:'linear-gradient(155deg,#475569,#1e293b)', artBg:'radial-gradient(circle at 50% 45%,#64748b,#0f172a)', ink:'#f8fafc', icon:'🌙' },
+  Metal:     { hex:'#475569', cardBg:'linear-gradient(155deg,#e2e8f0,#94a3b8)', artBg:'radial-gradient(circle at 50% 45%,#f8fafc,#64748b)', ink:'#1e293b', icon:'⚙️' },
+  Colorless: { hex:'#78716c', cardBg:'linear-gradient(155deg,#f5f5f4,#d6d3d1)', artBg:'radial-gradient(circle at 50% 45%,#ffffff,#d6d3d1)', ink:'#292524', icon:'★' }
 };
 
+const CARDS = [
+  { id:'001', dex:724, name:'Decidueye',  stage:'Stage 2', type:'Grass',     holo:false },
+  { id:'002', dex:609, name:'Chandelure', stage:'Stage 2', type:'Fire',      holo:true  },
+  { id:'003', dex:964, name:'Palafin',    stage:'Stage 1', type:'Water',     holo:true  },
+  { id:'004', dex:25,  name:'Pikachu',    stage:'Basic',   type:'Lightning', holo:true, defaultWish:true },
+  { id:'005', dex:778, name:'Mimikyu',    stage:'Basic',   type:'Psychic',   holo:true  },
+  { id:'006', dex:448, name:'Lucario',    stage:'Stage 1', type:'Fighting',  holo:true  },
+  { id:'007', dex:701, name:'Hawlucha',   stage:'Basic',   type:'Fighting',  holo:false },
+  { id:'008', dex:248, name:'Tyranitar',  stage:'Stage 2', type:'Darkness',  holo:true  },
+  { id:'009', dex:359, name:'Absol',      stage:'Basic',   type:'Darkness',  holo:false },
+  { id:'010', dex:571, name:'Zoroark',    stage:'Stage 1', type:'Darkness',  holo:false },
+  { id:'011', dex:376, name:'Metagross',  stage:'Stage 2', type:'Metal',     holo:false },
+  { id:'012', dex:385, name:'Jirachi',    stage:'Basic',   type:'Metal',     holo:true, defaultWish:true },
+  { id:'013', dex:133, name:'Eevee',      stage:'Basic',   type:'Colorless', holo:false },
+  { id:'014', dex:143, name:'Snorlax',    stage:'Basic',   type:'Colorless', holo:false },
+  { id:'015', dex:831, name:'Wooloo',     stage:'Basic',   type:'Colorless', holo:false }
+];
+
+const LIGHT_HEXES = ['#ffd83d','#ffca28','#79e2c7','#e5e2dc','#84d91a','#5cc8f5','#f7d4b2'];
+
+let state = { qty: {}, wish: {}, cardQty: {}, cardWish: {} };
 let ui = {
   tab: 'map',
   mapMode: 'missing',
   wishOnly: false,
+  locked: false,
   spotlight: false,
   listFilter: 'all',
+  cardFilter: 'all',
   selectedCode: '12'
 };
+let undoSnapshot = null;
 
 function initDefaultState() {
   TOYS.forEach(t => {
     state.qty[t.id] = t.defaultQty;
     state.wish[t.id] = !!t.defaultWish;
+  });
+  CARDS.forEach(c => {
+    state.cardQty[c.id] = 0;
+    state.cardWish[c.id] = !!c.defaultWish;
   });
 }
 
@@ -654,10 +766,10 @@ function loadState() {
     if (saved) {
       const parsed = JSON.parse(saved);
       state = {
-        ...state,
-        ...parsed,
         qty: { ...state.qty, ...(parsed.qty || {}) },
-        wish: { ...state.wish, ...(parsed.wish || {}) }
+        wish: { ...state.wish, ...(parsed.wish || {}) },
+        cardQty: { ...state.cardQty, ...(parsed.cardQty || {}) },
+        cardWish: { ...state.cardWish, ...(parsed.cardWish || {}) }
       };
     }
   } catch (e) {}
@@ -667,20 +779,19 @@ function saveState() {
   try { localStorage.setItem('poke2026_v4', JSON.stringify(state)); } catch (e) {}
 }
 
-function isWish(id) {
-  return !!state.wish[id];
-}
+function isWish(id) { return !!state.wish[id]; }
+function isCardWish(id) { return !!state.cardWish[id]; }
 
-function getNeededList() {
+function getNeededByColor() {
   return TOYS.filter(t => !(state.qty[t.id] > 0))
-    .sort((a,b) => (isWish(b.id) ? 1 : 0) - (isWish(a.id) ? 1 : 0) || a.id.localeCompare(b.id));
+    .sort((a, b) => a.colorOrder - b.colorOrder);
 }
 
 function getContrastInk(hex) {
   return LIGHT_HEXES.includes(hex) ? '#2d2640' : '#ffffff';
 }
 
-function renderBoxAndChibi(toy, size = 72) {
+function renderBoxAndChibi(toy, size = 64) {
   const chibi = getChibiFace(toy.id);
   const strokeCol = getContrastInk(toy.hex);
   return `
@@ -690,9 +801,7 @@ function renderBoxAndChibi(toy, size = 72) {
     <circle cx="44" cy="32" r="10" fill="#2d2640"/>
     <circle cx="44" cy="32" r="6" fill="${toy.hex}"/>
     <text x="44" y="20" text-anchor="middle" font-size="8" font-weight="900" fill="${strokeCol}" opacity="0.88">POKÉMON</text>
-    <g transform="translate(22, 42)">
-      ${chibi}
-    </g>
+    <g transform="translate(22, 42)">${chibi}</g>
   </svg>`;
 }
 
@@ -717,7 +826,7 @@ function getChibiFace(id) {
   return faces[id] || '';
 }
 
-function pokeballSvg(size = 46) {
+function pokeballSvg(size = 40) {
   return `
   <svg width="${size}" height="${size}" viewBox="0 0 64 64">
     <circle cx="32" cy="32" r="28" fill="#fff" stroke="#2d2640" stroke-width="4"/>
@@ -733,7 +842,7 @@ function renderAll() {
   renderProgress();
   renderMissingVisual();
   renderCases();
-  renderPhotoOverlay();
+  renderCards();
   renderDecoder();
   renderChecklist();
   if (document.getElementById('flashOverlay').classList.contains('open')) {
@@ -743,23 +852,37 @@ function renderAll() {
 
 function renderProgress() {
   const caught = TOYS.filter(t => (state.qty[t.id] || 0) > 0).length;
-  const pct = Math.round((caught / TOYS.length) * 100);
-  const left = TOYS.length - caught;
-  const wishCount = getNeededList().filter(t => isWish(t.id)).length;
-  document.getElementById('progressText').textContent = `${caught} / ${TOYS.length} Caught (${pct}%)`;
-  document.getElementById('leftBadge').textContent = left === 0 ? '🎉 Set Complete!' : `${left} Left to Hunt`;
+  const cardsOwned = CARDS.filter(c => (state.cardQty[c.id] || 0) > 0).length;
+  const pct = ui.tab === 'cards'
+    ? Math.round((cardsOwned / CARDS.length) * 100)
+    : Math.round((caught / TOYS.length) * 100);
+  const wishCount = getNeededByColor().filter(t => isWish(t.id)).length;
+
+  document.getElementById('progressPill').textContent = caught === TOYS.length ? '🎉 15/15' : `${caught}/15 Toys`;
+  document.getElementById('cardsPill').textContent = cardsOwned === CARDS.length ? '🃏 15/15' : `${cardsOwned}/15 Cards`;
   document.getElementById('progressFill').style.width = `${pct}%`;
-  document.getElementById('wishOnlyBtn').textContent = `★ Wish Only (${wishCount})`;
-  document.getElementById('wishOnlyBtn').classList.toggle('active', ui.wishOnly);
+
+  const wBtn = document.getElementById('wishOnlyBtn');
+  wBtn.textContent = `★ Wish (${wishCount})`;
+  wBtn.classList.toggle('active', ui.wishOnly);
+
+  const lBtn = document.getElementById('lockBtn');
+  lBtn.textContent = ui.locked ? '🔒 Locked' : '🔓 Lock';
+  lBtn.classList.toggle('locked', ui.locked);
+
+  const pLock = document.getElementById('posterLockBtn');
+  pLock.textContent = ui.locked ? '🔒 Locked' : '🔓 Lock';
+  pLock.classList.toggle('locked', ui.locked);
+
   document.getElementById('spotlightBtn').classList.toggle('active', ui.spotlight);
 }
 
-function buildScanTilesHtml(list, iconSize = 62) {
+function buildScanTilesHtml(list, iconSize = 58) {
   return list.map(t => {
     const ink = getContrastInk(t.hex);
     const wished = isWish(t.id);
     return `
-      <div class="scan-tile ${wished ? 'wish' : ''}" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="toggleToy('${t.id}')">
+      <div class="scan-tile ${wished ? 'wish' : ''}" style="--tile-hex:${t.hex};--tile-ink:${ink};" onclick="handleTileTap('${t.id}')">
         <div class="scan-color-band">${t.color}</div>
         <div class="scan-body">
           <button class="wish-btn ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
@@ -781,22 +904,22 @@ function buildSwatchesHtml(list) {
 
 function renderMissingVisual() {
   const wrap = document.getElementById('missingView');
-  const allNeeded = getNeededList();
+  const allNeeded = getNeededByColor();
   const list = ui.wishOnly ? allNeeded.filter(t => isWish(t.id)) : allNeeded;
 
   if (!allNeeded.length) {
-    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:26px 14px;">
-      <div style="font-size:34px;margin-bottom:6px;">🎉</div>
-      <div style="font-size:16px;font-weight:900;">All 15 Pokémon Caught!</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Your 2026 Happy Meal set is complete.</div>
+    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:24px 14px;">
+      <div style="font-size:32px;margin-bottom:6px;">🎉</div>
+      <div style="font-size:15px;font-weight:900;">All 15 Pokémon Caught!</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">Your 2026 Happy Meal toy set is complete.</div>
     </div>`;
     return;
   }
   if (!list.length) {
-    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:22px 14px;">
-      <div style="font-size:26px;margin-bottom:6px;">☆</div>
-      <div style="font-size:14px;font-weight:900;">No missing Pokémon on your Wish List</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Tap ☆ on any Pokémon to add it to your Wish List.</div>
+    wrap.innerHTML = `<div class="missing-board" style="text-align:center;padding:20px 14px;">
+      <div style="font-size:24px;margin-bottom:5px;">☆</div>
+      <div style="font-size:13.5px;font-weight:900;">No missing Pokémon on your Wish List</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">Tap ☆ on any Pokémon to star it.</div>
     </div>`;
     return;
   }
@@ -804,12 +927,12 @@ function renderMissingVisual() {
     <div class="missing-board">
       <div class="missing-board-head">
         <div>
-          <div class="missing-board-title">${ui.wishOnly ? `★ Wish List (${list.length})` : `🌈 Still Missing (${list.length}) — Quick Color Scan`}</div>
-          <div class="missing-board-sub">Tap ☆/★ for Wish List · Tap tile to mark caught</div>
+          <div class="missing-board-title">${ui.wishOnly ? `★ Wish List (${list.length})` : `🌈 Missing (${list.length}) — Grouped by Box Color`}</div>
+          <div class="missing-board-sub">${ui.locked ? '🔒 Screen locked — safe to show at counter' : 'Tap ☆/★ for Wish List · Tap tile to mark caught'}</div>
         </div>
       </div>
       <div class="color-swatch-bar">${buildSwatchesHtml(list)}</div>
-      <div class="missing-grid">${buildScanTilesHtml(list, 62)}</div>
+      <div class="missing-grid">${buildScanTilesHtml(list, 58)}</div>
     </div>`;
 }
 
@@ -818,10 +941,10 @@ function renderCases() {
   wrap.classList.toggle('spotlight-on', ui.spotlight);
   let html = '';
   for (let c = 1; c <= 5; c++) {
-    const group = TOYS.filter(t => t.caseNum === c);
+    const group = TOYS.filter(t => t.caseNum === c).sort((a,b) => a.id.localeCompare(b.id));
     const done = group.every(t => (state.qty[t.id] || 0) > 0);
     const hasWish = group.some(t => isWish(t.id) && !(state.qty[t.id] > 0));
-    const tag = done ? `<span class="case-tag done">CASE COMPLETE ✨</span>`
+    const tag = done ? `<span class="case-tag done">COMPLETE ✨</span>`
               : hasWish ? `<span class="case-tag hot">★ WISH INSIDE</span>`
               : `<span class="case-tag">${group.filter(t=>state.qty[t.id]>0).length}/3 Caught</span>`;
     html += `<div class="case-card"><div class="case-head"><div class="case-title">📦 Master Case ${c}</div>${tag}</div><div class="box-grid">`;
@@ -830,12 +953,12 @@ function renderCases() {
       const caught = q > 0;
       const wished = isWish(t.id);
       html += `
-        <div class="toy-tile ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}" onclick="toggleToy('${t.id}')">
+        <div class="toy-tile ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}" onclick="handleTileTap('${t.id}')">
           ${q > 1 ? `<span class="dupe-chip">x${q}</span>` : ''}
-          <button class="wish-btn ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
+          <button class="wish-btn ${wished ? 'active' : ''}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
           <div class="box-visual">
-            ${renderBoxAndChibi(t, 72)}
-            ${caught ? `<div class="pokeball-seal">${pokeballSvg(42)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
+            ${renderBoxAndChibi(t, 66)}
+            ${caught ? `<div class="pokeball-seal">${pokeballSvg(38)}<span class="caught-pill">CAUGHT!</span></div>` : ''}
           </div>
           <div class="toy-name">${t.name}</div>
           <div class="toy-code">-${t.id}</div>
@@ -847,95 +970,127 @@ function renderCases() {
   wrap.innerHTML = html;
 }
 
+// 2026 TCG Realistic Cards Tab
+function setCardFilter(f, btn) {
+  ui.cardFilter = f;
+  document.querySelectorAll('#cardFilters .seg-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards();
+}
+
+function renderCards() {
+  const owned = CARDS.filter(c => (state.cardQty[c.id] || 0) > 0).length;
+  const holosOwned = CARDS.filter(c => c.holo && (state.cardQty[c.id] || 0) > 0).length;
+  const pct = Math.round((owned / CARDS.length) * 100);
+  document.getElementById('cardsSub').textContent = `${owned}/15 Collected · ${holosOwned}/7 Confetti Holos`;
+  document.getElementById('cardsPctPill').textContent = `${pct}%`;
+
+  let list = [...CARDS];
+  if (ui.cardFilter === 'need') list = list.filter(c => !(state.cardQty[c.id] > 0));
+  if (ui.cardFilter === 'holo') list = list.filter(c => c.holo);
+  if (ui.cardFilter === 'wish') list = list.filter(c => isCardWish(c.id));
+  if (ui.cardFilter === 'owned') list = list.filter(c => (state.cardQty[c.id] || 0) > 0);
+  if (ui.cardFilter === 'dupes') list = list.filter(c => (state.cardQty[c.id] || 0) > 1);
+
+  const grid = document.getElementById('cardsGrid');
+  if (!list.length) {
+    grid.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted);font-weight:700;">No cards in this filter!</div>`;
+    return;
+  }
+  grid.innerHTML = list.map(c => {
+    const theme = TYPE_THEMES[c.type];
+    const q = state.cardQty[c.id] || 0;
+    const has = q > 0;
+    const wished = isCardWish(c.id);
+    const artUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${c.dex}.png`;
+    return `
+      <div class="tcg-wrap">
+        <div class="tcg-card ${c.holo ? 'holo' : ''} ${has ? 'owned' : ''} ${wished ? 'wish' : ''}"
+             style="--type-hex:${theme.hex};--card-bg:${theme.cardBg};--art-bg:${theme.artBg};--card-ink:${theme.ink};"
+             onclick="toggleCard('${c.id}')">
+          <div class="tcg-head">
+            <span class="tcg-stage">${c.stage}</span>
+            <span class="tcg-type-orb" title="${c.type}">${theme.icon}</span>
+          </div>
+          <div class="tcg-title-row">
+            <span class="tcg-name">${c.name}</span>
+          </div>
+          <div class="tcg-art-frame">
+            ${has ? '<span class="tcg-owned-badge">✓ HAVE</span>' : ''}
+            <button class="wish-btn ${wished ? 'active' : ''}" onclick="toggleCardWish('${c.id}', event)">${wished ? '★' : '☆'}</button>
+            <img src="${artUrl}" alt="${c.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+            <span class="tcg-fallback">${theme.icon}</span>
+            ${c.holo ? '<span class="holo-pill">✨ HOLO</span>' : ''}
+          </div>
+          <div class="tcg-foot">
+            <span class="tcg-set-tag">M26</span>
+            <span>${c.id}/015</span>
+          </div>
+        </div>
+        <div class="tcg-qty-row">
+          <button class="tcg-qbtn" onclick="changeCardQty('${c.id}', -1)">−</button>
+          <span class="tcg-qval">${q}</span>
+          <button class="tcg-qbtn" onclick="changeCardQty('${c.id}', 1)">+</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleCard(id) {
+  snapshotForUndo();
+  const card = CARDS.find(c => c.id === id);
+  const cur = state.cardQty[id] || 0;
+  if (cur === 0) {
+    state.cardQty[id] = 1;
+    launchConfetti();
+    showToast(`🃏 Pulled ${card.name} (${card.id}/015)!`, true);
+  } else {
+    state.cardQty[id] = 0;
+    showToast(`Removed ${card.name} (${card.id}/015)`, true);
+  }
+  saveState();
+  renderAll();
+}
+
+function changeCardQty(id, delta) {
+  snapshotForUndo();
+  const prev = state.cardQty[id] || 0;
+  const next = Math.max(0, prev + delta);
+  state.cardQty[id] = next;
+  if (prev === 0 && next > 0) {
+    launchConfetti();
+    const card = CARDS.find(c => c.id === id);
+    showToast(`🃏 Pulled ${card.name} (${card.id}/015)!`, true);
+  }
+  saveState();
+  renderAll();
+}
+
+function toggleCardWish(id, ev) {
+  if (ev) ev.stopPropagation();
+  snapshotForUndo();
+  const next = !state.cardWish[id];
+  state.cardWish[id] = next;
+  saveState();
+  renderAll();
+  const card = CARDS.find(c => c.id === id);
+  showToast(next ? `★ Added ${card.name} card to Wish List` : `☆ Removed ${card.name} card from Wish List`, true);
+}
+
 function setMapMode(mode) {
   ui.mapMode = mode;
   document.getElementById('modeMissingBtn').classList.toggle('active', mode === 'missing');
   document.getElementById('modeCasesBtn').classList.toggle('active', mode === 'cases');
-  document.getElementById('modePhotoBtn').classList.toggle('active', mode === 'photo');
   document.getElementById('missingView').style.display = mode === 'missing' ? 'block' : 'none';
   document.getElementById('casesView').style.display = mode === 'cases' ? 'block' : 'none';
-  document.getElementById('photoView').style.display = mode === 'photo' ? 'block' : 'none';
   document.getElementById('wishOnlyBtn').style.display = mode === 'missing' ? 'inline-flex' : 'none';
   document.getElementById('spotlightBtn').style.display = mode === 'cases' ? 'inline-flex' : 'none';
-  if (mode === 'photo') renderPhotoOverlay();
 }
 
-function handlePhotoUpload(ev) {
-  const file = ev.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try { localStorage.setItem('poke2026_guide_photo', e.target.result); } catch (err) {
-      showToast('Photo loaded (too large to persist permanently)');
-    }
-    document.getElementById('guideImg').src = e.target.result;
-    document.getElementById('uploadPrompt').style.display = 'none';
-    document.getElementById('photoStageWrap').style.display = 'block';
-    renderPhotoOverlay();
-    showToast('📷 Guide photo loaded!');
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearGuidePhoto() {
-  localStorage.removeItem('poke2026_guide_photo');
-  document.getElementById('guideImg').src = '';
-  document.getElementById('uploadPrompt').style.display = 'block';
-  document.getElementById('photoStageWrap').style.display = 'none';
-}
-
-function updateOverlayBounds() {
-  state.overlay = {
-    top: +document.getElementById('slTop').value,
-    bottom: +document.getElementById('slBottom').value,
-    left: +document.getElementById('slLeft').value,
-    right: +document.getElementById('slRight').value
-  };
-  saveState();
-  applyOverlayBounds();
-}
-
-function applyOverlayBounds() {
-  const o = state.overlay;
-  document.getElementById('valTop').textContent = o.top;
-  document.getElementById('valBottom').textContent = o.bottom;
-  document.getElementById('valLeft').textContent = o.left;
-  document.getElementById('valRight').textContent = o.right;
-  const g = document.getElementById('photoOverlayGrid');
-  g.style.top = o.top + '%';
-  g.style.bottom = o.bottom + '%';
-  g.style.left = o.left + '%';
-  g.style.right = o.right + '%';
-}
-
-function renderPhotoOverlay() {
-  const savedImg = localStorage.getItem('poke2026_guide_photo');
-  const imgEl = document.getElementById('guideImg');
-  if (savedImg && !imgEl.src) {
-    imgEl.src = savedImg;
-    document.getElementById('uploadPrompt').style.display = 'none';
-    document.getElementById('photoStageWrap').style.display = 'block';
-  }
-  document.getElementById('slTop').value = state.overlay.top;
-  document.getElementById('slBottom').value = state.overlay.bottom;
-  document.getElementById('slLeft').value = state.overlay.left;
-  document.getElementById('slRight').value = state.overlay.right;
-  applyOverlayBounds();
-
-  const grid = document.getElementById('photoOverlayGrid');
-  grid.innerHTML = PHOTO_ORDER.map(id => {
-    const t = TOYS.find(x => x.id === id);
-    const caught = (state.qty[id] || 0) > 0;
-    return `<div class="photo-cell" onclick="toggleToy('${id}')">
-      ${caught ? pokeballSvg(40) : ''}
-      <span class="cell-tag">${t.name} -${id}</span>
-    </div>`;
-  }).join('');
-}
-
+// Decoder
 function renderDecoder() {
-  const pad = document.getElementById('numPad');
-  pad.innerHTML = TOYS.map(t => {
+  const sortedById = [...TOYS].sort((a,b) => a.id.localeCompare(b.id));
+  document.getElementById('numPad').innerHTML = sortedById.map(t => {
     const caught = (state.qty[t.id] || 0) > 0;
     const wished = isWish(t.id);
     const cls = `${caught ? 'caught' : ''} ${wished && !caught ? 'wish' : ''} ${ui.selectedCode === t.id ? 'selected' : ''}`;
@@ -944,12 +1099,12 @@ function renderDecoder() {
 
   const families = [
     { key:'green', label:'Green', hex:'#84d91a' },
-    { key:'orange', label:'Tan / Orange', hex:'#f29c2b' },
-    { key:'blue', label:'Blue', hex:'#5cc8f5' },
-    { key:'purple', label:'Purple', hex:'#c889f0' },
-    { key:'grey', label:'White / Grey', hex:'#d1d5db' },
     { key:'yellow', label:'Yellow', hex:'#ffd83d' },
-    { key:'pink', label:'Pink', hex:'#f4438c' }
+    { key:'orange', label:'Orange / Tan', hex:'#f29c2b' },
+    { key:'pink', label:'Pink', hex:'#f4438c' },
+    { key:'purple', label:'Purple', hex:'#c889f0' },
+    { key:'blue', label:'Blue', hex:'#5cc8f5' },
+    { key:'grey', label:'White / Grey', hex:'#d1d5db' }
   ];
   document.getElementById('colorPills').innerHTML = families.map(f =>
     `<button class="color-pill" onclick="filterByColor('${f.key}')"><span class="dot" style="background:${f.hex}"></span>${f.label}</button>`
@@ -973,39 +1128,37 @@ function selectCode(id) {
 }
 
 function renderDecoderVerdict(id) {
-  const t = TOYS.find(x => x.id === id) || TOYS[11];
+  const t = TOYS.find(x => x.id === id) || TOYS[0];
   const caught = (state.qty[t.id] || 0) > 0;
   const wished = isWish(t.id);
   const mates = TOYS.filter(x => x.caseNum === t.caseNum && x.id !== t.id);
   const matesNeeded = mates.filter(x => !(state.qty[x.id] > 0));
-  const res = document.getElementById('decoderResult');
-  res.innerHTML = `
+  document.getElementById('decoderResult').innerHTML = `
     <div class="verdict-box ${caught ? 'skip' : 'grab'}">
-      <div>${renderBoxAndChibi(t, 82)}</div>
+      <div>${renderBoxAndChibi(t, 76)}</div>
       <div class="verdict-title">${caught ? '✋ ALREADY CAUGHT' : (wished ? '🌟 WISH LIST — GRAB IT!' : '✅ GRAB IT!')}</div>
-      <div style="font-size:15px;font-weight:800;margin-bottom:4px;">${t.name} · 30275-${t.id} (${t.color} Box)</div>
+      <div style="font-size:14px;font-weight:800;margin-bottom:4px;">${t.name} · 30275-${t.id} (${t.color} Box)</div>
       <div class="verdict-sub">
         Ships in <strong>Master Case ${t.caseNum}</strong> with ${mates.map(m => `${m.name} (-${m.id})`).join(' & ')}.<br/>
-        ${matesNeeded.length ? `💡 <strong>Carton Clue:</strong> Ask if they also have ${matesNeeded.map(m => `<strong>${m.color} (-${m.id} ${m.name})</strong>`).join(' or ')}!` : '✨ All other toys in this carton are already caught.'}
+        ${matesNeeded.length ? `💡 <strong>Carton Clue:</strong> Also look for ${matesNeeded.map(m => `<strong>${m.color} (-${m.id} ${m.name})</strong>`).join(' or ')}!` : '✨ All other toys in this carton are already caught.'}
       </div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn-primary" onclick="toggleToy('${t.id}')">${caught ? 'Mark as Uncaught' : '✅ Mark Caught Now'}</button>
+      <div style="margin-top:9px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="toggleToy('${t.id}')">${caught ? 'Mark Uncaught' : '✅ Mark Caught'}</button>
         <button class="btn-secondary" onclick="toggleWish('${t.id}', event)">${wished ? '★ On Wish List' : '☆ Add to Wish List'}</button>
       </div>
     </div>`;
 }
 
 function filterByColor(family) {
-  const matches = TOYS.filter(t => t.family === family);
-  const res = document.getElementById('decoderResult');
-  res.innerHTML = matches.map(t => {
+  const matches = TOYS.filter(t => t.family === family).sort((a,b) => a.colorOrder - b.colorOrder);
+  document.getElementById('decoderResult').innerHTML = matches.map(t => {
     const caught = (state.qty[t.id] || 0) > 0;
     const wished = isWish(t.id);
     return `
       <div class="list-item ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}" onclick="selectCode('${t.id}')" style="cursor:pointer;">
-        <div>${renderBoxAndChibi(t, 52)}</div>
+        <div>${renderBoxAndChibi(t, 48)}</div>
         <div class="list-main">
-          <div class="list-title">${t.name} <span class="toy-code">30275-${t.id}</span></div>
+          <div class="list-title">${t.name} <span class="toy-code">-${t.id}</span></div>
           <div class="list-meta">${t.color} Box · Case ${t.caseNum} · <strong>${caught ? 'Already have' : 'NEED!'}</strong></div>
         </div>
         <button class="wish-btn-inline ${wished ? 'active' : ''}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
@@ -1013,6 +1166,7 @@ function filterByColor(family) {
   }).join('');
 }
 
+// Checklist
 function setListFilter(f, btn) {
   ui.listFilter = f;
   document.querySelectorAll('#listFilters .seg-btn').forEach(b => b.classList.remove('active'));
@@ -1026,7 +1180,7 @@ function renderChecklist() {
   if (ui.listFilter === 'wish') list = list.filter(t => isWish(t.id));
   if (ui.listFilter === 'caught') list = list.filter(t => (state.qty[t.id] || 0) > 0);
   if (ui.listFilter === 'dupes') list = list.filter(t => (state.qty[t.id] || 0) > 1);
-  list.sort((a, b) => (isWish(b.id) ? 1 : 0) - (isWish(a.id) ? 1 : 0) || a.id.localeCompare(b.id));
+  list.sort((a, b) => (isWish(b.id) ? 1 : 0) - (isWish(a.id) ? 1 : 0) || a.colorOrder - b.colorOrder);
 
   const wrap = document.getElementById('checklistWrap');
   if (!list.length) {
@@ -1039,8 +1193,8 @@ function renderChecklist() {
     const wished = isWish(t.id);
     return `
       <div class="list-item ${caught ? 'caught' : ''} ${wished ? 'wish' : ''}">
-        <button class="wish-btn-inline ${wished ? 'active' : ''}" title="${wished ? 'Remove from Wish List' : 'Add to Wish List'}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
-        <div onclick="toggleToy('${t.id}')" style="cursor:pointer;">${renderBoxAndChibi(t, 50)}</div>
+        <button class="wish-btn-inline ${wished ? 'active' : ''}" onclick="toggleWish('${t.id}', event)">${wished ? '★' : '☆'}</button>
+        <div onclick="toggleToy('${t.id}')" style="cursor:pointer;">${renderBoxAndChibi(t, 46)}</div>
         <div class="list-main" onclick="toggleToy('${t.id}')" style="cursor:pointer;">
           <div class="list-title">
             ${t.name}
@@ -1058,14 +1212,53 @@ function renderChecklist() {
   }).join('');
 }
 
+// Actions with Lock & Undo
+function snapshotForUndo() {
+  undoSnapshot = {
+    qty: { ...state.qty },
+    wish: { ...state.wish },
+    cardQty: { ...state.cardQty },
+    cardWish: { ...state.cardWish }
+  };
+}
+
+function undoLastAction() {
+  if (!undoSnapshot) return;
+  state = {
+    qty: { ...undoSnapshot.qty },
+    wish: { ...undoSnapshot.wish },
+    cardQty: { ...undoSnapshot.cardQty },
+    cardWish: { ...undoSnapshot.cardWish }
+  };
+  undoSnapshot = null;
+  saveState();
+  renderAll();
+  showToast('↩️ Undone!', false);
+}
+
+function toggleLock() {
+  ui.locked = !ui.locked;
+  renderProgress();
+  renderMissingVisual();
+  if (document.getElementById('flashOverlay').classList.contains('open')) renderMissingPoster();
+  showToast(ui.locked ? '🔒 Screen locked — safe to show crew' : '🔓 Unlocked — tap tiles to edit', false);
+}
+
+function handleTileTap(id) {
+  if (ui.locked) return showToast('🔒 Locked — tap Unlock to edit', false);
+  toggleToy(id);
+}
+
 function toggleWish(id, ev) {
   if (ev) ev.stopPropagation();
+  if (ui.locked) return showToast('🔒 Locked — tap Unlock to edit', false);
+  snapshotForUndo();
   const next = !state.wish[id];
   state.wish[id] = next;
   saveState();
   renderAll();
   const toy = TOYS.find(t => t.id === id);
-  showToast(next ? `★ Added ${toy.name} to Wish List!` : `☆ Removed ${toy.name} from Wish List`);
+  showToast(next ? `★ Added ${toy.name} to Wish List` : `☆ Removed ${toy.name} from Wish List`, true);
 }
 
 function toggleWishOnly() {
@@ -1075,24 +1268,57 @@ function toggleWishOnly() {
 }
 
 function toggleToy(id) {
+  snapshotForUndo();
+  const toy = TOYS.find(t => t.id === id);
   const cur = state.qty[id] || 0;
   if (cur === 0) {
     state.qty[id] = 1;
-    celebrate(TOYS.find(t => t.id === id));
+    launchConfetti();
+    showToast(`🎉 Caught ${toy.name} (-${toy.id})!`, true);
   } else {
     state.qty[id] = 0;
+    showToast(`Moved ${toy.name} (-${toy.id}) back to Missing`, true);
   }
   saveState();
   renderAll();
 }
 
 function changeQty(id, delta) {
+  snapshotForUndo();
   const prev = state.qty[id] || 0;
   const next = Math.max(0, prev + delta);
   state.qty[id] = next;
-  if (prev === 0 && next > 0) celebrate(TOYS.find(t => t.id === id));
+  if (prev === 0 && next > 0) {
+    launchConfetti();
+    const toy = TOYS.find(t => t.id === id);
+    showToast(`🎉 Caught ${toy.name} (-${toy.id})!`, true);
+  }
   saveState();
   renderAll();
+}
+
+function resetToDefault() {
+  snapshotForUndo();
+  TOYS.forEach(t => { state.qty[t.id] = t.defaultQty; });
+  saveState();
+  renderAll();
+  showToast('↺ Reset toys to default 8/15', true);
+}
+
+function clearAllToys() {
+  snapshotForUndo();
+  TOYS.forEach(t => { state.qty[t.id] = 0; });
+  saveState();
+  renderAll();
+  showToast('🗑️ Cleared all toys to 0/15', true);
+}
+
+function clearAllCards() {
+  snapshotForUndo();
+  CARDS.forEach(c => { state.cardQty[c.id] = 0; });
+  saveState();
+  renderAll();
+  showToast('🃏 Cleared all cards to 0/15', true);
 }
 
 function toggleSpotlight() {
@@ -1106,6 +1332,7 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
+  renderProgress();
 }
 
 function launchConfetti() {
@@ -1113,11 +1340,11 @@ function launchConfetti() {
   const ctx = c.getContext('2d');
   c.width = window.innerWidth; c.height = window.innerHeight;
   const colors = ['#ff6b9d','#a78bfa','#34d399','#fbbf24','#38bdf8'];
-  const parts = Array.from({length: 55}, () => ({
+  const parts = Array.from({length: 48}, () => ({
     x: c.width / 2 + (Math.random() - 0.5) * 120,
     y: c.height * 0.4,
-    vx: (Math.random() - 0.5) * 11,
-    vy: -Math.random() * 10 - 3,
+    vx: (Math.random() - 0.5) * 10,
+    vy: -Math.random() * 9 - 3,
     size: Math.random() * 7 + 4,
     col: colors[Math.floor(Math.random() * colors.length)],
     rot: Math.random() * 6
@@ -1131,22 +1358,17 @@ function launchConfetti() {
       ctx.fillStyle = p.col; ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
       ctx.restore();
     });
-    if (++frame < 55) requestAnimationFrame(tick);
+    if (++frame < 50) requestAnimationFrame(tick);
     else ctx.clearRect(0, 0, c.width, c.height);
   }
   tick();
 }
 
-function celebrate(toy) {
-  launchConfetti();
-  showToast(`🎉 Caught ${toy.name} (-${toy.id})!`);
-}
-
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 function openMissingPoster() {
-  const list = getNeededList();
-  if (!list.length) return showToast('🎉 You caught all 15 toys!');
+  const list = getNeededByColor();
+  if (!list.length) return showToast('🎉 You caught all 15 toys!', false);
   renderMissingPoster();
   document.getElementById('flashOverlay').classList.add('open');
 }
@@ -1156,13 +1378,17 @@ function closeMissingPoster() {
 }
 
 function renderMissingPoster() {
-  const list = getNeededList();
+  const list = getNeededByColor();
   if (!list.length) return closeMissingPoster();
   document.getElementById('posterCount').textContent = `${list.length} toy${list.length === 1 ? '' : 's'} still needed`;
   document.getElementById('posterSwatches').innerHTML = buildSwatchesHtml(list);
-  document.getElementById('posterGrid').innerHTML = buildScanTilesHtml(list, 60);
+  document.getElementById('posterGrid').innerHTML = buildScanTilesHtml(list, 58);
+  document.getElementById('posterHint').textContent = ui.locked
+    ? '🔒 Screen locked — safe to show crew'
+    : 'Sorted by box color · Tap 🔒 Lock before handing phone to crew';
 }
 
+// Trade Card PNG
 function openTradeModal() {
   document.getElementById('tradeModal').classList.add('open');
   drawTradeCard();
@@ -1181,7 +1407,7 @@ function drawTradeCard() {
   ctx.fillText('North York / Yonge Line Meetup · Brand New Sealed / Unplayed', 34, 82);
 
   const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
-  const needed = getNeededList();
+  const needed = getNeededByColor();
 
   ctx.fillStyle = '#ffffff'; roundRect(ctx, 34, 108, 310, 376, 18); ctx.fill();
   ctx.fillStyle = '#10b981'; ctx.font = 'bold 20px -apple-system, sans-serif';
@@ -1218,23 +1444,24 @@ function downloadTradePng() {
   link.download = 'toronto-pokemon-2026-trade-card.png';
   link.href = document.getElementById('tradeCanvas').toDataURL('image/png');
   link.click();
-  showToast('⬇️ Trade card PNG downloaded!');
+  showToast('⬇️ Trade card PNG downloaded!', false);
 }
 
 function copyTradeText() {
   const dupes = TOYS.filter(t => (state.qty[t.id] || 0) > 1);
-  const needed = getNeededList();
+  const needed = getNeededByColor();
   const txt = `[Toronto / North York] 2026 McDonald's Pokémon Happy Meal Toy Trade!\n\nFT (Extras): ${dupes.length ? dupes.map(t => `${t.name} (-${t.id})`).join(', ') : 'None yet'}\nISO (Looking for): ${needed.map(t => `${isWish(t.id) ? '⭐' : ''}${t.name} (-${t.id})`).join(', ')}\n\nCan meet along the Yonge subway line / North York. DM to swap!`;
-  navigator.clipboard?.writeText(txt).then(() => showToast('📋 Trade post copied!'));
+  navigator.clipboard?.writeText(txt).then(() => showToast('📋 Trade post copied!', false));
 }
 
 let toastTimer;
-function showToast(msg) {
+function showToast(msg, allowUndo = false) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastUndoBtn').style.display = allowUndo && undoSnapshot ? 'inline-block' : 'none';
   el.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2300);
+  toastTimer = setTimeout(() => el.classList.remove('show'), allowUndo ? 4000 : 2300);
 }
 
 loadState();
